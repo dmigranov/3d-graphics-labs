@@ -220,6 +220,7 @@ VOID Render()
 
 		//moon
 		D3DXMatrixScaling(&matScale3, 0.4, 0.4, 0.4);
+		//D3DXMatrixTranslation(&matTrans3, 0.0f, 3.0f, 0.0f);
 		D3DXMatrixTranslation(&matTrans3, 0.0f, 3.0f, 0.0f);
 		matWorld = matScale3 * //לאסרעאב
 			matRotY *
