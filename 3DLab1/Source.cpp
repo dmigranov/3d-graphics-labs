@@ -198,7 +198,7 @@ VOID SetupMatrices()
 	// the aspect ratio, and the near and far clipping planes (which define at
 	// what distances geometry should be no longer be rendered).
 	D3DXMATRIXA16 matProj;
-	D3DXMatrixPerspectiveFovLH(&matProj, D3DX_PI / 2, 1.0f, 1.0f, 100.0f);
+	D3DXMatrixPerspectiveFovLH(&matProj, D3DX_PI/2, 1.0f, 1.0f, 100.0f);
 	g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &matProj);
 }
 
@@ -225,7 +225,7 @@ VOID Render()
 		g_pd3dDevice->SetFVF(D3DFVF_CUSTOMVERTEX);
 		g_pd3dDevice->SetIndices(g_pIB);
 
-		D3DXVECTOR3 vEyePt(0.0f, 1.0f, -9.0f);
+		D3DXVECTOR3 vEyePt(0.0f, 3.0f, -9.0f);
 		D3DXVECTOR3 vLookatPt(0.0f, 0.0f, 0.0f);
 		D3DXVECTOR3 vUpVec(0.0f, 1.0f, 0.0f);
 		D3DXMATRIXA16 matView;
@@ -233,27 +233,42 @@ VOID Render()
 		g_pd3dDevice->SetTransform(D3DTS_VIEW, &matView);
 
 		D3DXMATRIXA16 matProj;
-		D3DXMatrixPerspectiveFovLH(&matProj, D3DX_PI / 2, 1.0f, 1.0f, 100.0f);
+		D3DXMatrixPerspectiveFovLH(&matProj, D3DX_PI/2, 1.0f, 1.0f, 100.0f);
 		g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &matProj);
 
 
 
-		D3DXMATRIXA16 matRotZ, matRotY, matWorld, matTrans1, matTrans2, matTrans3;
+		D3DXMATRIXA16 matRotZ, matRotY, matRotX, matWorld, matTrans1, matTrans2, matTrans3;
 
 		D3DXMatrixRotationY(&matRotY, fAngle);
-		D3DXMatrixRotationZ(&matRotZ, fAngle);//Y
-		D3DXMatrixTranslation(&matTrans1, 9.0f, 0.0f, 0.0f);
-		matWorld = matRotY * matTrans1 * matRotZ;
-		g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
+		D3DXMatrixRotationZ(&matRotZ, fAngle);
+		D3DXMatrixRotationX(&matRotX, fAngle);
 
+		//sun
+		D3DXMatrixTranslation(&matTrans1, 0.0f, 0.0f, 0.0f);
+		matWorld = matRotY * matTrans1;
+		g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
+		g_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
+
+		//earth
+		D3DXMatrixTranslation(&matTrans2, 6.0f, 0.0f, 0.0f);
+		D3DXMATRIXA16 matScale2;
+		D3DXMatrixScaling(&matScale2, 0.8, 0.8, 0.8);
+		//matWorld = matRotX * matTrans2 * matRotZ;
+		matWorld = matRotY * matTrans1 //вращение вокруг своей оси //перемещаемся туда где первый
+					* matTrans2 * matRotZ * //перемещаемся и вращаемся вокруг первого
+					* matScale2; //уменьшаемся
+		g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
+		g_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
+
+		//moon
+		D3DXMatrixTranslation(&matTrans3, 4.0f, 0.0f, 0.0f);
+		matWorld = matRotY * matTrans1 * matTrans2 * matTrans3 * matRotZ;// 
+		//matWorld = matRotY * matWorld  * matTrans3;
+		g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
 		g_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
 		
-		D3DXMatrixTranslation(&matTrans2, 0.0f, 0.0f, 0.0f);
-		matWorld = matRotY * matTrans2;
-
-		g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
-
-		g_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
+		
 		
 
 		// End the scene
