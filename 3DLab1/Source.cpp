@@ -82,6 +82,7 @@ HRESULT InitGeometry()
 		{ -1.0f, 1.0f, 1.0f, 0xff00ffff, },
 	};
 
+
 	int g_Indices[] =
 	{
 		0, 2, 1,
@@ -174,7 +175,7 @@ VOID SetupMatrices()
 
 	
 
-	D3DXMatrixTranslation(&matTrans, 0.0f, 0.0f, 0.0f);
+	//D3DXMatrixTranslation(&matTrans, 0.01f * iTime, 0.0f, 0.0f);
 
 	matWorld = matRot * matTrans;
 	g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
@@ -197,7 +198,7 @@ VOID SetupMatrices()
 	// the aspect ratio, and the near and far clipping planes (which define at
 	// what distances geometry should be no longer be rendered).
 	D3DXMATRIXA16 matProj;
-	D3DXMatrixPerspectiveFovLH(&matProj, D3DX_PI / 4, 1.0f, 1.0f, 100.0f);
+	D3DXMatrixPerspectiveFovLH(&matProj, D3DX_PI / 2, 1.0f, 1.0f, 100.0f);
 	g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &matProj);
 }
 
@@ -214,19 +215,51 @@ VOID Render()
 	// Begin the scene
 	if (SUCCEEDED(g_pd3dDevice->BeginScene()))
 	{
+		UINT iTime = timeGetTime() % 2000;
+		FLOAT fAngle = iTime * (2.0f * D3DX_PI) / 2000.0f;
 		// Setup the world, view, and projection matrices
-		SetupMatrices();
+		//SetupMatrices();
 
 		// Render the vertex buffer contents
 		g_pd3dDevice->SetStreamSource(0, g_pVB, 0, sizeof(CUSTOMVERTEX));
 		g_pd3dDevice->SetFVF(D3DFVF_CUSTOMVERTEX);
-		//g_pd3dDevice->DrawPrimitive( D3DPT_TRIANGLESTRIP, 0, 1 );
 		g_pd3dDevice->SetIndices(g_pIB);
+
+		D3DXVECTOR3 vEyePt(0.0f, 1.0f, -9.0f);
+		D3DXVECTOR3 vLookatPt(0.0f, 0.0f, 0.0f);
+		D3DXVECTOR3 vUpVec(0.0f, 1.0f, 0.0f);
+		D3DXMATRIXA16 matView;
+		D3DXMatrixLookAtLH(&matView, &vEyePt, &vLookatPt, &vUpVec);
+		g_pd3dDevice->SetTransform(D3DTS_VIEW, &matView);
+
+		D3DXMATRIXA16 matProj;
+		D3DXMatrixPerspectiveFovLH(&matProj, D3DX_PI / 2, 1.0f, 1.0f, 100.0f);
+		g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &matProj);
+
+
+
+		D3DXMATRIXA16 matRotZ, matRotY, matWorld, matTrans1, matTrans2, matTrans3;
+
+		D3DXMatrixRotationY(&matRotY, fAngle);
+		D3DXMatrixRotationZ(&matRotZ, fAngle);//Y
+		D3DXMatrixTranslation(&matTrans1, 9.0f, 0.0f, 0.0f);
+		matWorld = matRotY * matTrans1 * matRotZ;
+		g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
+
 		g_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
+		
+		D3DXMatrixTranslation(&matTrans2, 0.0f, 0.0f, 0.0f);
+		matWorld = matRotY * matTrans2;
+
+		g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
+
+		g_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
+		
 
 		// End the scene
 		g_pd3dDevice->EndScene();
 	}
+
 
 	// Present the backbuffer contents to the display
 	g_pd3dDevice->Present(NULL, NULL, NULL, NULL);
