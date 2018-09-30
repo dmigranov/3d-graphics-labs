@@ -156,48 +156,6 @@ VOID Cleanup()
 
 
 
-VOID SetupMatrices()
-{
-	// For our world matrix, we will just rotate the object about the y-axis.
-	D3DXMATRIXA16 matRot, matWorld, matTrans;
-
-	// Set up the rotation matrix to generate 1 full rotation (2*PI radians) 
-	// every 1000 ms. To avoid the loss of precision inherent in very high 
-	// floating point numbers, the system time is modulated by the rotation 
-	// period before conversion to a radian angle.
-	UINT iTime = timeGetTime() % 1000;
-	FLOAT fAngle = iTime * (2.0f * D3DX_PI) / 1000.0f;
-	D3DXMatrixRotationY(&matRot, fAngle); //Y
-
-	
-
-	//D3DXMatrixTranslation(&matTrans, 0.01f * iTime, 0.0f, 0.0f);
-
-	matWorld = matRot * matTrans;
-	g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
-
-	// Set up our view matrix. A view matrix can be defined given an eye point,
-	// a point to lookat, and a direction for which way is up. Here, we set the
-	// eye five units back along the z-axis and up three units, look at the
-	// origin, and define "up" to be in the y-direction.
-	D3DXVECTOR3 vEyePt(0.0f, 3.0f, -9.0f);
-	D3DXVECTOR3 vLookatPt(0.0f, 0.0f, 0.0f);
-	D3DXVECTOR3 vUpVec(0.0f, 1.0f, 0.0f);
-	D3DXMATRIXA16 matView;
-	D3DXMatrixLookAtLH(&matView, &vEyePt, &vLookatPt, &vUpVec);
-	g_pd3dDevice->SetTransform(D3DTS_VIEW, &matView);
-
-	// For the projection matrix, we set up a perspective transform (which
-	// transforms geometry from 3D view space to 2D viewport space, with
-	// a perspective divide making objects smaller in the distance). To build
-	// a perpsective transform, we need the field of view (1/4 pi is common),
-	// the aspect ratio, and the near and far clipping planes (which define at
-	// what distances geometry should be no longer be rendered).
-	D3DXMATRIXA16 matProj;
-	D3DXMatrixPerspectiveFovLH(&matProj, D3DX_PI/2, 1.0f, 1.0f, 100.0f);
-	g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &matProj);
-}
-
 
 //-----------------------------------------------------------------------------
 // Name: Render()
@@ -253,7 +211,8 @@ VOID Render()
 		
 		D3DXMatrixScaling(&matScale2, 0.8, 0.8, 0.8);
 		//matWorld = matRotX * matTrans2 * matRotZ;
-		matWorld = matScale2 * matRotY //вращение вокруг своей оси 
+		matWorld = matScale2
+			* matRotY //вращение вокруг своей оси 
 			* matTrans2 * matRotZ; //перемещаемся и вращаемся вокруг первого; //уменьшаемся
 		g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
 		g_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
@@ -264,7 +223,10 @@ VOID Render()
 		D3DXMatrixTranslation(&matTrans3, 0.0f, 3.0f, 0.0f);
 		matWorld = matScale3 * //масштаб
 			matRotY *
-			(matTrans2 * matRotZ) *matRotX;// matTrans2 * matRotZ - вот вокруг этой точки надо вращаться
+			matTrans3 *
+			matRotZ *
+			(matTrans2 * matRotZ)
+			;// matTrans2 * matRotZ - вот вокруг этой точки надо вращаться
 		g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
 		g_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
 		
@@ -321,7 +283,7 @@ INT WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
 
 	// Create the application's window
 	HWND hWnd = CreateWindow(L"Cube", L"Rotating Cube",
-		WS_OVERLAPPEDWINDOW, 100, 100, 256, 256,
+		WS_OVERLAPPEDWINDOW, 100, 100, 512, 512,
 		NULL, NULL, wc.hInstance, NULL);
 
 	// Initialize Direct3D
