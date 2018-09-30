@@ -156,10 +156,6 @@ VOID Cleanup()
 
 
 
-//-----------------------------------------------------------------------------
-// Name: SetupMatrices()
-// Desc: Sets up the world, view, and projection transform matrices.
-//-----------------------------------------------------------------------------
 VOID SetupMatrices()
 {
 	// For our world matrix, we will just rotate the object about the y-axis.
@@ -240,9 +236,10 @@ VOID Render()
 
 		D3DXMATRIXA16 matRotZ, matRotY, matRotX, matWorld, matTrans1, matTrans2, matTrans3;
 
+		D3DXMatrixRotationX(&matRotX, fAngle);
 		D3DXMatrixRotationY(&matRotY, fAngle);
 		D3DXMatrixRotationZ(&matRotZ, fAngle);
-		D3DXMatrixRotationX(&matRotX, fAngle);
+
 
 		//sun
 		D3DXMatrixTranslation(&matTrans1, 0.0f, 0.0f, 0.0f);
@@ -251,20 +248,23 @@ VOID Render()
 		g_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
 
 		//earth
+		D3DXMATRIXA16 matScale2, matScale3;
 		D3DXMatrixTranslation(&matTrans2, 6.0f, 0.0f, 0.0f);
-		D3DXMATRIXA16 matScale2;
+		
 		D3DXMatrixScaling(&matScale2, 0.8, 0.8, 0.8);
 		//matWorld = matRotX * matTrans2 * matRotZ;
-		matWorld = matRotY * matTrans1 //вращение вокруг своей оси //перемещаемся туда где первый
-					* matTrans2 * matRotZ * //перемещаемся и вращаемся вокруг первого
-					* matScale2; //уменьшаемся
+		matWorld = matScale2 * matRotY //вращение вокруг своей оси 
+			* matTrans2 * matRotZ; //перемещаемся и вращаемся вокруг первого; //уменьшаемся
 		g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
 		g_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
 
+
 		//moon
-		D3DXMatrixTranslation(&matTrans3, 4.0f, 0.0f, 0.0f);
-		matWorld = matRotY * matTrans1 * matTrans2 * matTrans3 * matRotZ;// 
-		//matWorld = matRotY * matWorld  * matTrans3;
+		D3DXMatrixScaling(&matScale3, 0.4, 0.4, 0.4);
+		D3DXMatrixTranslation(&matTrans3, 0.0f, 3.0f, 0.0f);
+		matWorld = matScale3 * //масштаб
+			matRotY *
+			(matTrans2 * matRotZ) *matRotX;// matTrans2 * matRotZ - вот вокруг этой точки надо вращаться
 		g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
 		g_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
 		
