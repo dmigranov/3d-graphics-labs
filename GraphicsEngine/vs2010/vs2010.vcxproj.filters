@@ -743,5 +743,11 @@
     <None Include="..\Sources\GraphicsEngine\Shaders\GL20\ShaderEarth.vs">
       <Filter>GraphicsEngine\Shaders\GL20</Filter>
     </None>
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderUnlitSimple.ps">
+      <Filter>GraphicsEngine\Shaders\DX9</Filter>
+    </None>
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderUnlitSimple.vs">
+      <Filter>GraphicsEngine\Shaders\DX9</Filter>
+    </None>
   </ItemGroup>
 </Project>

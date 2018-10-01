@@ -328,6 +328,8 @@ xcopy  /S /I /E /Y "..\Sources\GraphicsEngine\Shaders" "..\BUILD\Release\Shaders
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderTask02Cylinder.vs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderUnlit.ps" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderUnlit.vs" />
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderUnlitSimple.ps" />
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderUnlitSimple.vs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\GL20\ShaderDiffuse.fs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\GL20\ShaderDiffuse.vs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\GL20\ShaderEarth.fs" />

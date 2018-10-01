@@ -7,7 +7,7 @@
 MaterialUnlitSimple::MaterialUnlitSimple()
 {
 	m_vsFileName = "ShaderUnlitSimple";
-	m_psFileName = "ShaderUnlitSimple";
+	m_psFileName = "ShaderUnlitSimple"; //does it use ps or vs files?
 }
 
 // TODO: Реализовать переключение Graphics API при нажатии на кнопки (1 - DirectX 11, 2 - OpenGL 2.0, 9 - DirectX 9)
