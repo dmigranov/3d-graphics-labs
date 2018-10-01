@@ -42,6 +42,8 @@ HRESULT InitD3D(HWND hWnd)
 	d3dpp.Windowed = TRUE;
 	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
 	d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
+	d3dpp.EnableAutoDepthStencil = TRUE;
+	d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
 
 	// Create the D3DDevice
 	if (FAILED(g_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,
@@ -57,6 +59,7 @@ HRESULT InitD3D(HWND hWnd)
 
 	// Turn off D3D lighting, since we are providing our own vertex colors
 	g_pd3dDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
+	g_pd3dDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
 
 	return S_OK;
 }
@@ -176,7 +179,7 @@ VOID Render()
 
 		// Render the vertex buffer contents
 		g_pd3dDevice->SetStreamSource(0, g_pVB, 0, sizeof(CUSTOMVERTEX));
-		g_pd3dDevice->SetFVF(D3DFVF_CUSTOMVERTEX);
+		g_pd3dDevice->SetFVF(D3DFVF_CUSTOMVERTEX); //the format of vertices
 		g_pd3dDevice->SetIndices(g_pIB);
 
 		D3DXVECTOR3 vEyePt(0.0f, 3.0f, -9.0f);
@@ -189,8 +192,6 @@ VOID Render()
 		D3DXMATRIXA16 matProj;
 		D3DXMatrixPerspectiveFovLH(&matProj, D3DX_PI/2, 1.0f, 1.0f, 100.0f);
 		g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &matProj);
-
-
 
 		D3DXMATRIXA16 matRotZ, matRotY, matRotX, matWorld, matTrans1, matTrans2, matTrans3;
 
@@ -205,15 +206,16 @@ VOID Render()
 		g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
 		g_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
 
+
 		//earth
 		D3DXMATRIXA16 matScale2, matScale3;
 		D3DXMatrixTranslation(&matTrans2, 6.0f, 0.0f, 0.0f);
-		
 		D3DXMatrixScaling(&matScale2, 0.8, 0.8, 0.8);
 		//matWorld = matRotX * matTrans2 * matRotZ;
 		matWorld = matScale2
 			* matRotY //вращение вокруг своей оси 
 			* matTrans2 * matRotZ; //перемещаемся и вращаемся вокруг первого; //уменьшаемся
+			//* matTrans2 * matRotY; //why doesn't it work properly??????
 		g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
 		g_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
 
@@ -223,7 +225,7 @@ VOID Render()
 		//D3DXMatrixTranslation(&matTrans3, 0.0f, 3.0f, 0.0f);
 		D3DXMatrixTranslation(&matTrans3, 0.0f, 3.0f, 0.0f);
 		matWorld = matScale3 * //масштаб
-			matRotY *
+			matRotY * //вращение вокруг своей оси
 			matTrans3 *
 			matRotZ *
 			(matTrans2 * matRotZ)
@@ -247,7 +249,7 @@ VOID Render()
 
 
 //-----------------------------------------------------------------------------
-// Name: MsgProc()
+// Name: MsgProc() aka WInProc
 // Desc: The window's message handler
 //-----------------------------------------------------------------------------
 LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -313,6 +315,6 @@ INT WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
 		}
 	}
 
-	UnregisterClass(L"D3D Tutorial", wc.hInstance);
+	UnregisterClass(L"Cube", wc.hInstance);
 	return 0;
 }
