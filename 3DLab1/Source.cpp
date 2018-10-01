@@ -168,6 +168,7 @@ VOID Render()
 {
 	// Clear the backbuffer to a black color
 	g_pd3dDevice->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
+	g_pd3dDevice->Clear(0, NULL, D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
 
 	// Begin the scene
 	if (SUCCEEDED(g_pd3dDevice->BeginScene()))
@@ -214,14 +215,14 @@ VOID Render()
 		//matWorld = matRotX * matTrans2 * matRotZ;
 		matWorld = matScale2
 			* matRotY //вращение вокруг своей оси 
-			* matTrans2 * matRotZ; //перемещаемся и вращаемся вокруг первого; //уменьшаемся
-			//* matTrans2 * matRotY; //why doesn't it work properly??????
+			//* matTrans2 * matRotZ; //перемещаемся и вращаемся вокруг первого; //уменьшаемся
+			* matTrans2 * matRotY; 
 		g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
 		g_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
 
 
 		//moon
-		D3DXMatrixScaling(&matScale3, 0.4, 0.4, 0.4);
+		/*D3DXMatrixScaling(&matScale3, 0.4, 0.4, 0.4);
 		//D3DXMatrixTranslation(&matTrans3, 0.0f, 3.0f, 0.0f);
 		D3DXMatrixTranslation(&matTrans3, 0.0f, 3.0f, 0.0f);
 		matWorld = matScale3 * //масштаб
@@ -231,7 +232,7 @@ VOID Render()
 			(matTrans2 * matRotZ)
 			;// matTrans2 * matRotZ - вот вокруг этой точки надо вращаться
 		g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
-		g_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
+		g_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);*/
 		
 		
 		
