@@ -183,7 +183,7 @@ VOID Render()
 		g_pd3dDevice->SetFVF(D3DFVF_CUSTOMVERTEX); //the format of vertices
 		g_pd3dDevice->SetIndices(g_pIB);
 
-		D3DXVECTOR3 vEyePt(0.0f, 3.0f, -9.0f);
+		D3DXVECTOR3 vEyePt(0.0f, 3.0f, -11.0f);
 		D3DXVECTOR3 vLookatPt(0.0f, 0.0f, 0.0f);
 		D3DXVECTOR3 vUpVec(0.0f, 1.0f, 0.0f);
 		D3DXMATRIXA16 matView;
@@ -214,9 +214,9 @@ VOID Render()
 		D3DXMatrixScaling(&matScale2, 0.8, 0.8, 0.8);
 		//matWorld = matRotX * matTrans2 * matRotZ;
 		matWorld = matScale2
-			* matRotY //вращение вокруг своей оси 
-			* matTrans2 * matRotZ; //перемещаемся и вращаемся вокруг первого; //уменьшаемся
-			//* matTrans2 * matRotY; 
+			* matRotX * matRotY  //вращение вокруг своей оси 
+			//* matTrans2 * matRotZ; //перемещаемся и вращаемся вокруг первого; //уменьшаемся
+			* matTrans2 * matRotY; 
 		g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
 		g_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
 
@@ -224,12 +224,12 @@ VOID Render()
 		//moon
 		D3DXMatrixScaling(&matScale3, 0.4, 0.4, 0.4);
 		//D3DXMatrixTranslation(&matTrans3, 0.0f, 3.0f, 0.0f);
-		D3DXMatrixTranslation(&matTrans3, 0.0f, 3.0f, 0.0f);
+		D3DXMatrixTranslation(&matTrans3, 0.0f, 0.0f, 2.0f);
 		matWorld = matScale3 * //масштаб
-			matRotY * //вращение вокруг своей оси
+			matRotX * matRotY * //вращение вокруг своей оси
 			matTrans3 *
-			matRotZ *
-			(matTrans2 * matRotZ)
+			matRotY *
+			(matTrans2 * matRotY)
 			;// matTrans2 * matRotZ - вот вокруг этой точки надо вращаться
 		g_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
 		g_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
