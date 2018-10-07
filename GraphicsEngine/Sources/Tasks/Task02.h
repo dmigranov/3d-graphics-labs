@@ -30,7 +30,7 @@ public:
 		// Camera
 		{
 			Object * pCameraObj = new Object();
-			pCameraObj->m_pTransform = new Transform( Vector3(0, 1.5, -3), Vector3(20.0f, 0.0f, 0.0f));
+			pCameraObj->m_pTransform = new Transform( Vector3(0, 3, -5), Vector3(20.0f, 0.0f, 0.0f));
 			Camera * pCamera = new Camera();
 			pCamera->SetFovY(90);
 			pCamera->SetNearPlane(0.01f);

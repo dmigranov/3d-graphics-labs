@@ -21,10 +21,11 @@ VS_OUTPUT main( VS_INPUT input )
 
 	float radius = 2.0;
 	float4 p1 = input.Position;
-	float4 t = {1,0,0,0};
-	float4 p2 = mul(radius, normalize(p1));
+	float4 t = {0,0,1,0};
+	//float4 p2 = mul(radius, normalize(p1));
+	p1 = p1 * 5;
 
-	output.Position	= mul(p2, matrixWorldViewProjT);
+	output.Position	= mul(p1 - t, matrixWorldViewProjT);
 	output.Color	= materialColor;
 	//output.Color	= input.Color;
 	
