@@ -38,7 +38,7 @@ void MaterialUnlitSimple::SetMaterial(const Object * pObject)
 	{
 		SetVertexShaderBegin();
 		SetVertexShaderMatrix4x4("matrixWorldViewProjT", matWorldViewProjT);
-		SetVertexShaderVector4("constColor", Vector4(1, 1, 1, 1));
+		SetVertexShaderVector4("materialColor", Vector4(1, 1, 1, 1));
 		SetVertexShaderEnd();
 
 		SetPixelShaderBegin();

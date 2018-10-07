@@ -182,6 +182,7 @@ xcopy  /S /I /E /Y "..\Sources\GraphicsEngine\Shaders" "..\BUILD\Release\Shaders
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\Material.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialSand.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialDiffuse.h" />
+    <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialSphereMorphing.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialUnlit.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialUnlitSimple.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Math.h" />
@@ -282,6 +283,7 @@ xcopy  /S /I /E /Y "..\Sources\GraphicsEngine\Shaders" "..\BUILD\Release\Shaders
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\Material.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialSand.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialDiffuse.cpp" />
+    <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialSphereMorphing.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialUnlit.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialUnlitSimple.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Meshes\Mesh.cpp" />
@@ -322,6 +324,7 @@ xcopy  /S /I /E /Y "..\Sources\GraphicsEngine\Shaders" "..\BUILD\Release\Shaders
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderDiffuseSpecular.vs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderRoad.ps" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderRoad.vs" />
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderSphereMorphing.vs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderTask02Cube.ps" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderTask02Cube.vs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderTask02Cylinder.ps" />
@@ -344,6 +347,9 @@ xcopy  /S /I /E /Y "..\Sources\GraphicsEngine\Shaders" "..\BUILD\Release\Shaders
     <None Include="..\Sources\GraphicsEngine\Shaders\GL20\ShaderTask02Cylinder.vs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\GL20\ShaderUnlit.fs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\GL20\ShaderUnlit.vs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderSphereMorphing.ps" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

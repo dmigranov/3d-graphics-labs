@@ -7,6 +7,7 @@
 #include "GraphicsEngine/Object.h"
 #include "GraphicsEngine/Scene.h"
 #include "GraphicsEngine/Transform.h"
+#include "GraphicsEngine/Materials/MaterialSphereMorphing.h"
 
 #include "Tasks/Task.h"
 #include "Tasks/ObjectRotator.h"
@@ -45,7 +46,7 @@ public:
 			Object * pObject = new Object();
 			pObject->m_pTransform	= new Transform( Vector3(-1.5, 0, 0), Vector3(0, 30, 0) );
 			pObject->m_pMesh		= new MeshCube(10);			
-            pObject->m_pMaterial	= new MaterialUnlitSimple();
+            pObject->m_pMaterial	= new MaterialSphereMorphing(); //create another Class
 
 			scene.AddObject( pObject );
 		}
@@ -55,7 +56,7 @@ public:
 			Object * pObject = new Object();
 			pObject->m_pTransform	= new Transform( Vector3(1.5, 0, 0), Vector3(0, 30, 0) );
 			pObject->m_pMesh		= new MeshCylinder(20);			
-			pObject->m_pMaterial	= new MaterialUnlitSimple();
+			pObject->m_pMaterial	= new MaterialUnlitSimple(); //create another Class
 			
 			scene.AddObject( pObject );
         }
