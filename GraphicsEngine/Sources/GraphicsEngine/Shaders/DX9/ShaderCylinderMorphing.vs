@@ -27,7 +27,7 @@ VS_OUTPUT main( VS_INPUT input )
 	
 
 	float4x4 res = upper * (1 - alpha) + lower * alpha;
-	res[3][3] = 1;
+	//res[3][3] = 1;
 
 
 	float4 newPos = mul(pos, res);

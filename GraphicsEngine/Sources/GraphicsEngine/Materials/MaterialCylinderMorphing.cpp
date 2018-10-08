@@ -40,7 +40,7 @@ void MaterialCylinderMorphing::SetMaterial(const Object * pObject)
 	/*double t = fmod(Time::GetTime(), 2);
 	double angle = t * (2.0f * PI) / 2.0;*/
 	double time = Time::GetTime();
-	double angle = sin(time) * 2 * PI;
+	double angle = sin(time) * 2 * PI * 100;
 	for(int i = 0; i < 4; i++)
 		for (int j = 0; j < 4; j++)
 		{
@@ -52,11 +52,13 @@ void MaterialCylinderMorphing::SetMaterial(const Object * pObject)
 	SetMaterialBegin();
 	{
 		SetVertexShaderBegin();
-		SetVertexShaderMatrix4x4("matrixWorldViewProjT", matWorldViewProjT);
 		SetVertexShaderMatrix4x4("lower", lower);
 		SetVertexShaderMatrix4x4("upper", upper);
+		SetVertexShaderMatrix4x4("matrixWorldViewProjT", matWorldViewProjT);
+		
+		
 		SetVertexShaderVector4("materialColor", Vector4(1, 1, 1, 1));
-
+		
 		SetVertexShaderEnd();
 
 		SetPixelShaderBegin();
