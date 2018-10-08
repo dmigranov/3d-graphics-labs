@@ -180,6 +180,7 @@ xcopy  /S /I /E /Y "..\Sources\GraphicsEngine\Shaders" "..\BUILD\Release\Shaders
     <ClInclude Include="..\Sources\GraphicsEngine\KeyCode.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Light.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\Material.h" />
+    <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialCylinderMorphing.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialSand.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialDiffuse.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialSphereMorphing.h" />
@@ -281,6 +282,7 @@ xcopy  /S /I /E /Y "..\Sources\GraphicsEngine\Shaders" "..\BUILD\Release\Shaders
     <ClCompile Include="..\Sources\GraphicsEngine\Internal\InternalInput.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Internal\ObjectStorage.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\Material.cpp" />
+    <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialCylinderMorphing.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialSand.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialDiffuse.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialSphereMorphing.cpp" />
@@ -314,6 +316,8 @@ xcopy  /S /I /E /Y "..\Sources\GraphicsEngine\Shaders" "..\BUILD\Release\Shaders
     <None Include="..\Sources\GraphicsEngine\Shaders\DX11\ShaderTask02Cube.fx" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX11\ShaderTask02Cylinder.fx" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX11\ShaderUnlit.fx" />
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderCylinderMorphing.ps" />
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderCylinderMorphing.vs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderEarth.ps" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderEarth.vs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderSand.ps" />
