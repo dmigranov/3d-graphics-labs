@@ -3,7 +3,7 @@
 #include "GraphicsEngine/MathUtils.h"
 #include "GraphicsEngine/SceneUtils.h"
 #include "GraphicsEngine/Time.h"
-//#include <iostream>
+#include <iostream>
 
 
 MaterialSphereMorphing::MaterialSphereMorphing()
@@ -40,8 +40,10 @@ void MaterialSphereMorphing::SetMaterial(const Object * pObject)
 	{
 		SetVertexShaderBegin();
 		SetVertexShaderMatrix4x4("matrixWorldViewProjT", matWorldViewProjT);
+		SetVertexShaderVector4("time", Vector4(abs(sin(Time::GetTime())), 0, 0, 0));
 		SetVertexShaderVector4("materialColor", Vector4(1, 1, 1, 1));
-		SetVertexShaderVector4("time", Vector4(abs(sin(Time::GetTime())),0,0,0));
+
+		
 		//std::cout << abs(sin(Time::GetTime())) << " ";
 		//SetVertexShaderVector4("timeVector", Vector4()); //time
 		SetVertexShaderEnd();
