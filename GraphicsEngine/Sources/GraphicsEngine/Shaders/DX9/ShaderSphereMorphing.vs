@@ -1,7 +1,7 @@
 float4x4	matrixWorldViewProjT;
-float4		time;
-float4		materialColor;
 
+float4		materialColor;
+float4		time;
 
 struct VS_INPUT
 {

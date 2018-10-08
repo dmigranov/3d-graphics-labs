@@ -44,6 +44,8 @@ void MaterialSphereMorphing::SetMaterial(const Object * pObject)
 		SetVertexShaderVector4("materialColor", Vector4(1, 1, 1, 1));
 
 		
+
+		
 		//std::cout << abs(sin(Time::GetTime())) << " ";
 		//SetVertexShaderVector4("timeVector", Vector4()); //time
 		SetVertexShaderEnd();
