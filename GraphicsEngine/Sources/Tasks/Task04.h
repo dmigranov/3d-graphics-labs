@@ -72,6 +72,8 @@ public:
 
 			scene.AddLight(pLight);
 		}
+
+		//Spot
 	}
 
 	virtual void Update()
