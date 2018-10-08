@@ -33,11 +33,12 @@ VS_OUTPUT main( VS_INPUT input )
 	p1[1] = 3 * p1[1];
 	p1[2] = 3 * p1[2];*/
 	//p1.xyz = mul (3.0f, p1.xyz);
-	float4 pos = float4(p2, 1);
+	float3 pos = p1 * (1 - t) + p2 * t;
+	float4 pos4 = float4(pos, 1);
 	//pos.w = p1.w;
 	//pos.xyz = p1.xyz * (1 - t) + p
 
-	output.Position	= mul(pos, matrixWorldViewProjT);
+	output.Position	= mul(pos4, matrixWorldViewProjT);
 	
 	//output.Color	= materialColor;
 	output.Color	= input.Color;
