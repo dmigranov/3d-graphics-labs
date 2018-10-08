@@ -20,7 +20,7 @@ VS_OUTPUT main( VS_INPUT input )
 	VS_OUTPUT output;
 
 	float3 p1 = input.Position;
-	float alpha = (p1.y + 1)/2.0;
+	float alpha = (p1.y)/2.0;
 
 
 	float4 pos = float4(p1, 1);

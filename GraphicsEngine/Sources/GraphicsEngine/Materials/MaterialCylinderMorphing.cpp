@@ -40,7 +40,7 @@ void MaterialCylinderMorphing::SetMaterial(const Object * pObject)
 	/*double t = fmod(Time::GetTime(), 2);
 	double angle = t * (2.0f * PI) / 2.0;*/
 	double time = Time::GetTime();
-	double angle = sin(time) * 2 * PI * 100;
+	double angle = cos(time) * 2 * PI * 16;
 	for(int i = 0; i < 4; i++)
 		for (int j = 0; j < 4; j++)
 		{

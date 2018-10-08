@@ -55,7 +55,7 @@ public:
 		// Object #2 - Cylinder (is twisted)
         {
 			Object * pObject = new Object();
-			pObject->m_pTransform	= new Transform( Vector3(1.5, 0, 0), Vector3(0, 30, 0) );
+			pObject->m_pTransform	= new Transform( Vector3(2, 0, 0), Vector3(0, 30, 0) );
 			pObject->m_pMesh		= new MeshCylinder(20);			
 			pObject->m_pMaterial	= new MaterialCylinderMorphing(); //create another Class
 			
