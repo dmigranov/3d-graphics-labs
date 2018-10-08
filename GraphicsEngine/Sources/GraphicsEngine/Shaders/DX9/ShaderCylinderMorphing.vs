@@ -1,7 +1,7 @@
 float4x4	matrixWorldViewProjT;
-
+float4x4	lower;
+float4x4	upper;
 float4		materialColor;
-float4		time;
 
 struct VS_INPUT
 {
@@ -19,18 +19,20 @@ VS_OUTPUT main( VS_INPUT input )
 {
 	VS_OUTPUT output;
 
-	//float radius = 2.0;
 	float3 p1 = input.Position;
-	float3 p2 = 2 * normalize(p1);
-	//float t = time[0];
+	float alpha = (p1.y + 1)/2.0;
 
 
-	//float3 pos = p1 * (1 - time[0]) + p2 * time[0];
-	float3 pos = lerp (p1, p2, time[0]);
-	float4 pos4 = float4(pos, 1);
+	float4 pos = float4(p1, 1);
+	
+
+	float4x4 res = upper * (1 - alpha) + lower * alpha;
+	res[3][3] = 1;
 
 
-	output.Position	= mul(pos4, matrixWorldViewProjT);
+	float4 newPos = mul(pos, res);
+
+	output.Position	= mul(newPos, matrixWorldViewProjT);
 	
 	//output.Color	= materialColor;
 	output.Color	= input.Color;
