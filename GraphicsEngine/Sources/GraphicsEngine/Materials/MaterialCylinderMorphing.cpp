@@ -35,12 +35,28 @@ void MaterialCylinderMorphing::SetMaterial(const Object * pObject)
 	const Matrix4x4 & matProj = SceneUtils::GetMatrixProj();
 
 	const Matrix4x4 matWorldViewProjT = MathUtils::GetMatrixWorldViewProjT(matWorld, matView, matProj);
+	Matrix4x4 upper, lower;
+	/*upper = {
+		{1, 0, 0, 0},
+		{0, 1, 0, 0},
+		{0, 0, 1, 0},
+		{0, 0, 0, 1}
+	};*/
+	for(int i = 0; i < 4; i++)
+		for (int j = 0; j < 4; j++)
+		{
+			upper.m[i][j] = (i == j);
+			lower.m[i][j] = 
+		}
+
 
 	SetMaterialBegin();
 	{
 		SetVertexShaderBegin();
 		SetVertexShaderMatrix4x4("matrixWorldViewProjT", matWorldViewProjT);
-		SetVertexShaderVector4("time", Vector4(abs(sin(Time::GetTime())), 0, 0, 0));
+		//SetVertexShaderVector4("time", Vector4(abs(sin(Time::GetTime())), 0, 0, 0));
+		SetVertexShaderMatrix4x4("lower");
+		SetVertexShaderMatrix4x4("upper");
 		SetVertexShaderVector4("materialColor", Vector4(1, 1, 1, 1));
 
 		
