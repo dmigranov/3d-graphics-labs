@@ -6,6 +6,7 @@
 #include "GraphicsEngine/Application.h"
 
 bool				DX9GUI::isInited	= false;
+bool				DX9GUI::fontIsInited = false;
 LPDIRECT3DDEVICE9	DX9GUI::m_pDevice	= NULL;
 ID3DXFont *			DX9GUI::m_pFont		= NULL;
 
@@ -14,6 +15,7 @@ void DX9GUI::Init()
 	const GraphicsEngineContext * pContext = Application::Instance().GetContext();
 	const DX9GraphicsEngineContext * pDX9Context = static_cast<const DX9GraphicsEngineContext *>( pContext );
 	m_pDevice = pDX9Context->m_pDevice;
+	isInited = true;
 }
 
 HRESULT DX9GUI::InitFont(UINT iheight, UINT iwidth, UINT iweight)
@@ -24,11 +26,12 @@ HRESULT DX9GUI::InitFont(UINT iheight, UINT iwidth, UINT iweight)
 	// http://www.gamedev.ru/code/forum/?id=91973
 	
 	// TODO: Task03
-
-	D3DXCreateFont(m_pDevice, iheight, iwidth, iweight, 0, false, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, (LPCWSTR)"Comic Sans MS", &m_pFont);
+	LPCWSTR fontName = LPCWSTR("Courier New");
+	D3DXCreateFont(m_pDevice, iheight, iwidth, iweight, 0, false, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_MODERN, fontName, &m_pFont);
 	//DEFAULT_CHARSET - a character set based on the current system locale
 	//OutputPrecision = OUT_DEFAULT_PRECIS specfifes how the desired fonts match actual fonts
 	//pitch?
+	//fontIsInited = true;
 	return S_OK;
 };
 
@@ -38,8 +41,11 @@ void DX9GUI::Label(int x, int y, int w, int h, const char * pText)
 	{
 		Init();
 	}
-
-	InitFont(25, 10, 100);
+	if (!fontIsInited)
+	{
+		InitFont(30, 10, 100);
+	}
+	
 
 	RECT rect;
 	{

@@ -22,6 +22,7 @@ private:
 	static HRESULT InitFont(UINT iheight, UINT iwidth, UINT iweight);
 
 	static bool isInited;
+	static bool fontIsInited;
 
 	static LPDIRECT3DDEVICE9	m_pDevice;
 	static LPD3DXFONT			m_pFont;
