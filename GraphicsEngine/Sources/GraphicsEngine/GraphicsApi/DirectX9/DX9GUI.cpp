@@ -26,7 +26,7 @@ HRESULT DX9GUI::InitFont(UINT iheight, UINT iwidth, UINT iweight)
 	// http://www.gamedev.ru/code/forum/?id=91973
 	
 
-	D3DXCreateFont(m_pDevice, iheight, iwidth, iweight, 0, false, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, (LPCWSTR)"Arial", &m_pFont);
+	D3DXCreateFont(m_pDevice, iheight, iwidth, iweight, 0, false, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, (LPCWSTR)"", &m_pFont);
 	//DEFAULT_CHARSET - a character set based on the current system locale
 	//OutputPrecision = OUT_DEFAULT_PRECIS specfifes how the desired fonts match actual fonts
 	//pitch?
