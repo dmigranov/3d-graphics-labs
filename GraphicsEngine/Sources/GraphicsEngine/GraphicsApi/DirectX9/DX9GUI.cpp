@@ -25,13 +25,12 @@ HRESULT DX9GUI::InitFont(UINT iheight, UINT iwidth, UINT iweight)
 	// http://www.cyberforum.ru/directx/thread888719.html
 	// http://www.gamedev.ru/code/forum/?id=91973
 	
-	// TODO: Task03
-	LPCWSTR fontName = LPCWSTR("Courier New");
-	D3DXCreateFont(m_pDevice, iheight, iwidth, iweight, 0, false, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_MODERN, fontName, &m_pFont);
+
+	D3DXCreateFont(m_pDevice, iheight, iwidth, iweight, 0, false, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, (LPCWSTR)"Arial", &m_pFont);
 	//DEFAULT_CHARSET - a character set based on the current system locale
 	//OutputPrecision = OUT_DEFAULT_PRECIS specfifes how the desired fonts match actual fonts
 	//pitch?
-	//fontIsInited = true;
+	fontIsInited = true;
 	return S_OK;
 };
 

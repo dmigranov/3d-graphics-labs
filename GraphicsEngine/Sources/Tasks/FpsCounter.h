@@ -28,7 +28,7 @@ public:
 		double t2	= Time::GetTime();
 		int f2		= Time::GetFrameCount();
 
-		GUI::Label(0, 0, 100, 100, "Hello");
+		GUI::Label(0, 0, 100, 100, 60.0);
 
 		// TODO: Task03
 	}
