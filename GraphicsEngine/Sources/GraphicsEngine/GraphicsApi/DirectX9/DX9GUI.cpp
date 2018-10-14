@@ -25,6 +25,10 @@ HRESULT DX9GUI::InitFont(UINT iheight, UINT iwidth, UINT iweight)
 	
 	// TODO: Task03
 
+	D3DXCreateFont(m_pDevice, iheight, iwidth, iweight, 0, false, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, (LPCWSTR)"Comic Sans MS", &m_pFont);
+	//DEFAULT_CHARSET - a character set based on the current system locale
+	//OutputPrecision = OUT_DEFAULT_PRECIS specfifes how the desired fonts match actual fonts
+	//pitch?
 	return S_OK;
 };
 

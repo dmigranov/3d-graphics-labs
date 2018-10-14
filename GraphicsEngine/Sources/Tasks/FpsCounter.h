@@ -28,6 +28,8 @@ public:
 		double t2	= Time::GetTime();
 		int f2		= Time::GetFrameCount();
 
+		//Label(0,0);
+
 		// TODO: Task03
 	}
 };

@@ -22,9 +22,9 @@ int main(int argc, char ** argv)
 		app.argv = argv;
 	}
 
-    //Task * pTask = new Task01();
-    Task * pTask = new Task02();
-    //Task * pTask = new Task03();
+    //Task * pTask = new Task01(); //done using plain DirectX 9
+    //Task * pTask = new Task02(); //done
+    Task * pTask = new Task03();
     //Task * pTask = new Task04();
     //Task * pTask = new Task05_01();
     //Task * pTask = new Task05_02();
