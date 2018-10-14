@@ -45,7 +45,7 @@ public:
 		// Object # 1 - Cube (is morphed to sphere)
 		{
 			Object * pObject = new Object();
-			pObject->m_pTransform	= new Transform( Vector3(-1.5, 0, 0), Vector3(0, 30, 0) );
+			pObject->m_pTransform	= new Transform( Vector3(-2, 0, 0), Vector3(0, 30, 0) );
 			pObject->m_pMesh		= new MeshCube(10);			
             pObject->m_pMaterial	= new MaterialSphereMorphing(); //create another Class
 
