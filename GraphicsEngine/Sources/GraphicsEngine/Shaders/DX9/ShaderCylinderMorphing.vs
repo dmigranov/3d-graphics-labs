@@ -1,7 +1,6 @@
-
+float4x4	matrixWorldViewProjT;
 float4x4	lower;
 float4x4	upper;
-float4x4	matrixWorldViewProjT;
 float4		materialColor;
 
 

@@ -47,6 +47,24 @@ public:
 
 			scene.AddObject( pObject );
 		}
+
+		const int n = 20;
+
+		
+		
+		Mesh * cube = new MeshCube(15);
+
+		for(int i = -n; i < n; i++)
+		{
+			for (int j = -n; j < n; j++)
+			{
+				Object * pObject = new Object();
+				pObject->m_pMaterial = new MaterialSphereMorphing();
+				pObject->m_pTransform = new Transform(Vector3(i / 10.0, j/10.0, 0), Vector3(0, 30, 0));
+				pObject->m_pMesh = cube;
+				scene.AddObject(pObject);
+			}
+		}
 	}
 
 	virtual void Update()

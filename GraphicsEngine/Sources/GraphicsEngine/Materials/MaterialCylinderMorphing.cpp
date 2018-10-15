@@ -54,9 +54,10 @@ void MaterialCylinderMorphing::SetMaterial(const Object * pObject)
 	{
 		SetVertexShaderBegin();
 
+		SetVertexShaderMatrix4x4("matrixWorldViewProjT", matWorldViewProjT);
 		SetVertexShaderMatrix4x4("lower", lower);
 		SetVertexShaderMatrix4x4("upper", upper);
-		SetVertexShaderMatrix4x4("matrixWorldViewProjT", matWorldViewProjT);
+
 		SetVertexShaderVector4("materialColor", Vector4(1, 0, 1, 1));
 		
 		
