@@ -24,8 +24,8 @@ int main(int argc, char ** argv)
 
     //Task * pTask = new Task01(); //done using plain DirectX 9
     //Task * pTask = new Task02(); //done
-    Task * pTask = new Task03(); //done
-    //Task * pTask = new Task04();
+    //Task * pTask = new Task03(); //done
+    Task * pTask = new Task04();
     //Task * pTask = new Task05_01();
     //Task * pTask = new Task05_02();
     //Task * pTask = new Task05_03();

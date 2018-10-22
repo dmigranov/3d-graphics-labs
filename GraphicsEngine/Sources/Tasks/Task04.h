@@ -61,7 +61,7 @@ public:
 		}
 
 		// Ligth source #2 - Point
-		{
+		/*{
 			Light * pLight = new Light(LIGHT_POINT);
 			pLight->SetColor(1,1,1);
 			pLight->SetIntensity(1);
@@ -73,7 +73,18 @@ public:
 			scene.AddLight(pLight);
 		}
 
-		//Spot
+		//Ligth source #3 - Spot
+		{
+			Light * pLight = new Light(LIGHT_SPOT);
+			pLight->SetColor(1, 1, 1);
+			pLight->SetIntensity(1);
+
+			Object * pLightObject = new Object();
+			pLightObject->m_pTransform = new Transform(3, 0, 0, 0, 0, 0, 1, 1, 1);
+			pLightObject->AddComponent(pLight);
+
+			scene.AddLight(pLight);
+		}*/
 	}
 
 	virtual void Update()

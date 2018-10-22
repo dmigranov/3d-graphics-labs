@@ -4,13 +4,16 @@ struct Light
 	float4	position;	// позиция источника (есть у Point и Spot)
 	float4	direction;	// направление света
 	float4	color;		// (цвет.r, цвет.g, цвет.b, интенсивность)
+	float4  specPower;
+
 };
 
 float4x4	matWorldNormal			: register(c0);
 float4x4	matWorldT				: register(c4);
 float4		materialColor			: register(c8);
 float4		lightsCount				: register(c9);
-Light		lights[3]				: register(c10);
+float4		cameraPos				: register(c10);
+Light		lights[3]				: register(c11);
 
 struct PS_INPUT
 {
@@ -28,13 +31,25 @@ struct PS_OUTPUT
 
 float3 calcDiffuse(float4 lightCol, float3 lightDir, float3 vertexNormal)
 {
-	float diffuse = saturate( dot(-lightDir, vertexNormal) );
+	float diffuse = saturate( dot(-lightDir, vertexNormal) ); //если скалярное произведение меньше нуля, то saturate обращает его в ноль
 
 	// Цвет = diffuse * (цвет источника) * (интенсивность источника)
 	float3 color = diffuse * lightCol.rgb * lightCol.a;
 
 	return color;
 }
+
+float3 calcSpecular(float4 lightCol, float3 lightDir, float3 vertexNormal, float3 vertexPos, float specPower)
+{
+	float3 halfway = normalize(normalize(cameraPos.xyz - vertexPos) - lightDir); //+lightDir?
+	float specular = pow(saturate( dot(vertexNormal, halfway) ), specPower);
+
+
+	float3 color = specular/* * lightCol.rgb * lightCol.a*/;
+	return color;
+
+}
+
 
 PS_OUTPUT main( PS_INPUT input ) : COLOR0
 {
@@ -70,8 +85,13 @@ PS_OUTPUT main( PS_INPUT input ) : COLOR0
 		{
 			lightDir = normalize(vertexPos - lights[i].position.xyz).xyz;
 		}
+		// Spot light
+		/*else if (abs(type - 3) < epsilon)
+		{
+			//lightDir = normalize(vertexPos - lights[i].position.xyz).xyz;
+		}*/
 		
-		col += materialColor.rgb * calcDiffuse(lightCol, lightDir, vertexNormal);
+		col += materialColor.rgb * (calcDiffuse(lightCol, lightDir, vertexNormal) + calcSpecular(lightCol, lightDir, vertexNormal, vertexPos, lights[i].specPower.x ));
 	}
 	
 	output.Color = float4(col, 1.0);

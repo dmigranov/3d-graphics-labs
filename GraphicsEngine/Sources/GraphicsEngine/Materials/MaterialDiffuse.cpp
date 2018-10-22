@@ -3,6 +3,7 @@
 #include "GraphicsEngine/Light.h"
 #include "GraphicsEngine/MathUtils.h"
 #include "GraphicsEngine/SceneUtils.h"
+#include <iostream>
 
 
 MaterialDiffuse::MaterialDiffuse()
@@ -36,6 +37,7 @@ void MaterialDiffuse::SetMaterial(const Object * pObject)
 	const Matrix4x4 matWorldViewProjT	= MathUtils::GetMatrixWorldViewProjT(matWorld, matView, matProj);
 	const Matrix4x4 matWorldT			= matWorld.Transpose();
 	const Matrix4x4 matWorldNormal		= matWorld.Inverse();
+	const Vector4 cameraPosition = Vector4(SceneUtils::GetEyePosition(), 1);
 
 	// Получили список всех источников света в сцене
 	std::list<const Light *> lights = SceneUtils::GetLights();
@@ -52,18 +54,24 @@ void MaterialDiffuse::SetMaterial(const Object * pObject)
 		SetPixelShaderMatrix4x4	("matWorldT",		matWorldT);
 		SetPixelShaderVector4	("materialColor",	Vector4(1, 1, 1, 1));
 		SetPixelShaderVector4	("lightsCount",		Vector4(count, 1, 1, 1));
+		SetPixelShaderVector4("cameraPos", cameraPosition);
 		
 		// Передаём параметры каждого источника света
 		int i = 0;
 		std::list<const Light *>::iterator iter;
 		for (iter = lights.begin(); iter != lights.end(); ++iter, ++i)
 		{
+
 			const Light * pLight = *iter;
 			const Vector4 lightType			= pLight->GetType();
 			const Vector4 lightPosition		= Vector4( pLight->GetPosition(), 1 );
+			//std::cout << lightPosition.v[0] << " " << lightPosition.v[1] << " " << lightPosition.v[2] << " " << std::endl;
 			const Vector4 lightDirection	= Vector4( pLight->GetDirection(), 0 );
+			//std::cout << lightDirection.v[0] << " " << lightDirection.v[1] << " " << lightDirection.v[2] << " " << std::endl;
 			const Vector4 lightColor		= pLight->GetColor();
-
+			const Vector4 specularPower = Vector4(10, 0, 0, 0);
+			
+			//std::cout << std::endl;
 			// "lights[i]"
 			std::string lightStr = "lights[" + std::to_string(static_cast<long long>(i)) + "]";
 			
@@ -72,7 +80,10 @@ void MaterialDiffuse::SetMaterial(const Object * pObject)
 			SetPixelShaderVector4( (lightStr + ".position").c_str(),	lightPosition );
 			SetPixelShaderVector4( (lightStr + ".direction").c_str(),	lightDirection );
 			SetPixelShaderVector4( (lightStr + ".color").c_str(),		lightColor );	
+			SetPixelShaderVector4( (lightStr + ".specPower").c_str(), specularPower);
+
 		}
+
 
 		SetPixelShaderEnd();
 	}
