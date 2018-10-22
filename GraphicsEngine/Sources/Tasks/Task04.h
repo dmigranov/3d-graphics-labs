@@ -54,8 +54,9 @@ public:
 			pLight->SetIntensity(1);
 
 			Object * pLightObject = new Object();
-			pLightObject->m_pTransform	= new Transform(1,0,0, 0,90,0, 1,1,1);
+			pLightObject->m_pTransform	= new Transform(0,0,5, 0,0,0, 1,1,1);
 			pLightObject->AddComponent(pLight);
+			pLightObject->AddComponent(new ObjectRotator(20, 0, 0));
 
 			scene.AddLight(pLight);
 		}
@@ -67,14 +68,14 @@ public:
 			pLight->SetIntensity(1);
 
 			Object * pLightObject = new Object();
-			pLightObject->m_pTransform	= new Transform(3,0,0, 0,0,0, 1,1,1);
+			pLightObject->m_pTransform	= new Transform(0,5,0, 0,0,0, 1,1,1);
 			pLightObject->AddComponent(pLight);
 
 			scene.AddLight(pLight);
-		}
+		}*/
 
 		//Ligth source #3 - Spot
-		{
+		/*{
 			Light * pLight = new Light(LIGHT_SPOT);
 			pLight->SetColor(1, 1, 1);
 			pLight->SetIntensity(1);

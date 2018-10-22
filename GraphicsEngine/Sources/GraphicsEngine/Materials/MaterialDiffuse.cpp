@@ -69,7 +69,8 @@ void MaterialDiffuse::SetMaterial(const Object * pObject)
 			const Vector4 lightDirection	= Vector4( pLight->GetDirection(), 0 );
 			//std::cout << lightDirection.v[0] << " " << lightDirection.v[1] << " " << lightDirection.v[2] << " " << std::endl;
 			const Vector4 lightColor		= pLight->GetColor();
-			const Vector4 specularPower = Vector4(10, 0, 0, 0);
+			const Vector4 specularPower = Vector4(100, 0, 0, 0);
+			const Vector4 attenuation = Vector4(0, 0, 0.1, 0);
 			
 			//std::cout << std::endl;
 			// "lights[i]"
@@ -81,6 +82,7 @@ void MaterialDiffuse::SetMaterial(const Object * pObject)
 			SetPixelShaderVector4( (lightStr + ".direction").c_str(),	lightDirection );
 			SetPixelShaderVector4( (lightStr + ".color").c_str(),		lightColor );	
 			SetPixelShaderVector4( (lightStr + ".specPower").c_str(), specularPower);
+			SetPixelShaderVector4((lightStr + ".att").c_str(), attenuation);
 
 		}
 
