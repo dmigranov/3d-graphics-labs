@@ -100,32 +100,42 @@ PS_OUTPUT main( PS_INPUT input ) : COLOR0
 		// Spot light
 		else if (abs(type - 3) < epsilon)
 		{
-			lightDir = normalize(vertexPos - lights[i].position.xyz).xyz;
-			float lightDcs = normalize(-lights[i].direction.xyz).xyz;
-			/*float3 L_ =  normalize(lights[i].direction.xyz).xyz;
+			/*lightDir = normalize(vertexPos - lights[i].position.xyz).xyz;
+			float3 lightDcs = normalize(lights[i].direction.xyz).xyz; //убрал минус
+			float rho = dot(lightDir, lightDcs); //formule from dx9 docs*/
+
+			float3 L_ =  normalize(lights[i].direction.xyz).xyz;
 			float3 D_ = normalize(vertexPos - lights[i].position.xyz).xyz;
-			lightDir = D_; //? or L_?
-			float rho = dot(L_, D_);*/
+			lightDir = L_; //? or L_?
+			float rho = dot(L_, D_);
+
 			float phi = lights[i].spot.x;
 			float theta = lights[i].spot.y;
 			float falloff = lights[i].spot.z;
-			float rho = dot(lightDir, lightDcs); //formule from dx9 docs
+
 
 			float d = distance(vertexPos, lights[i].position.xyz);
 			//attenuation = 1.0 / (lights[i].att.x + lights[i].att.y * d + lights[i].att.z * d * d);
-			attenuation = 1;
-			spot = saturate(
+			attenuation = 1; //for testing
+
+			/*spot = saturate(
 				pow(
 					(rho - cos(phi/2.0)) / (cos(theta/2.0) - cos(phi/2.0)),
 					falloff
 				)
-			);
+			);*/
+			if (rho > cos(theta/2.0))
+				spot = 1.0;
+			else if(rho <= cos(phi/2.0))
+				spot = 0.0;
+			else
+				spot = pow( (rho - cos(phi/2.0)) / (cos(theta/2.0) - cos(phi/2.0)), falloff );
 		}
 
 
 
 		
-		col += materialColor.rgb * (calcDiffuse(lightCol, lightDir, vertexNormal, attenuation, spot) + calcSpecular(lightCol, lightDir, vertexNormal, vertexPos, lights[i].specPower.x, attenuation, spot ));
+		col += materialColor.rgb * (calcDiffuse(lightCol, lightDir, vertexNormal, attenuation, spot) /*+ calcSpecular(lightCol, lightDir, vertexNormal, vertexPos, lights[i].specPower.x, attenuation, spot )*/);
 	}
 	
 	output.Color = float4(col, 1.0);
