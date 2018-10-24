@@ -10,6 +10,7 @@
 
 #include "Tasks/Task.h"
 #include "Tasks/ObjectRotator.h"
+#include "Tasks/ObjectMover.h"
 
 
 /**
@@ -29,6 +30,7 @@ public:
 		{
 			Object * pCameraObj = new Object();
 			pCameraObj->m_pTransform = new Transform( Vector3(0.0f, 0.0f,-7.0f), Vector3(0.0f, 0.0f, 0.0f));
+
 			Camera * pCamera = new Camera();
 			pCameraObj->AddComponent( pCamera );
 
@@ -82,8 +84,9 @@ public:
 			pLight->SetIntensity(1);
 
 			Object * pLightObject = new Object();
-			pLightObject->AddComponent(new ObjectRotator(0, -10, 0));
-			pLightObject->m_pTransform = new Transform(0, 0, -6, 0, 0, 0, 1, 1, 1);
+			//pLightObject->AddComponent(new ObjectRotator(0, -10, 0));
+			//pLightObject->m_pTransform = new Transform(0, 0, -6, 0, 0, 0, 1, 1, 1);
+			pLightObject->m_pTransform = new Transform(0, 3.6, 0, 0, 0, 0, 1, 1, 1);
 			pLightObject->AddComponent(pLight);
 
 

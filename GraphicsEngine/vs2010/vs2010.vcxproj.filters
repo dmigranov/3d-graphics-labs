@@ -423,6 +423,9 @@
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialCylinderMorphing.h">
       <Filter>GraphicsEngine\Materials</Filter>
     </ClInclude>
+    <ClInclude Include="..\Sources\Tasks\ObjectMover.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Sources\GraphicsEngine\Application.cpp">
