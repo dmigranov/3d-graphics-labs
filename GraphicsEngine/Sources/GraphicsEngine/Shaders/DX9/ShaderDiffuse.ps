@@ -104,10 +104,16 @@ PS_OUTPUT main( PS_INPUT input ) : COLOR0
 			float3 lightDcs = normalize(lights[i].direction.xyz).xyz; //убрал минус
 			float rho = dot(lightDir, lightDcs); //formule from dx9 docs*/
 
-			float3 L_ =  normalize(lights[i].direction.xyz).xyz;
+			/*float3 L_ =  normalize(lights[i].direction.xyz).xyz;
 			float3 D_ = normalize(vertexPos - lights[i].position.xyz).xyz;
 			lightDir = L_; //? or L_?
-			float rho = dot(L_, D_);
+			float rho = dot(L_, D_);*/
+
+			lightDir = normalize(lights[i].direction.xyz).xyz;
+			float3 lightDcs = normalize(vertexPos - lights[i].position.xyz).xyz;
+			float rho = dot(lightDir, lightDcs);
+
+
 
 			float phi = lights[i].spot.x;
 			float theta = lights[i].spot.y;
