@@ -42,7 +42,7 @@ public:
 			pObject1->m_pTransform	= new Transform(0,0,0, 0,0,0, 3,3,3);
 			pObject1->m_pMesh		= new MeshSphere(20);
             pObject1->m_pMaterial	= new MaterialDiffuse();
-			pObject1->AddComponent( new ObjectRotator(0,10,0) );
+			//pObject1->AddComponent( new ObjectRotator(0,10,0) );
 
 			scene.AddObject( pObject1 );
 		}
@@ -68,8 +68,9 @@ public:
 			pLight->SetIntensity(1);
 
 			Object * pLightObject = new Object();
-			pLightObject->m_pTransform	= new Transform(0,5,0, 0,0,0, 1,1,1);
+			pLightObject->m_pTransform	= new Transform(0,0,-5, 0,0,0, 1,1,1);
 			pLightObject->AddComponent(pLight);
+			pLightObject->AddComponent(new ObjectRotator(0, 20, 0));
 
 			scene.AddLight(pLight);
 		}*/
@@ -81,10 +82,13 @@ public:
 			pLight->SetIntensity(1);
 
 			Object * pLightObject = new Object();
-			pLightObject->m_pTransform = new Transform(0, 0, -5, 0, 0, 0, 1, 1, 1);
+			pLightObject->AddComponent(new ObjectRotator(0, -10, 0));
+			pLightObject->m_pTransform = new Transform(0, 0, -6, 0, 0, 0, 1, 1, 1);
 			pLightObject->AddComponent(pLight);
 
+
 			scene.AddLight(pLight);
+
 		}
 	}
 

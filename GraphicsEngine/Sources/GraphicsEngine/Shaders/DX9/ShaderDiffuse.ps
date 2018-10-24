@@ -51,8 +51,6 @@ float3 calcSpecular(float4 lightCol, float3 lightDir, float3 vertexNormal, float
 
 }
 
-
-
 PS_OUTPUT main( PS_INPUT input ) : COLOR0
 {
 	PS_OUTPUT output;
@@ -121,8 +119,8 @@ PS_OUTPUT main( PS_INPUT input ) : COLOR0
 
 
 			float d = distance(vertexPos, lights[i].position.xyz);
-			//attenuation = 1.0 / (lights[i].att.x + lights[i].att.y * d + lights[i].att.z * d * d);
-			attenuation = 1; //for testing
+			attenuation = 1.0 / (lights[i].att.x + lights[i].att.y * d + lights[i].att.z * d * d);
+			//attenuation = 1; //for testing
 
 			if (rho > cos(theta/2.0))
 				spot = 1.0;
@@ -132,7 +130,7 @@ PS_OUTPUT main( PS_INPUT input ) : COLOR0
 				spot = pow( (rho - cos(phi/2.0)) / (cos(theta/2.0) - cos(phi/2.0)), falloff );
 		}
 		
-		col += materialColor.rgb * (calcDiffuse(lightCol, lightDir, vertexNormal, attenuation, spot) /*+ calcSpecular(lightCol, lightDir, vertexNormal, vertexPos, lights[i].specPower.x, attenuation, spot )*/);
+		col += materialColor.rgb * (calcDiffuse(lightCol, lightDir, vertexNormal, attenuation, spot) + calcSpecular(lightCol, lightDir, vertexNormal, vertexPos, lights[i].specPower.x, attenuation, spot ));
 	}
 	
 	output.Color = float4(col, 1.0);
