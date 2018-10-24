@@ -5,7 +5,8 @@ struct Light
 	float4	direction;	// направление света
 	float4	color;		// (цвет.r, цвет.g, цвет.b, интенсивность)
 	float4  specPower;
-	float4  att;
+	float4  att; //нет у directional
+	float4  spot; //есть только у splotlight
 };
 
 float4x4	matWorldNormal			: register(c0);
@@ -29,23 +30,23 @@ struct PS_OUTPUT
 	float4 	Color	 	: COLOR0;
 };
 
-float3 calcDiffuse(float4 lightCol, float3 lightDir, float3 vertexNormal, float attenuation)
+float3 calcDiffuse(float4 lightCol, float3 lightDir, float3 vertexNormal, float attenuation, float spot)
 {
 	float diffuse = saturate( dot(-lightDir, vertexNormal) ); //если скалярное произведение меньше нуля, то saturate обращает его в ноль
 
 	// Цвет = diffuse * (цвет источника) * (интенсивность источника)
-	float3 color = diffuse * lightCol.rgb * lightCol.a * attenuation;
+	float3 color = diffuse * lightCol.rgb * lightCol.a * attenuation * spot;
 
 	return color;
 }
 
-float3 calcSpecular(float4 lightCol, float3 lightDir, float3 vertexNormal, float3 vertexPos, float specPower, float attenuation)
+float3 calcSpecular(float4 lightCol, float3 lightDir, float3 vertexNormal, float3 vertexPos, float specPower, float attenuation, float spot)
 {
 	float3 halfway = normalize(normalize(cameraPos.xyz - vertexPos) - lightDir); //+lightDir?
 	float specular = pow(saturate( dot(vertexNormal, halfway) ), specPower);
 	float3 specularColor = float3(1,1,1); //цвет отблеска
 
-	float3 color = specular  * specularColor * attenuation;
+	float3 color = specular  * specularColor * attenuation * spot;
 	return color;
 
 }
@@ -76,11 +77,11 @@ PS_OUTPUT main( PS_INPUT input ) : COLOR0
 		float4 lightCol = lights[i].color;
 		float3 lightDir = float3(0,0,0);
 		
-		float attenuation;
+		float attenuation= 1;
+		float spot = 1;
 		// Directional light
 		if (abs(type - 1) < epsilon)
 		{
-			attenuation = 1;
 			lightDir = normalize(lights[i].direction.xyz).xyz;
 		}
 
@@ -89,6 +90,7 @@ PS_OUTPUT main( PS_INPUT input ) : COLOR0
 		else if (abs(type - 2) < epsilon)
 		{
 			lightDir = normalize(vertexPos - lights[i].position.xyz).xyz;
+			
 			float d = distance(vertexPos, lights[i].position.xyz);
 			attenuation = 1.0 / (lights[i].att.x + lights[i].att.y * d + lights[i].att.z * d * d); //d - расстояние от положения вертекса до источника света
 
@@ -96,16 +98,34 @@ PS_OUTPUT main( PS_INPUT input ) : COLOR0
 
 
 		// Spot light
-		/*else if (abs(type - 3) < epsilon)
+		else if (abs(type - 3) < epsilon)
 		{
-			//lightDir = normalize(vertexPos - lights[i].position.xyz).xyz;
-			float attenuation = 1 / (att.x + att.y * d + att.z * d * d); 
-		}*/
+			lightDir = normalize(vertexPos - lights[i].position.xyz).xyz;
+			float lightDcs = normalize(-lights[i].direction.xyz).xyz;
+			/*float3 L_ =  normalize(lights[i].direction.xyz).xyz;
+			float3 D_ = normalize(vertexPos - lights[i].position.xyz).xyz;
+			lightDir = D_; //? or L_?
+			float rho = dot(L_, D_);*/
+			float phi = lights[i].spot.x;
+			float theta = lights[i].spot.y;
+			float falloff = lights[i].spot.z;
+			float rho = dot(lightDir, lightDcs); //formule from dx9 docs
+
+			float d = distance(vertexPos, lights[i].position.xyz);
+			//attenuation = 1.0 / (lights[i].att.x + lights[i].att.y * d + lights[i].att.z * d * d);
+			attenuation = 1;
+			spot = saturate(
+				pow(
+					(rho - cos(phi/2.0)) / (cos(theta/2.0) - cos(phi/2.0)),
+					falloff
+				)
+			);
+		}
 
 
 
 		
-		col += materialColor.rgb * (calcDiffuse(lightCol, lightDir, vertexNormal, attenuation) + calcSpecular(lightCol, lightDir, vertexNormal, vertexPos, lights[i].specPower.x, attenuation ));
+		col += materialColor.rgb * (calcDiffuse(lightCol, lightDir, vertexNormal, attenuation, spot) + calcSpecular(lightCol, lightDir, vertexNormal, vertexPos, lights[i].specPower.x, attenuation, spot ));
 	}
 	
 	output.Color = float4(col, 1.0);

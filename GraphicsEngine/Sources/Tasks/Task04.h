@@ -48,7 +48,7 @@ public:
 		}
 
 		// Ligth source #1 - Directional
-		{
+		/*{
 			Light * pLight = new Light(LIGHT_DIRECTIONAL);
 			pLight->SetColor(1,1,0);
 			pLight->SetIntensity(1);
@@ -59,7 +59,7 @@ public:
 			pLightObject->AddComponent(new ObjectRotator(20, 0, 0));
 
 			scene.AddLight(pLight);
-		}
+		}*/
 
 		// Ligth source #2 - Point
 		/*{
@@ -75,17 +75,17 @@ public:
 		}*/
 
 		//Ligth source #3 - Spot
-		/*{
+		{
 			Light * pLight = new Light(LIGHT_SPOT);
 			pLight->SetColor(1, 1, 1);
 			pLight->SetIntensity(1);
 
 			Object * pLightObject = new Object();
-			pLightObject->m_pTransform = new Transform(3, 0, 0, 0, 0, 0, 1, 1, 1);
+			pLightObject->m_pTransform = new Transform(0, 0, -5, 0, 0, 0, 1, 1, 1);
 			pLightObject->AddComponent(pLight);
 
 			scene.AddLight(pLight);
-		}*/
+		}
 	}
 
 	virtual void Update()
