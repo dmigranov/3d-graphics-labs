@@ -1,4 +1,5 @@
 ﻿#include "DX9TextureSampler.h"
+#include <iostream>
 
 #ifdef CAN_USE_DIRECT_X
 
@@ -28,18 +29,26 @@ void DX9TextureSampler::SetFilterMode(TextureFilterMode filterMode)
 	if (m_filterMode == TEXTURE_FILTER_MODE_POINT)
 	{
 		// TODO: Task05_01
+		m_filterModeDX9 = D3DTEXF_POINT;
 	}
 	else if (m_filterMode == TEXTURE_FILTER_MODE_BILINEAR)
 	{
 		// TODO: Task05_01
+		m_filterModeDX9 = D3DTEXF_LINEAR;
+		m_useMipMaps = false; //I guess?
 	}
-	else if (m_filterMode == TEXTURE_FILTER_MODE_TRILINEAR)
+	else if (m_filterMode == TEXTURE_FILTER_MODE_TRILINEAR) //билинейная + mipmapping
 	{
 		// TODO: Task05_01
+		m_filterModeDX9 = D3DTEXF_LINEAR;
+		m_useMipMaps = true;
 	}
 	else if (m_filterMode == TEXTURE_FILTER_MODE_ANISOTROPIC)
 	{
 		// TODO: Task05_01
+		m_useAniso = true;
+		m_filterModeDX9 = D3DTEXF_ANISOTROPIC;
+
 	}	
 }
 
@@ -50,15 +59,19 @@ void DX9TextureSampler::SetWrapMode(TextureWrapMode wrapMode)
 	if (m_wrapMode == TEXTURE_WRAP_MODE_CLAMP)
 	{
 		// TODO: Task05_01
+		m_wrapModeDX9 = D3DTADDRESS_WRAP;
 	}
 	else if (m_wrapMode == TEXTURE_WRAP_MODE_REPEAT)
 	{
 		// TODO: Task05_01
+		m_wrapModeDX9 = D3DTADDRESS_CLAMP;
+
 	}
 }
 
 void DX9TextureSampler::PassParamsToShader(int textureRegister, bool toPixelShader) const
 {
+	//std::cout << toPixelShader << std::endl;
 	// https://msdn.microsoft.com/en-us/library/windows/desktop/bb174456(v=vs.85).aspx
 	DWORD sampler = textureRegister;
 
@@ -67,6 +80,7 @@ void DX9TextureSampler::PassParamsToShader(int textureRegister, bool toPixelShad
 		// https://msdn.microsoft.com/en-us/library/windows/desktop/bb206339(v=vs.85).aspx#Sampling_Stage_Registers
 		sampler += D3DVERTEXTEXTURESAMPLER0;
 	}
+	//во всех этих тудусах делаем IDirect3DDevice9::SetSamplerState(sampler) с разными вторыми аршкментами
 
 	// Set wrap mode (Clamp, Repeat) 
 	// TODO: Task05_01
@@ -94,6 +108,8 @@ void DX9TextureSampler::PassParamsToShader(int textureRegister, bool toPixelShad
 	{
 		// TODO: Task05_01
 	}
+
+	
 }
 
 #endif
