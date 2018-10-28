@@ -181,6 +181,8 @@ xcopy  /S /I /E /Y "..\Sources\GraphicsEngine\Shaders" "..\BUILD\Release\Shaders
     <ClInclude Include="..\Sources\GraphicsEngine\Light.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\Material.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialCylinderMorphing.h" />
+    <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialRoad.cpp" />
+    <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialRoad.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialSand.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialDiffuse.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialSphereMorphing.h" />

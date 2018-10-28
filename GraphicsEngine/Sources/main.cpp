@@ -26,8 +26,8 @@ int main(int argc, char ** argv)
     //Task * pTask = new Task02(); //done
     //Task * pTask = new Task03(); //done
     //Task * pTask = new Task04(); //mistakes?
-    Task * pTask = new Task05_01();
-    //Task * pTask = new Task05_02();
+    //Task * pTask = new Task05_01(); //well I guess it's done
+    Task * pTask = new Task05_02();
     //Task * pTask = new Task05_03();
     //Task * pTask = new Task06();
 	//Task * pTask = new Task07();

@@ -33,6 +33,7 @@ void DX9TextureSampler::SetFilterMode(TextureFilterMode filterMode)
 	}
 	else if (m_filterMode == TEXTURE_FILTER_MODE_BILINEAR)
 	{
+		//m_filterModeDX9 = D3DTEXF_POINT; //for testing only
 		m_filterModeDX9 = D3DTEXF_LINEAR;
 		m_useMipMaps = false; //I guess?
 	}

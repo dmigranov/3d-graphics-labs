@@ -426,6 +426,12 @@
     <ClInclude Include="..\Sources\Tasks\ObjectMover.h">
       <Filter>Tasks</Filter>
     </ClInclude>
+    <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialRoad.h">
+      <Filter>GraphicsEngine\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialRoad.cpp">
+      <Filter>GraphicsEngine\Materials</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Sources\GraphicsEngine\Application.cpp">

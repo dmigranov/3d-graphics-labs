@@ -40,7 +40,8 @@ public:
 
 			pObject1->m_pTransform	= new Transform( 0,0,0, 0,0,0, 1,1,10 );
 			pObject1->m_pMesh		= new MeshQuad();			
-			pObject1->m_pMaterial	= new MaterialUnlit(Vector3(0.5, 0.5, 0.5));
+			//pObject1->m_pMaterial	= new MaterialUnlit(Vector3(0.5, 0.5, 0.5));
+			pObject1->m_pMaterial = new MaterialRoad();
 						
 			scene.AddObject( pObject1 );
 		}
