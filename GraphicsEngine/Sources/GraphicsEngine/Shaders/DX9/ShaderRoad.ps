@@ -14,6 +14,28 @@ struct PS_OUTPUT
 	float4 	Color	 	: COLOR0;
 };
 
+float3 blendColors (float3 c1, float3 c2, float3 c3)
+{
+	float3 c12;
+	float3 c123;
+	c12.x = min(c1.x, c2.x);
+	c12.y = min(c1.y, c2.y);
+	c12.z = min(c1.z, c2.z);
+	/*if(c12.x < 0.3)
+		c12.x+=0.2;
+	if(c12.y < 0.3)
+		c12.y+=0.2;
+	if(c12.z < 0.3)
+		c12.z+=0.2;*/ //это было осветление черных точек. “еоретически, оно работает, но без этого всЄ же красивее
+	/*if (c3.x < 0.65 && c3.y < 0.65 && c3.z < 0.65)
+		c123 = max(c3, c12);
+	else
+		c123 = min(c3, c12);*/
+
+	//return (c1 + c2 + c3)/3;
+	return c123;
+}
+
 PS_OUTPUT main( PS_INPUT input )
 {
 	PS_OUTPUT output;
@@ -27,8 +49,9 @@ PS_OUTPUT main( PS_INPUT input )
 	uv1Scale = float2(4, 8);
 	float3 color3 = tex2D( texture3, input.uv1.xy * uv1Scale ).rgb;
 
-	output.Color.rgb = (color1 + color2 + color3)/3;
+	//output.Color.rgb = (color1 + color2 + color3)/3;
 	//output.Color.rgb = min(color1, color3);
+	output.Color.rgb = blendColors(color1, color2, color3);
 	output.Color.w   = input.Color.w;
 
 	return output;

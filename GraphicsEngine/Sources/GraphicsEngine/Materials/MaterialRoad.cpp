@@ -20,12 +20,12 @@ void MaterialRoad::Init()
 {
 	Material::Init();
 	m_pTexture1 = new Texture2D("road_1.jpg");
-	m_pTexture1->SetFilterMode(TEXTURE_FILTER_MODE_BILINEAR); //например
+	m_pTexture1->SetFilterMode(TEXTURE_FILTER_MODE_ANISOTROPIC); //например
 	m_pTexture1->SetWrapMode(TEXTURE_WRAP_MODE_REPEAT);
 	m_pTexture2 = new Texture2D("road_2.jpg");
-	m_pTexture2->SetFilterMode(TEXTURE_FILTER_MODE_BILINEAR);
+	m_pTexture2->SetFilterMode(TEXTURE_FILTER_MODE_ANISOTROPIC);
 	m_pTexture3 = new Texture2D("road_3.jpg");
-	m_pTexture3->SetFilterMode(TEXTURE_FILTER_MODE_BILINEAR);
+	m_pTexture3->SetFilterMode(TEXTURE_FILTER_MODE_ANISOTROPIC);
 }
 
 void MaterialRoad::Deinit()
