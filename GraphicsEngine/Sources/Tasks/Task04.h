@@ -29,10 +29,12 @@ public:
 		// Camera
 		{
 			Object * pCameraObj = new Object();
+
 			pCameraObj->m_pTransform = new Transform( Vector3(0.0f, 0.0f,-7.0f), Vector3(0.0f, 0.0f, 0.0f));
 
 			Camera * pCamera = new Camera();
 			pCameraObj->AddComponent( pCamera );
+			
 
 			scene.SetCamera( pCamera );
 		}
@@ -56,11 +58,11 @@ public:
 			pLight->SetIntensity(1);
 
 			Object * pLightObject = new Object();
-			pLightObject->m_pTransform	= new Transform(0,0,5, 0,0,0, 1,1,1);
+			pLightObject->m_pTransform	= new Transform(0,0,-5, 0,0,0, 1,1,1);
 			pLightObject->AddComponent(pLight);
 			pLightObject->AddComponent(new ObjectRotator(20, 0, 0));
 
-			scene.AddLight(pLight);
+			scene.AddLight(pLight); //directional works!
 		}*/
 
 		// Ligth source #2 - Point
@@ -70,11 +72,11 @@ public:
 			pLight->SetIntensity(1);
 
 			Object * pLightObject = new Object();
-			pLightObject->m_pTransform	= new Transform(0,0,-5, 0,0,0, 1,1,1);
+			pLightObject->m_pTransform	= new Transform(0, 0,-5.5, 0,0,0, 1,1,1);
 			pLightObject->AddComponent(pLight);
-			pLightObject->AddComponent(new ObjectRotator(0, 20, 0));
+			//pLightObject->AddComponent(new ObjectRotator(0, 20, 0)); //вращение идёт вокруг собственной оси, поэтому в случае с пойнтом смысла не имеет, т.к он излучает во все стороны
 
-			scene.AddLight(pLight);
+			scene.AddLight(pLight); //it works as well! (read above)
 		}*/
 
 		//Ligth source #3 - Spot
@@ -84,9 +86,9 @@ public:
 			pLight->SetIntensity(1);
 
 			Object * pLightObject = new Object();
-			//pLightObject->AddComponent(new ObjectRotator(0, -10, 0));
+			//pLightObject->AddComponent(new ObjectRotator(0, -35, 0));
 			//pLightObject->m_pTransform = new Transform(0, 0, -6, 0, 0, 0, 1, 1, 1);
-			pLightObject->m_pTransform = new Transform(0, 3.6, 0, 0, 0, 0, 1, 1, 1);
+			pLightObject->m_pTransform = new Transform(0, 0, -6, 0, 0, 0, 1, 1, 1);
 			pLightObject->AddComponent(pLight);
 
 

@@ -105,7 +105,7 @@ PS_OUTPUT main( PS_INPUT input ) : COLOR0
 			float3 L_ =  normalize(lights[i].direction.xyz).xyz;
 			float3 D_ = normalize(vertexPos - lights[i].position.xyz).xyz;
 			lightDir = L_; //?
-			float rho = dot(L_, D_);
+			float rho = saturate(dot(L_, D_));
 
 			/*lightDir = normalize(lights[i].direction.xyz).xyz;
 			float3 lightDcs = normalize(vertexPos - lights[i].position.xyz).xyz;
@@ -123,6 +123,7 @@ PS_OUTPUT main( PS_INPUT input ) : COLOR0
 			//attenuation = 1; //for testing
 
 			if (rho > cos(theta/2.0))
+				//spot = 0.0; //for testing - it works as suppossed!
 				spot = 1.0;
 			else if(rho <= cos(phi/2.0))
 				spot = 0.0;
