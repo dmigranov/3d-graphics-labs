@@ -47,9 +47,9 @@ PS_OUTPUT main( PS_INPUT input )
 	float3 color3 = tex2D( texture3, input.uv1.xy * uv1Scale ).rgb;
 
 	//output.Color.rgb = (color1 + color2 + color3)/3;
-	output.Color.rgb = color1;
+	//output.Color.rgb = color1;
 	//output.Color.rgb = min(color1, color3);
-	//output.Color.rgb = blendColors(color1, color2, color3);
+	output.Color.rgb = blendColors(color1, color2, color3);
 	output.Color.w   = input.Color.w;
 
 	return output;

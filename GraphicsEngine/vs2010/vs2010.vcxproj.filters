@@ -429,6 +429,9 @@
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialRoad.h">
       <Filter>GraphicsEngine\Materials</Filter>
     </ClInclude>
+    <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialEarth.h">
+      <Filter>GraphicsEngine\Materials</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Sources\GraphicsEngine\Application.cpp">
@@ -649,6 +652,9 @@
       <Filter>GraphicsEngine\Materials</Filter>
     </ClCompile>
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialRoad.cpp">
+      <Filter>GraphicsEngine\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialEarth.cpp">
       <Filter>GraphicsEngine\Materials</Filter>
     </ClCompile>
   </ItemGroup>

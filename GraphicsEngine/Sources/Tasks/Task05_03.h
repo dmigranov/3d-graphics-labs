@@ -7,7 +7,7 @@
 #include "GraphicsEngine/Scene.h"
 #include "GraphicsEngine/GraphicsEngine.h"
 #include "GraphicsEngine/Light.h"
-#include "GraphicsEngine/Materials/MaterialUnlit.h"
+#include "GraphicsEngine/Materials/MaterialEarth.h"
 
 #include "Tasks/Task.h"
 
@@ -41,7 +41,7 @@ public:
 
 			pObject1->m_pTransform	= new Transform( 0,0,0, 0,0,0, 1,1,1 );
 			pObject1->m_pMesh		= new MeshSphere(20);			
-			pObject1->m_pMaterial	= new MaterialUnlit(Vector3(0.5, 0.5, 0.5));
+			pObject1->m_pMaterial	= new MaterialEarth();
 			pObject1->AddComponent( new ObjectRotator(0, 20, 0) );
 						
 			scene.AddObject( pObject1 );
