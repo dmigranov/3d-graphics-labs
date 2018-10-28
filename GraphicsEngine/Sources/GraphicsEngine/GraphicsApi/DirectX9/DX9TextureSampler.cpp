@@ -1,5 +1,5 @@
 ﻿#include "DX9TextureSampler.h"
-#include <iostream>
+//#include <iostream>
 
 #ifdef CAN_USE_DIRECT_X
 
@@ -28,24 +28,21 @@ void DX9TextureSampler::SetFilterMode(TextureFilterMode filterMode)
 
 	if (m_filterMode == TEXTURE_FILTER_MODE_POINT)
 	{
-		// TODO: Task05_01
 		m_filterModeDX9 = D3DTEXF_POINT;
+		m_useMipMaps = false;
 	}
 	else if (m_filterMode == TEXTURE_FILTER_MODE_BILINEAR)
 	{
-		// TODO: Task05_01
 		m_filterModeDX9 = D3DTEXF_LINEAR;
 		m_useMipMaps = false; //I guess?
 	}
 	else if (m_filterMode == TEXTURE_FILTER_MODE_TRILINEAR) //билинейная + mipmapping
 	{
-		// TODO: Task05_01
 		m_filterModeDX9 = D3DTEXF_LINEAR;
 		m_useMipMaps = true;
 	}
 	else if (m_filterMode == TEXTURE_FILTER_MODE_ANISOTROPIC)
 	{
-		// TODO: Task05_01
 		m_useAniso = true;
 		m_filterModeDX9 = D3DTEXF_ANISOTROPIC;
 
@@ -58,14 +55,11 @@ void DX9TextureSampler::SetWrapMode(TextureWrapMode wrapMode)
 
 	if (m_wrapMode == TEXTURE_WRAP_MODE_CLAMP)
 	{
-		// TODO: Task05_01
-		m_wrapModeDX9 = D3DTADDRESS_WRAP;
+		m_wrapModeDX9 = D3DTADDRESS_CLAMP;
 	}
 	else if (m_wrapMode == TEXTURE_WRAP_MODE_REPEAT)
 	{
-		// TODO: Task05_01
-		m_wrapModeDX9 = D3DTADDRESS_CLAMP;
-
+		m_wrapModeDX9 = D3DTADDRESS_WRAP;
 	}
 }
 
@@ -83,30 +77,39 @@ void DX9TextureSampler::PassParamsToShader(int textureRegister, bool toPixelShad
 	//во всех этих тудусах делаем IDirect3DDevice9::SetSamplerState(sampler) с разными вторыми аршкментами
 
 	// Set wrap mode (Clamp, Repeat) 
-	// TODO: Task05_01
+	m_pDevice->SetSamplerState(sampler, D3DSAMP_ADDRESSU, m_wrapModeDX9);
+	m_pDevice->SetSamplerState(sampler, D3DSAMP_ADDRESSV, m_wrapModeDX9); //w too?
 
 
 	// Set filter mode (Point, Bilinear, Trilinear, Anisotropic)
 	// TODO: Task05_01
+	m_pDevice->SetSamplerState(sampler, D3DSAMP_MAGFILTER, m_filterModeDX9); //по умолчанию point
+	m_pDevice->SetSamplerState(sampler, D3DSAMP_MINFILTER, m_filterModeDX9); //по умолчанию point
+
 	
 	// Set degree of anisotropic filtering (aniso level)
 	if (m_useAniso)
 	{
 		// TODO: Task05_01
+		m_pDevice->SetSamplerState(sampler, D3DSAMP_MAXANISOTROPY, 5); 
+
 	}
 	else
 	{
 		// TODO: Task05_01
+		m_pDevice->SetSamplerState(sampler, D3DSAMP_MAXANISOTROPY, 1);
 	}
 	
 	// Enable/Disable mip maps
 	if (m_useMipMaps)
 	{
 		// TODO: Task05_01
+		m_pDevice->SetSamplerState(sampler, D3DSAMP_MIPFILTER, m_filterMode);
 	}
 	else
 	{
 		// TODO: Task05_01
+		m_pDevice->SetSamplerState(sampler, D3DSAMP_MIPFILTER, D3DTEXF_NONE);
 	}
 
 	
