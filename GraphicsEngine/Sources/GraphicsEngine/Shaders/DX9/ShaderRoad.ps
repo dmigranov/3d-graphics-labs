@@ -19,22 +19,18 @@ float3 blendColors (float3 c1, float3 c2, float3 c3)
 	//float3 c12;
 	float3 c13;
 	float3 c123;
-	c3 -= float3(0.5,0.5,0.5);
+	c3 -= float3(0.5,0.5,0.5); //затемнение темного
 	c13.x = min(c1.x, c3.x);
 	c13.y = min(c1.y, c3.y);
 	c13.z = min(c1.z, c3.z);
-	/*if(c12.x < 0.3)
-		c12.x+=0.2;
-	if(c12.y < 0.3)
-		c12.y+=0.2;
-	if(c12.z < 0.3)
-		c12.z+=0.2;*/ //это было осветление черных точек. Теоретически, оно работает, но без этого всё же красивее
-	/*if(c3.x < 0.8 && c3.y < 0.8 && c3.z < 0.8) //!не белый
-		c123 = c12 - 0.35 * c3;*/
-	//c123/=2;
+	
+	c123.x = min(c2.x, c13.x);
+	c123.y = min(c2.y, c13.y);
+	c123.z = min(c2.z, c13.z);
 
+	//c123 = 0.5 *c13 + 0.5*c2;
 	//return (c1 + c2 + c3)/3;
-	return c13;
+	return c123;
 }
 
 PS_OUTPUT main( PS_INPUT input )
@@ -44,15 +40,16 @@ PS_OUTPUT main( PS_INPUT input )
 	float2 uv1Scale = float2(1, 10);
 	float3 color1 = tex2D( texture1, input.uv1.xy * uv1Scale ).rgb;
 
-	uv1Scale = float2(1, 10);
+	uv1Scale = float2(0.8, 10);
 	float3 color2 = tex2D( texture2, input.uv1.xy * uv1Scale ).rgb;
 
-	uv1Scale = float2(2, 6);
+	uv1Scale = float2(1, 3);
 	float3 color3 = tex2D( texture3, input.uv1.xy * uv1Scale ).rgb;
 
 	//output.Color.rgb = (color1 + color2 + color3)/3;
+	output.Color.rgb = color1;
 	//output.Color.rgb = min(color1, color3);
-	output.Color.rgb = blendColors(color1, color2, color3);
+	//output.Color.rgb = blendColors(color1, color2, color3);
 	output.Color.w   = input.Color.w;
 
 	return output;
