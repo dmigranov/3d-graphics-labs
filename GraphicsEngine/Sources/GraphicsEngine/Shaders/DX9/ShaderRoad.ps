@@ -31,6 +31,9 @@ float3 blendColors (float3 c1, float3 c2, float3 c3)
 		c123 = max(c3, c12);
 	else
 		c123 = min(c3, c12);*/
+	if(c3.x < 0.8 && c3.y < 0.8 && c3.z < 0.8) //!не белый
+		c123 = c12 - 0.35 * c3;
+	//c123/=2;
 
 	//return (c1 + c2 + c3)/3;
 	return c123;
