@@ -1,0 +1,35 @@
+sampler2D texture1 : register(s0);
+sampler2D texture2 : register(s1);
+sampler2D texture3 : register(s2);
+
+struct PS_INPUT
+{
+	float4 	Position	: POSITION;
+	float4 	Color		: COLOR0;
+	float4	uv1			: TEXCOORD0;
+};
+
+struct PS_OUTPUT
+{
+	float4 	Color	 	: COLOR0;
+};
+
+PS_OUTPUT main( PS_INPUT input )
+{
+	PS_OUTPUT output;
+
+	float2 uv1Scale = float2(1, 10);
+	float3 color1 = tex2D( texture1, input.uv1.xy * uv1Scale ).rgb;
+
+	uv1Scale = float2(1, 10);
+	float3 color2 = tex2D( texture2, input.uv1.xy * uv1Scale ).rgb;
+
+	uv1Scale = float2(4, 8);
+	float3 color3 = tex2D( texture3, input.uv1.xy * uv1Scale ).rgb;
+
+	output.Color.rgb = (color1 + color2 + color3)/3;
+	//output.Color.rgb = min(color1, color3);
+	output.Color.w   = input.Color.w;
+
+	return output;
+};

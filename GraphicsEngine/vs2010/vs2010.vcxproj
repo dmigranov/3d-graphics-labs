@@ -181,7 +181,6 @@ xcopy  /S /I /E /Y "..\Sources\GraphicsEngine\Shaders" "..\BUILD\Release\Shaders
     <ClInclude Include="..\Sources\GraphicsEngine\Light.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\Material.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialCylinderMorphing.h" />
-    <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialRoad.cpp" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialRoad.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialSand.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialDiffuse.h" />
@@ -286,6 +285,7 @@ xcopy  /S /I /E /Y "..\Sources\GraphicsEngine\Shaders" "..\BUILD\Release\Shaders
     <ClCompile Include="..\Sources\GraphicsEngine\Internal\ObjectStorage.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\Material.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialCylinderMorphing.cpp" />
+    <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialRoad.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialSand.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialDiffuse.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialSphereMorphing.cpp" />
@@ -323,14 +323,14 @@ xcopy  /S /I /E /Y "..\Sources\GraphicsEngine\Shaders" "..\BUILD\Release\Shaders
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderCylinderMorphing.vs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderEarth.ps" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderEarth.vs" />
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderRoad.ps" />
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderRoad.vs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderSand.ps" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderSand.vs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderDiffuse.ps" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderDiffuse.vs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderDiffuseSpecular.ps" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderDiffuseSpecular.vs" />
-    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderRoad.ps" />
-    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderRoad.vs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderSphereMorphing.vs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderTask02Cube.ps" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderTask02Cube.vs" />

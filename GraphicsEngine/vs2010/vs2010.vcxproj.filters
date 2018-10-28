@@ -429,9 +429,6 @@
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialRoad.h">
       <Filter>GraphicsEngine\Materials</Filter>
     </ClInclude>
-    <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialRoad.cpp">
-      <Filter>GraphicsEngine\Materials</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Sources\GraphicsEngine\Application.cpp">
@@ -651,6 +648,9 @@
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialCylinderMorphing.cpp">
       <Filter>GraphicsEngine\Materials</Filter>
     </ClCompile>
+    <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialRoad.cpp">
+      <Filter>GraphicsEngine\Materials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Sources\GraphicsEngine\Shaders\DX11\ShaderDiffuse.fx">
@@ -678,12 +678,6 @@
       <Filter>GraphicsEngine\Shaders\DX9</Filter>
     </None>
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderDiffuseSpecular.vs">
-      <Filter>GraphicsEngine\Shaders\DX9</Filter>
-    </None>
-    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderRoad.ps">
-      <Filter>GraphicsEngine\Shaders\DX9</Filter>
-    </None>
-    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderRoad.vs">
       <Filter>GraphicsEngine\Shaders\DX9</Filter>
     </None>
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderTask02Cube.ps">
@@ -777,6 +771,18 @@
       <Filter>GraphicsEngine\Shaders\DX9</Filter>
     </None>
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderCylinderMorphing.vs">
+      <Filter>GraphicsEngine\Shaders\DX9</Filter>
+    </None>
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderRoad.ps">
+      <Filter>GraphicsEngine\Shaders\DX9</Filter>
+    </None>
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderRoad.vs">
+      <Filter>GraphicsEngine\Shaders\DX9</Filter>
+    </None>
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderRoad.ps">
+      <Filter>GraphicsEngine\Shaders\DX9</Filter>
+    </None>
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderRoad.vs">
       <Filter>GraphicsEngine\Shaders\DX9</Filter>
     </None>
   </ItemGroup>
