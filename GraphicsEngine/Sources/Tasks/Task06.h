@@ -2,6 +2,7 @@
 #include "Tasks/ObjectRotator.h"
 #include "GraphicsEngine/Application.h"
 #include "GraphicsEngine/Meshes/MeshSphere.h"
+#include "GraphicsEngine/Materials/MaterialEarthNormal.h"
 #include "GraphicsEngine/Transform.h"
 #include "GraphicsEngine/Object.h"
 #include "GraphicsEngine/Scene.h"
@@ -41,7 +42,7 @@ public:
 
 			pObject1->m_pMesh		= new MeshSphere(30);
 			pObject1->m_pTransform	= new Transform(0,0,0, 0,0,0, 1,1,1);
-            pObject1->m_pMaterial	= new MaterialDiffuse();
+            pObject1->m_pMaterial	= new MaterialEarthNormal();
 			pObject1->AddComponent( new ObjectRotator(0, 30, 0) );
 						
 			scene.AddObject( pObject1 );

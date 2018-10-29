@@ -182,6 +182,7 @@ xcopy  /S /I /E /Y "..\Sources\GraphicsEngine\Shaders" "..\BUILD\Release\Shaders
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\Material.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialCylinderMorphing.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialEarth.h" />
+    <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialEarthNormal.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialRoad.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialSand.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialDiffuse.h" />
@@ -287,6 +288,7 @@ xcopy  /S /I /E /Y "..\Sources\GraphicsEngine\Shaders" "..\BUILD\Release\Shaders
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\Material.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialCylinderMorphing.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialEarth.cpp" />
+    <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialEarthNormal.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialRoad.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialSand.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialDiffuse.cpp" />
@@ -325,6 +327,8 @@ xcopy  /S /I /E /Y "..\Sources\GraphicsEngine\Shaders" "..\BUILD\Release\Shaders
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderCylinderMorphing.vs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderEarth.ps" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderEarth.vs" />
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderEarthNormal.ps" />
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderEarthNormal.vs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderRoad.ps" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderRoad.vs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderSand.ps" />

@@ -432,6 +432,9 @@
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialEarth.h">
       <Filter>GraphicsEngine\Materials</Filter>
     </ClInclude>
+    <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialEarthNormal.h">
+      <Filter>GraphicsEngine\Materials</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Sources\GraphicsEngine\Application.cpp">
@@ -657,6 +660,9 @@
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialEarth.cpp">
       <Filter>GraphicsEngine\Materials</Filter>
     </ClCompile>
+    <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialEarthNormal.cpp">
+      <Filter>GraphicsEngine\Materials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Sources\GraphicsEngine\Shaders\DX11\ShaderDiffuse.fx">
@@ -789,6 +795,12 @@
       <Filter>GraphicsEngine\Shaders\DX9</Filter>
     </None>
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderRoad.vs">
+      <Filter>GraphicsEngine\Shaders\DX9</Filter>
+    </None>
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderEarthNormal.ps">
+      <Filter>GraphicsEngine\Shaders\DX9</Filter>
+    </None>
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderEarthNormal.vs">
       <Filter>GraphicsEngine\Shaders\DX9</Filter>
     </None>
   </ItemGroup>

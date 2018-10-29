@@ -1,0 +1,85 @@
+sampler2D nmap : register(s0);
+sampler2D tex : register(s1);
+
+
+
+float4x4	matWorldNormal			: register(c0);
+float4x4	matWorldT				: register(c4);
+float4		cameraPos				: register(c8);
+float4		direction				: register(c9);
+float4		color					: register(c10);
+float4		specPower				: register(c11);
+
+
+struct PS_INPUT
+{
+	float4 	Position	: POSITION;
+	float4 	Color		: COLOR0;
+	float4	uv1			: TEXCOORD0;
+	float4	LocalPosition	: TEXCOORD1;
+	float4	LocalNormal		: TEXCOORD2;
+};
+
+struct PS_OUTPUT
+{
+	float4 	Color	 	: COLOR0;
+};
+
+float3 calcDiffuse(float4 lightCol, float3 lightDir, float3 vertexNormal, float attenuation, float spot)
+{
+	float diffuse = saturate( dot(-lightDir, vertexNormal) ); //если скал€рное произведение меньше нул€, то saturate обращает его в ноль
+
+	// ÷вет = diffuse * (цвет источника) * (интенсивность источника)
+	float3 color = diffuse * lightCol.rgb * lightCol.a * attenuation * spot;
+
+	return color;
+}
+
+float3 calcSpecular(float4 lightCol, float3 lightDir, float3 vertexNormal, float3 vertexPos, float specPower, float attenuation, float spot)
+{
+	float3 halfway = normalize(normalize(cameraPos.xyz - vertexPos) - lightDir); //+lightDir?
+	float specular = pow(saturate( dot(vertexNormal, halfway) ), specPower);
+	float3 specularColor = float3(1,1,1); //цвет отблеска
+
+	float3 color = specular  * specularColor * attenuation * spot;
+	return color;
+
+}
+
+
+
+PS_OUTPUT main( PS_INPUT input )
+{
+
+
+	PS_OUTPUT output;
+
+	float2 uv1Scale = float2(1, 1);
+	float3 color1 = tex2D( nmap, input.uv1.xy * uv1Scale ).rgb;
+
+
+	//directional light from ShaderDiffuse.ps
+	float4 lightCol = color;
+
+	float3 vertexNormal = mul(input.LocalNormal.xyz, matWorldNormal);
+	vertexNormal = normalize(vertexNormal);
+
+	float3 vertexPos = mul(input.LocalPosition, matWorldT);
+
+	float3 lightDir = normalize(direction.xyz).xyz;
+	float attenuation= 1;
+	float spot = 1;
+
+	float3 lcol = color1 * (calcDiffuse(lightCol, lightDir, vertexNormal, attenuation, spot) + calcSpecular(lightCol, lightDir, vertexNormal, vertexPos, specPower.x, attenuation, spot ));
+
+
+
+
+
+	
+
+	output.Color.rgb = color1;
+	output.Color.w   = input.Color.w;
+
+	return output;
+};

@@ -11,6 +11,7 @@ struct VS_OUTPUT
 {
 	float4 	Position		: POSITION;
 	float4 	Color			: COLOR0;
+	//uv1
 	float4	LocalPosition	: TEXCOORD1;
 	float4	LocalNormal		: TEXCOORD2;
 };
