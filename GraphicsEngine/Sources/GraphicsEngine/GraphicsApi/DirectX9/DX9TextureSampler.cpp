@@ -14,7 +14,7 @@ DX9TextureSampler::DX9TextureSampler(TextureFilterMode filterMode, TextureWrapMo
 	m_pDevice = pDX9Context->m_pDevice;
 
 	SetFilterMode( filterMode );
-	SetWrapMode  ( wrapMode );
+	SetWrapMode  ( wrapMode );	
 }
 
 DX9TextureSampler::~DX9TextureSampler()
@@ -25,6 +25,7 @@ DX9TextureSampler::~DX9TextureSampler()
 void DX9TextureSampler::SetFilterMode(TextureFilterMode filterMode)
 {
 	m_filterMode = filterMode;
+	m_useAniso = false;
 
 	if (m_filterMode == TEXTURE_FILTER_MODE_POINT)
 	{
@@ -44,9 +45,9 @@ void DX9TextureSampler::SetFilterMode(TextureFilterMode filterMode)
 	}
 	else if (m_filterMode == TEXTURE_FILTER_MODE_ANISOTROPIC)
 	{
+		m_useMipMaps = false; //?
 		m_useAniso = true;
 		m_filterModeDX9 = D3DTEXF_ANISOTROPIC;
-
 	}	
 }
 
@@ -92,25 +93,27 @@ void DX9TextureSampler::PassParamsToShader(int textureRegister, bool toPixelShad
 	if (m_useAniso)
 	{
 		// TODO: Task05_01
-		m_pDevice->SetSamplerState(sampler, D3DSAMP_MAXANISOTROPY, 5); 
+		m_pDevice->SetSamplerState(sampler, D3DSAMP_MAXANISOTROPY, 8); 
 
 	}
 	else
 	{
 		// TODO: Task05_01
-		m_pDevice->SetSamplerState(sampler, D3DSAMP_MAXANISOTROPY, 1);
+		m_pDevice->SetSamplerState(sampler, D3DSAMP_MAXANISOTROPY, 0);
 	}
 	
 	// Enable/Disable mip maps
 	if (m_useMipMaps)
 	{
 		// TODO: Task05_01
-		m_pDevice->SetSamplerState(sampler, D3DSAMP_MIPFILTER, m_filterMode);
+		m_pDevice->SetSamplerState(sampler, D3DSAMP_MIPFILTER, m_filterModeDX9);
 	}
 	else
 	{
-		// TODO: Task05_01
-		m_pDevice->SetSamplerState(sampler, D3DSAMP_MIPFILTER, D3DTEXF_NONE);
+		if(m_filterMode == TEXTURE_FILTER_MODE_BILINEAR)
+			m_pDevice->SetSamplerState(sampler, D3DSAMP_MIPFILTER, D3DTEXF_POINT);
+		else
+			m_pDevice->SetSamplerState(sampler, D3DSAMP_MIPFILTER, D3DTEXF_NONE);
 	}
 
 	

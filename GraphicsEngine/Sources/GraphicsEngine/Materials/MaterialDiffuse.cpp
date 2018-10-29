@@ -71,7 +71,7 @@ void MaterialDiffuse::SetMaterial(const Object * pObject)
 			const Vector4 lightColor		= pLight->GetColor();
 			const Vector4 specularPower = Vector4(100, 0, 0, 0);
 			const Vector4 attenuation = Vector4(0, 0, 0.1, 0);
-			const Vector4 spotlight = Vector4(0.4, 0.2, 0.6, 0); //(phi, theta, falloff, 0);
+			const Vector4 spotlight = Vector4(0.4, 0.2, 1, 0); //(phi, theta, falloff, 0);
 			
 			//std::cout << std::endl;
 			// "lights[i]"

@@ -3,6 +3,7 @@
 #include "GraphicsEngine/GraphicsEngine.h"
 #include "GraphicsEngine/Light.h"
 #include "GraphicsEngine/Materials/MaterialDiffuse.h"
+#include "GraphicsEngine/Materials/MaterialUnlit.h"
 #include "GraphicsEngine/Meshes/MeshSphere.h"
 #include "GraphicsEngine/Object.h"
 #include "GraphicsEngine/Scene.h"
@@ -30,7 +31,7 @@ public:
 		{
 			Object * pCameraObj = new Object();
 
-			pCameraObj->m_pTransform = new Transform( Vector3(0.0f, 0.0f,-7.0f), Vector3(0.0f, 0.0f, 0.0f));
+			pCameraObj->m_pTransform = new Transform( Vector3(0.0f, 0.0f,-10.0f), Vector3(0.0f, 0.0f, 0.0f));
 
 			Camera * pCamera = new Camera();
 			pCameraObj->AddComponent( pCamera );
@@ -86,9 +87,12 @@ public:
 			pLight->SetIntensity(1);
 
 			Object * pLightObject = new Object();
-			//pLightObject->AddComponent(new ObjectRotator(0, -35, 0));
+			pLightObject->AddComponent(new ObjectRotator(0, -20, 0));
+			pLightObject->m_pMesh = new MeshCube(20);
+			pLightObject->m_pMaterial = new MaterialUnlit(Vector3(1, 1, 1));
 			//pLightObject->m_pTransform = new Transform(0, 0, -6, 0, 0, 0, 1, 1, 1);
-			pLightObject->m_pTransform = new Transform(0, 0, -6, 0, 0, 0, 1, 1, 1);
+			pLightObject->m_pTransform = new Transform(0, 0, -4.5, 0, 0, 0, 1, 1, 1);
+			//pLightObject->m_pTransform = new Transform(0, -4.5, 0, PI, 0, 0, 1, 1, 1);
 			pLightObject->AddComponent(pLight);
 
 
