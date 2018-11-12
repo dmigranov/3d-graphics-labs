@@ -4,6 +4,7 @@
 #include "GraphicsEngine/Transform.h"
 #include "GraphicsEngine/MathUtils.h"
 #include "GraphicsEngine/SceneUtils.h"
+#include "GraphicsEngine/Light.h"
 
 
 MaterialEarthNormal::MaterialEarthNormal()
@@ -44,6 +45,7 @@ void MaterialEarthNormal::SetMaterial(const Object * pObject)
 	std::list<const Light *> lights = SceneUtils::GetLights();
 	const Vector4 cameraPosition = Vector4(SceneUtils::GetEyePosition(), 1);
 	const Vector4 specularPower = Vector4(100, 0, 0, 0);
+	const Light * pLight = SceneUtils::GetLights().front();
 	const Vector4 lightDirection = Vector4(pLight->GetDirection(), 0);
 	SetMaterialBegin();
 	{
@@ -57,6 +59,9 @@ void MaterialEarthNormal::SetMaterial(const Object * pObject)
 		SetPixelShaderMatrix4x4("matWorldNormal", matWorldNormal);
 		SetPixelShaderMatrix4x4("matWorldT", matWorldT);
 		SetPixelShaderVector4("cameraPos", cameraPosition);
+		SetPixelShaderVector4("direction", lightDirection);
+		SetPixelShaderVector4("color", Vector4(1, 1, 1, 1));
+		SetPixelShaderVector4("specPower", specularPower);
 
 		//передать остальные
 
