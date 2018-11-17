@@ -6,6 +6,7 @@
 #include <sstream>
 
 
+
 MeshObjFile::MeshObjFile(const char * filepath)
 {
 	m_filepath = Application::Instance().GetDataDirectory() + "/" + filepath;
@@ -32,11 +33,50 @@ void MeshObjFile::Init()
 
 	std::string str;
 	while (std::getline(infile, str))
-		std::cout << str << std::endl;
+		if (str[0] == 'v')
+		{
+			if (str[1] == 'n') //vn 0 0 -1
+			{
+				str = str.substr(3);
+				std::vector<std::string> parsedStrings = parseString(str, ' ');
+				//std::cout << parsedStrings[0] << "    " << parsedStrings[1] << "    " << parsedStrings[2] << std::endl;
+				std::vector<double> values = getNumericValues(parsedStrings);
+				//std::cout << values[0] << "    " << values[1] << "    " << values[2] << std::endl;
+				normals.push_back(Vector3(values[0], values[1], values[2]));
+			}
+			//std::cout << str << std::endl;
+		}
 
 }
 
 void MeshObjFile::Deinit()
 {
 	Mesh::Deinit();
+}
+
+
+std::vector<std::string> MeshObjFile::parseString(std::string str, char delimiter)
+{
+	std::vector<std::string> vec;
+	size_t startIndex = 0;
+	size_t endIndex;
+	while ((endIndex = str.find(delimiter, startIndex)) != std::string::npos)
+	{
+		std::string substr = str.substr(startIndex, endIndex - startIndex);
+		vec.push_back(substr);
+		startIndex = endIndex + 1;
+	}
+	std::string substr = str.substr(startIndex, endIndex - startIndex);
+	vec.push_back(substr);
+	return vec;
+}
+
+std::vector<double> MeshObjFile::getNumericValues(std::vector<std::string> strings)
+{
+	std::vector<double> vec;
+	for (std::string str : strings)
+	{
+		vec.push_back(atof(str.c_str()));
+	}
+	return vec;
 }
