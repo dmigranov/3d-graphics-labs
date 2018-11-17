@@ -33,19 +33,37 @@ void MeshObjFile::Init()
 
 	std::string str;
 	while (std::getline(infile, str))
+	{
 		if (str[0] == 'v')
 		{
-			if (str[1] == 'n') //vn 0 0 -1
+			if (str[1] == ' ') //v -0.5 0.5 -0.5
+			{
+				str = str.substr(2);
+				std::vector<std::string> parsedStrings = parseString(str, ' ');
+				std::vector<double> values = getNumericValues(parsedStrings);
+				vertices.push_back(Vector3(values[0], values[1], values[2]));
+			}
+			else if (str[1] == 'n') //vn 0 0 -1
 			{
 				str = str.substr(3);
 				std::vector<std::string> parsedStrings = parseString(str, ' ');
-				//std::cout << parsedStrings[0] << "    " << parsedStrings[1] << "    " << parsedStrings[2] << std::endl;
 				std::vector<double> values = getNumericValues(parsedStrings);
-				//std::cout << values[0] << "    " << values[1] << "    " << values[2] << std::endl;
 				normals.push_back(Vector3(values[0], values[1], values[2]));
 			}
-			//std::cout << str << std::endl;
 		}
+	}
+
+
+
+	/*meshImpl->SetVertices(vertices);
+	meshImpl->SetColors(colors);
+	meshImpl->SetNormals(normals);
+	meshImpl->SetUV0(uv0);
+
+	meshImpl->SetIndices(indices, MESH_TOPOLOGY_TRIANGLE_STRIP);
+
+	meshImpl->Apply();*/
+
 
 }
 
