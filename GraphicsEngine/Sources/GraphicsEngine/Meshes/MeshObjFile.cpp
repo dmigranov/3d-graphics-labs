@@ -74,15 +74,16 @@ void MeshObjFile::Init()
 				std::vector<std::string> strIndices = parseString(substr, '/');
 				std::vector<double> indices = getIntValues(strIndices);
 				vertexIndices.push_back(indices[0] - 1); //кароч в этом obj индексы считаются с единицы, а не с нуля. ну ваще...
-				//std::cout << indices[0] << " ";
 				textureIndices.push_back(indices[1] - 1);
 				normalIndices.push_back(indices[2] - 1);
 			}
-			//d::cout << std::endl;
 		}
 		else if (str[0] == 'm') //mtllib
 		{
+			str = str.substr(7);
+			parseMTL(str);
 
+			
 		}
 	}
 
@@ -91,7 +92,7 @@ void MeshObjFile::Init()
 	std::vector<Vector4> colors;
 	for (unsigned int i = 0; i < vertices.size(); i++)
 	{
-		colors.push_back(Vector4(1.0f, 1.0f, 1.0f, 10.f)); //
+		colors.push_back(Vector4(1.0f, 1.0f, 1.0f, 0.5f)); //
 	}
 
 	meshImpl->SetVertices(vertices);
@@ -147,4 +148,24 @@ std::vector<double> MeshObjFile::getIntValues(std::vector<std::string> strings)
 		vec.push_back(atoi(str.c_str()));
 	}
 	return vec;
+}
+
+void MeshObjFile::parseMTL(std::string mtlpath)
+{
+	std::string fullpath = Application::Instance().GetDataDirectory() + "/" + mtlpath;
+	std::ifstream infile;
+	infile.open(fullpath);
+
+	if (!infile)
+	{
+		std::cerr << "Unable to open file " << m_filepath << std::endl;
+		exit(1);
+	}
+
+	std::string str;
+
+	while (std::getline(infile, str))
+	{
+
+	}
 }
