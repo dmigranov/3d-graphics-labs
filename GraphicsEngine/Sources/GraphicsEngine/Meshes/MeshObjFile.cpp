@@ -18,9 +18,13 @@ void MeshObjFile::Init()
 
 	// TODO: Task07
 	std::vector<Vector3> vertices;
-	std::vector<Vector4> colors; //?
+	//std::vector<Vector4> colors; //?
 	std::vector<Vector3> normals;
 	std::vector<Vector3> uv0;
+
+	std::vector<int> vertexIndices;
+	std::vector<int> textureIndices;
+	std::vector<int> normalIndices;
 
 	std::ifstream infile;
 	infile.open(m_filepath);
@@ -32,6 +36,8 @@ void MeshObjFile::Init()
 	}
 
 	std::string str;
+	size_t polygonSize;
+
 	while (std::getline(infile, str))
 	{
 		if (str[0] == 'v')
@@ -40,29 +46,63 @@ void MeshObjFile::Init()
 			{
 				str = str.substr(2);
 				std::vector<std::string> parsedStrings = parseString(str, ' ');
-				std::vector<double> values = getNumericValues(parsedStrings);
+				std::vector<double> values = getDoubleValues(parsedStrings);
 				vertices.push_back(Vector3(values[0], values[1], values[2]));
 			}
 			else if (str[1] == 'n') //vn 0 0 -1
 			{
 				str = str.substr(3);
 				std::vector<std::string> parsedStrings = parseString(str, ' ');
-				std::vector<double> values = getNumericValues(parsedStrings);
+				std::vector<double> values = getDoubleValues(parsedStrings);
 				normals.push_back(Vector3(values[0], values[1], values[2]));
 			}
+			else if (str[1] == 't') //vt 0 0
+			{
+				str = str.substr(3);
+				std::vector<std::string> parsedStrings = parseString(str, ' ');
+				std::vector<double> values = getDoubleValues(parsedStrings);
+				uv0.push_back(Vector3(values[0], values[1], 0));
+			}
+		}
+		else if (str[0] == 'f') //f 2/2/2 4/4/4 1/1/1
+		{
+			str = str.substr(2);
+			std::vector<std::string> parsedStrings = parseString(str, ' '); 
+			polygonSize = parsedStrings.size(); //3 or 4
+			for (std::string substr : parsedStrings) //2/2/2
+			{
+				std::vector<std::string> strIndices = parseString(substr, '/');
+				std::vector<double> indices = getIntValues(strIndices);
+				vertexIndices.push_back(indices[0] - 1); //кароч в этом obj индексы считаются с единицы, а не с нуля. ну ваще...
+				//std::cout << indices[0] << " ";
+				textureIndices.push_back(indices[1] - 1);
+				normalIndices.push_back(indices[2] - 1);
+			}
+			//d::cout << std::endl;
+		}
+		else if (str[0] == 'm') //mtllib
+		{
+
 		}
 	}
 
+	int i = 0;
 
+	std::vector<Vector4> colors;
+	for (unsigned int i = 0; i < vertices.size(); i++)
+	{
+		colors.push_back(Vector4(1.0f, 1.0f, 1.0f, 10.f)); //
+	}
 
-	/*meshImpl->SetVertices(vertices);
-	meshImpl->SetColors(colors);
+	meshImpl->SetVertices(vertices);
+	meshImpl->SetColors(colors); //change
 	meshImpl->SetNormals(normals);
 	meshImpl->SetUV0(uv0);
 
-	meshImpl->SetIndices(indices, MESH_TOPOLOGY_TRIANGLE_STRIP);
 
-	meshImpl->Apply();*/
+	meshImpl->SetIndices(vertexIndices, MESH_TOPOLOGY_TRIANGLE_LIST); //ну тут работает, а как это из файла понять, что там не STRIP?
+
+	meshImpl->Apply();
 
 
 }
@@ -89,12 +129,22 @@ std::vector<std::string> MeshObjFile::parseString(std::string str, char delimite
 	return vec;
 }
 
-std::vector<double> MeshObjFile::getNumericValues(std::vector<std::string> strings)
+std::vector<double> MeshObjFile::getDoubleValues(std::vector<std::string> strings)
 {
 	std::vector<double> vec;
 	for (std::string str : strings)
 	{
 		vec.push_back(atof(str.c_str()));
+	}
+	return vec;
+}
+
+std::vector<double> MeshObjFile::getIntValues(std::vector<std::string> strings)
+{
+	std::vector<double> vec;
+	for (std::string str : strings)
+	{
+		vec.push_back(atoi(str.c_str()));
 	}
 	return vec;
 }
