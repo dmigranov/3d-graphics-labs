@@ -131,7 +131,9 @@ PS_OUTPUT main( PS_INPUT input ) : COLOR0
 				spot = pow( (rho - cos(phi/2.0)) / (cos(theta/2.0) - cos(phi/2.0)), falloff );
 		}
 		
-		col += materialColor.rgb * (calcDiffuse(lightCol, lightDir, vertexNormal, attenuation, spot) + calcSpecular(lightCol, lightDir, vertexNormal, vertexPos, lights[i].specPower.x, attenuation, spot ));
+		//col += materialColor.rgb * (calcDiffuse(lightCol, lightDir, vertexNormal, attenuation, spot) + calcSpecular(lightCol, lightDir, vertexNormal, vertexPos, lights[i].specPower.x, attenuation, spot )); //цвет, которыей передали из материал cpp
+		col += input.Color.rgb * (calcDiffuse(lightCol, lightDir, vertexNormal, attenuation, spot) + calcSpecular(lightCol, lightDir, vertexNormal, vertexPos, lights[i].specPower.x, attenuation, spot )); //цвет, который при создании (например, из obj файла) присвоили вершине
+	
 	}
 	
 	output.Color = float4(col, 1.0);

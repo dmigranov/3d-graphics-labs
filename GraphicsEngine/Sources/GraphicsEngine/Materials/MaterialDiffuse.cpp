@@ -52,7 +52,7 @@ void MaterialDiffuse::SetMaterial(const Object * pObject)
 		SetPixelShaderBegin();
 		SetPixelShaderMatrix4x4	("matWorldNormal",	matWorldNormal);
 		SetPixelShaderMatrix4x4	("matWorldT",		matWorldT);
-		SetPixelShaderVector4	("materialColor",	Vector4(1, 1, 1, 1));
+		SetPixelShaderVector4	("materialColor",	Vector4(1, 1, 0, 1));
 		SetPixelShaderVector4	("lightsCount",		Vector4(count, 1, 1, 1));
 		SetPixelShaderVector4("cameraPos", cameraPosition);
 		
