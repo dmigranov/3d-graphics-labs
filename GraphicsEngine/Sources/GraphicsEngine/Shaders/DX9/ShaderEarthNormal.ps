@@ -52,9 +52,11 @@ PS_OUTPUT main( PS_INPUT input )
 	PS_OUTPUT output;
 
 	float2 uv1Scale = float2(1, 1);
-	float3 nloc = tex2D( nmap, input.uv1.xy * uv1Scale ).rgb; //нормаль тз карты нормалей
+	float3 mapcolor = tex2D( nmap, input.uv1.xy * uv1Scale ).rgb; //нормаль тз карты нормалей
+	float3 nloc = mapcolor * 2 - float3(1,1,1);
 
-	//nloc = nloc * 2 - float3(1,1,1); //?
+
+	float3 texcolor =  tex2D( tex, input.uv1.xy * uv1Scale ).rgb;
 
 
 	//directional light from ShaderDiffuse.ps
@@ -66,25 +68,25 @@ PS_OUTPUT main( PS_INPUT input )
 	float3 n = vertexNormal; //this?
 	//n = normalize(n);
 	float3 t = cross(n, float3(1,1,1));
-	t = normalize(t);
+	
 	float3 b = cross(n, t);
+	n = normalize(n);
+	t = normalize(t);
 	b = normalize(b);
 
 	float3 nglob;
-	nglob = nloc.x * t +  nloc.y * b + nloc.x * n;
-	//nglob = normalize(nglob);
+	nglob = nloc.x * t +  nloc.y * b + nloc.z * n;
+	nglob = normalize(nglob);
 
 	float3 vertexPos = mul(input.LocalPosition, matWorldT);
 
 	float3 lightDir =  normalize(direction.xyz).xyz;
-	float attenuation= 1;
+	float attenuation = 1;
 	float spot = 1;
 
-	float3 lcol = nloc * (calcDiffuse(lightCol, lightDir, nglob, attenuation, spot)
-	//+ calcSpecular(lightCol, lightDir, nloc, vertexPos, specPower.x, attenuation, spot )
+	float3 lcol = texcolor * (calcDiffuse(lightCol, lightDir, nglob, attenuation, spot)
+	//+ calcSpecular(lightCol, lightDir, nglob, vertexPos, specPower.x, attenuation, spot )
 	);
-
-
 
 
 

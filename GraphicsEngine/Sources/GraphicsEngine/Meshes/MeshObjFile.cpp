@@ -96,7 +96,7 @@ void MeshObjFile::Init()
 	}
 
 	meshImpl->SetVertices(vertices);
-	meshImpl->SetColors(colors); //change
+	meshImpl->SetColors(colors); //change //somethins is wrong with light anyway!
 	meshImpl->SetNormals(normals);
 	meshImpl->SetUV0(uv0);
 

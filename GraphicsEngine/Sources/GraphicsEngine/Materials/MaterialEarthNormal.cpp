@@ -63,8 +63,6 @@ void MaterialEarthNormal::SetMaterial(const Object * pObject)
 		SetPixelShaderVector4("color", Vector4(1, 1, 1, 1));
 		SetPixelShaderVector4("specPower", specularPower);
 
-		//передать остальные
-
 
 		SetPixelShaderTexture2d("nmap", m_pNormalMap);
 		SetPixelShaderTexture2d("tex", m_pTexture);

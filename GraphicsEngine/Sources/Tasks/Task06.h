@@ -55,9 +55,10 @@ public:
 			pLight->SetIntensity(1);
 
 			Object * pLightObject = new Object();
-			pLightObject->m_pTransform	= new Transform(1,0,0, 60,-45,0, 1,1,1);
+			//pLightObject->m_pTransform	= new Transform(1,0,0, 60,-45,0, 1,1,1);
+			pLightObject->m_pTransform = new Transform(0, -1, 0, -90, 0, 0, 1, 1, 1);
 			//pLightObject->AddComponent( new ObjectRotator(0.3f,0,0) );
-			//pLightObject->m_pTransform = new Transform(0, 0, -3, 0, 0, 0, 1, 1, 1); //wtf?
+			//pLightObject->m_pTransform = new Transform(0, 0, -2, 0, 0, 0, 1, 1, 1); //wtf?
 			pLightObject->AddComponent(pLight);
 			
 
