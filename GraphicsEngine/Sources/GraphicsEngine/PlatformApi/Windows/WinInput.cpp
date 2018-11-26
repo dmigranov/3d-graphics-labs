@@ -2,12 +2,14 @@
 #include "GraphicsEngine/Internal/InternalInput.h"
 #include <Windowsx.h>
 
+
 #ifdef CAN_USE_DIRECT_X
 
 
 void WinInput::Init()
 {
 	// TODO : Task08
+	InternalInput input();
 }
 
 void WinInput::Clear()
@@ -35,12 +37,14 @@ void WinInput::Dispatch(MSG & msg)
 			{
 				// TODO : Task08
 				// Call InternalInput
+				//комбинации?
 			}
 			// Process other keys
 			else
 			{
 				// TODO : Task08
 				// Call InternalInput
+				InternalInput::SetKeyDown(winKey);
 			}
 		}
 
@@ -49,6 +53,9 @@ void WinInput::Dispatch(MSG & msg)
 		{
 			// TODO : Task08
 			// Call InternalInput
+			InternalInput::SetKeyUp(winKey);
+			
+			
 		}
 	}
 

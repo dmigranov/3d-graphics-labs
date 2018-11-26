@@ -6,6 +6,8 @@
 #include "GraphicsEngine/Time.h"
 #include "GraphicsEngine/Vector3.h"
 
+#include <iostream>
+
 
 class CameraController : public Component
 {
@@ -36,6 +38,7 @@ public:
 
 			if (Input::GetKey(KEY_CODE_W) || Input::GetKey(KEY_CODE_UP_ARROW))
 			{
+				std::cout << "UP" << std::endl;
 				direction += forward;
 			}
 			

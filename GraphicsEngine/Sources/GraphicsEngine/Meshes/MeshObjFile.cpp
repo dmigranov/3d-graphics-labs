@@ -40,6 +40,7 @@ void MeshObjFile::Init()
 
 	while (std::getline(infile, str))
 	{
+		std::cout << str << std::endl;
 		if (str[0] == 'v')
 		{
 			if (str[1] == ' ') //v -0.5 0.5 -0.5
@@ -81,7 +82,7 @@ void MeshObjFile::Init()
 		else if (str[0] == 'm') //mtllib
 		{
 			str = str.substr(7);
-			parseMTL(str);
+			//parseMTL(str);
 
 			
 		}
