@@ -64,13 +64,45 @@ void WinInput::Dispatch(MSG & msg)
 		//все события связанные с мышкой
 		UINT winEvent = msg.message;
 
+
 		if (winEvent == WM_MOUSEMOVE)
 		{
 			LPARAM lParam = msg.lParam;
 			int xPos = GET_X_LPARAM(lParam);
 			int yPos = GET_Y_LPARAM(lParam);
-			std::cout << xPos << " " << yPos << std::endl;
+			InternalInput::SetMousePosition(xPos, yPos);
 		}
+		else if (winEvent == WM_LBUTTONDOWN)
+		{
+			/*LPARAM lParam = msg.lParam;
+			int xPos = GET_X_LPARAM(lParam);
+			int yPos = GET_Y_LPARAM(lParam);
+			std::cout << xPos << " " << yPos << std::endl;*/
+			InternalInput::SetMouseButton(0, true);
+		}
+		else if (winEvent == WM_MBUTTONDOWN)
+		{
+			InternalInput::SetMouseButton(1, true);
+		}
+		else if (winEvent == WM_RBUTTONDOWN)
+		{
+			InternalInput::SetMouseButton(2, true);
+		}
+
+		else if (winEvent == WM_LBUTTONUP)
+		{
+			InternalInput::SetMouseButton(0, false);
+		}
+		else if (winEvent == WM_MBUTTONUP)
+		{
+			InternalInput::SetMouseButton(1, false);
+		}
+		else if (winEvent == WM_RBUTTONUP)
+		{
+			InternalInput::SetMouseButton(2, false);
+		}
+
+
 		// TODO : Task08
 		// Call InternalInput
 	}
