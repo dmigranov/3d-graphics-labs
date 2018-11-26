@@ -2,6 +2,7 @@
 #include "GraphicsEngine/Internal/InternalInput.h"
 #include <Windowsx.h>
 
+#include <iostream>
 
 #ifdef CAN_USE_DIRECT_X
 
@@ -60,6 +61,16 @@ void WinInput::Dispatch(MSG & msg)
 	// If a mouse event
 	if (msg.message >= WM_MOUSEFIRST && msg.message <= WM_MOUSELAST)
 	{
+		//все события связанные с мышкой
+		UINT winEvent = msg.message;
+
+		if (winEvent == WM_MOUSEMOVE)
+		{
+			LPARAM lParam = msg.lParam;
+			int xPos = GET_X_LPARAM(lParam);
+			int yPos = GET_Y_LPARAM(lParam);
+			std::cout << xPos << " " << yPos << std::endl;
+		}
 		// TODO : Task08
 		// Call InternalInput
 	}
