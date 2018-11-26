@@ -40,7 +40,7 @@ void MeshObjFile::Init()
 
 	while (std::getline(infile, str))
 	{
-		std::cout << str << std::endl;
+		//std::cout << str << std::endl;
 		if (str[0] == 'v')
 		{
 			if (str[1] == ' ') //v -0.5 0.5 -0.5

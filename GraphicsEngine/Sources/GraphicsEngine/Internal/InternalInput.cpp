@@ -2,6 +2,8 @@
 #include "GraphicsEngine/GraphicsEngineFabric.h"
 
 
+#include <iostream>
+
 bool	InternalInput::m_keys[512];
 bool	InternalInput::m_keysDown[512];
 bool	InternalInput::m_keysUp[512];
@@ -14,6 +16,7 @@ bool	InternalInput::m_mouseButtonsUp[3];
 
 InternalInput::InternalInput()
 {
+	std::cout << "hERE" << std::endl;
 	for (int i = 0; i < 512; ++i)
 	{
 		m_keys[i] = false;
@@ -49,12 +52,14 @@ void InternalInput::Clear()
 
 void InternalInput::SetKeyDown(unsigned int key)
 {
+	
 	if (!m_keys[key])
 	{
 		m_keysDown[key] = true;
 	}
 
 	m_keys[key] = true;	
+	//std::cout << key << std::endl;
 }
 
 void InternalInput::SetKeyUp(unsigned int key)

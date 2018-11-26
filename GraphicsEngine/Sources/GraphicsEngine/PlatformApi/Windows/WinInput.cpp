@@ -9,7 +9,7 @@
 void WinInput::Init()
 {
 	// TODO : Task08
-	InternalInput input();
+
 }
 
 void WinInput::Clear()
@@ -54,8 +54,6 @@ void WinInput::Dispatch(MSG & msg)
 			// TODO : Task08
 			// Call InternalInput
 			InternalInput::SetKeyUp(winKey);
-			
-			
 		}
 	}
 

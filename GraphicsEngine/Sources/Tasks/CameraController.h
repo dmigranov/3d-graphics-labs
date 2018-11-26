@@ -36,10 +36,24 @@ public:
 			const double speed = 1.0;
 			Vector3 direction;
 
+			
+
+			//if (Input::GetKey(KEY_CODE_W) || Input::GetKey(KEY_CODE_UP_ARROW))
 			if (Input::GetKey(KEY_CODE_W) || Input::GetKey(KEY_CODE_UP_ARROW))
 			{
-				std::cout << "UP" << std::endl;
 				direction += forward;
+			}
+			else if (Input::GetKey(KEY_CODE_S) || Input::GetKey(KEY_CODE_DOWN_ARROW))
+			{
+				direction -= forward;
+			}
+			else if (Input::GetKey(KEY_CODE_D) || Input::GetKey(KEY_CODE_RIGHT_ARROW))
+			{
+				direction += right;
+			}
+			else if (Input::GetKey(KEY_CODE_A) || Input::GetKey(KEY_CODE_LEFT_ARROW))
+			{
+				direction -= right;
 			}
 			
 			// TODO : Task08

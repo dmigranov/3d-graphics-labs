@@ -39,9 +39,9 @@ public:
 		// Object #1 - Earth
 		{
 			Object * pObject1 = new Object();
-			pObject1->m_pMesh		= new MeshObjFile("MeshCube.obj");
+			//pObject1->m_pMesh		= new MeshObjFile("MeshCube.obj");
 			//pObject1->m_pMesh		= new MeshObjFile("MeshSphere.obj");
-			//pObject1->m_pMesh		= new MeshObjFile("MeshHouse.obj");
+			pObject1->m_pMesh		= new MeshObjFile("MeshHouse.obj");
 			pObject1->m_pTransform	= new Transform(0,0,0, 0,0,0, 1,1,1);
 			pObject1->m_pMaterial	= new MaterialDiffuse();
 			pObject1->AddComponent( new ObjectRotator(0,45,0) );

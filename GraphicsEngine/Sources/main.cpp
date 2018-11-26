@@ -30,8 +30,8 @@ int main(int argc, char ** argv)
     //Task * pTask = new Task05_02(); //done
     //Task * pTask = new Task05_03(); //done
     //Task * pTask = new Task06(); //done
-	Task * pTask = new Task07(); //teacher said i may do not do parsing of the mtl file
-	//Task * pTask = new Task08();	
+	//Task * pTask = new Task07(); //done
+	Task * pTask = new Task08();	
 	{
 		GraphicsEngine & engine = GraphicsEngine::Instance();
 
