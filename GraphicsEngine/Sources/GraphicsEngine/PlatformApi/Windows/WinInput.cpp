@@ -101,10 +101,6 @@ void WinInput::Dispatch(MSG & msg)
 		{
 			InternalInput::SetMouseButton(2, false);
 		}
-
-
-		// TODO : Task08
-		// Call InternalInput
 	}
 }
 

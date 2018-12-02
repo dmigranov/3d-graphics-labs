@@ -36,8 +36,6 @@ public:
 			const double speed = 1.0;
 			Vector3 direction;
 
-			
-
 			//if (Input::GetKey(KEY_CODE_W) || Input::GetKey(KEY_CODE_UP_ARROW))
 			if (Input::GetKey(KEY_CODE_W) || Input::GetKey(KEY_CODE_UP_ARROW))
 			{
@@ -55,18 +53,21 @@ public:
 			{
 				direction -= right;
 			}
-			
-			// TODO : Task08
 
 			pTransform->Translate( speed * dt * direction );
 		}
 
 		// Camera Rotation
 		{
-			mousePos = Input::GetMousePosition();
 
+			mousePos = Input::GetMousePosition();
+			double x = mousePos.x;
+			double y = mousePos.y;
 			// TODO : Task08
 
+			//pTransform->Rotate(0, -(mousePosPrev.x - x), 0);
+			//pTransform->Rotate(mousePosPrev.y - y, 0, 0);
+			pTransform->Rotate(-(mousePosPrev.y - y), -(mousePosPrev.x - x), 0);
 			mousePosPrev = mousePos;
 		}
 	}
