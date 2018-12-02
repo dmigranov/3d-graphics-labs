@@ -22,7 +22,7 @@ int main(int argc, char ** argv)
 		app.argv = argv;
 	}
 
-    //Task * pTask = new Task01(); //done using plain DirectX 9
+    Task * pTask = new Task01(); //done using plain DirectX 9
     //Task * pTask = new Task02(); //done
     //Task * pTask = new Task03(); //done
     //Task * pTask = new Task04(); //done?
@@ -31,7 +31,7 @@ int main(int argc, char ** argv)
     //Task * pTask = new Task05_03(); //done
     //Task * pTask = new Task06(); //done
 	//Task * pTask = new Task07(); //done
-	Task * pTask = new Task08();	
+	//Task * pTask = new Task08();	
 	{
 		GraphicsEngine & engine = GraphicsEngine::Instance();
 

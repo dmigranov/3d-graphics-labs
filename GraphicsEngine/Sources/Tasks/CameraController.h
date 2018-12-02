@@ -5,7 +5,7 @@
 #include "GraphicsEngine/Transform.h"
 #include "GraphicsEngine/Time.h"
 #include "GraphicsEngine/Vector3.h"
-
+#
 #include <iostream>
 
 
@@ -58,17 +58,25 @@ public:
 		}
 
 		// Camera Rotation
+		mousePos = Input::GetMousePosition();
+		if(mousePosPrev.x != 0 || mousePosPrev.y != 0)
 		{
-
-			mousePos = Input::GetMousePosition();
+			Vector3 angles = pTransform->GetEulerAngles();
 			double x = mousePos.x;
 			double y = mousePos.y;
 			// TODO : Task08
+			//препод говорил что-то про parent
+			Matrix4x4 rotX = Matrix4x4::RotationX(mousePosPrev.y - y); //нормировать
+			Matrix4x4 rotY = Matrix4x4::RotationY(-(mousePosPrev.x - x));
 
-			//pTransform->Rotate(0, -(mousePosPrev.x - x), 0);
-			//pTransform->Rotate(mousePosPrev.y - y, 0, 0);
-			pTransform->Rotate(-(mousePosPrev.y - y), -(mousePosPrev.x - x), 0);
-			mousePosPrev = mousePos;
+			Matrix4x4 rot = rotX * rotY;
+			pTransform->Rotate(0, -(mousePosPrev.x - x), 0);
+			pTransform->Rotate(-(mousePosPrev.y - y), 0, 0);
+
+
+			//pTransform->Rotate(-(mousePosPrev.y - y), -(mousePosPrev.x - x), 0);
+
 		}
+		mousePosPrev = mousePos;
 	}
 };
