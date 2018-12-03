@@ -30,8 +30,9 @@ public:
 			Object * pCameraObj = new Object();
 			Camera * pCamera = new Camera();
 			pCameraObj->m_pTransform = new Transform( Vector3(0.0f, 0.5f,-5.0f), Vector3(10.0f, 0.0f, 0.0f) );
+			pCameraObj->AddComponent(new CameraController);
 			pCameraObj->AddComponent( pCamera );
-			pCameraObj->AddComponent( new CameraController );
+
 
 			scene.SetCamera( pCamera );
 		}

@@ -13,10 +13,13 @@ class CameraController : public Component
 {
 	Vector3 mousePos;
 	Vector3 mousePosPrev;
+	Object * parent;
 
 public:
 	CameraController()
 	{
+		parent = new Object();
+		parent->m_pTransform = new Transform();
 		mousePos		= Vector3::Zero();
 		mousePosPrev	= Vector3::Zero();
 	}
@@ -26,6 +29,10 @@ public:
 	virtual void Update() 
 	{
 		Transform * pTransform = m_pObject->m_pTransform;
+
+		//if(pTransform->P)
+		pTransform->SetParent(parent->m_pTransform);
+		Transform * parentTransform = parent->m_pTransform;
 		
 		// Camera Translation
 		{
@@ -54,7 +61,7 @@ public:
 				direction -= right;
 			}
 
-			pTransform->Translate( speed * dt * direction );
+			parentTransform->Translate( speed * dt * direction );
 		}
 
 		// Camera Rotation
@@ -71,7 +78,7 @@ public:
 			Matrix4x4 rot = rotX * rotY;*/
 
 
-			pTransform->Rotate(0, -(mousePosPrev.x - x), 0);
+			parentTransform->Rotate(0, -(mousePosPrev.x - x), 0);
 
 
 			int angle = (int)abs(angles.y) % 360;
@@ -82,12 +89,12 @@ public:
 				if (angle < 90 || angle >= 270)
 				{
 					//std::cout << "CASE 1" << std::endl;
-					pTransform->Rotate(-0.25 * (mousePosPrev.y - y), 0, 0);
+					pTransform->Rotate(-(mousePosPrev.y - y), 0, 0);
 				}
 				else
 				{
 					//std::cout << "CASE 2" << std::endl;
-					pTransform->Rotate(0.25 * (mousePosPrev.y - y), 0, 0);
+					pTransform->Rotate((mousePosPrev.y - y), 0, 0);
 				}
 
 
