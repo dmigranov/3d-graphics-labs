@@ -34,6 +34,7 @@ public:
 		pTransform->SetParent(parent->m_pTransform);
 		Transform * parentTransform = parent->m_pTransform;
 		
+		
 		// Camera Translation
 		{
 			Vector3 forward	= pTransform->GetForward();
@@ -89,12 +90,12 @@ public:
 				if (angle < 90 || angle >= 270)
 				{
 					//std::cout << "CASE 1" << std::endl;
-					pTransform->Rotate(-(mousePosPrev.y - y), 0, 0);
+					parentTransform->Rotate(-(mousePosPrev.y - y), 0, 0);
 				}
 				else
 				{
 					//std::cout << "CASE 2" << std::endl;
-					pTransform->Rotate((mousePosPrev.y - y), 0, 0);
+					parentTransform->Rotate((mousePosPrev.y - y), 0, 0);
 				}
 
 
