@@ -5,7 +5,7 @@
 #include "GraphicsEngine/Transform.h"
 #include "GraphicsEngine/Time.h"
 #include "GraphicsEngine/Vector3.h"
-#
+
 #include <iostream>
 
 
@@ -90,12 +90,12 @@ public:
 				if (angle < 90 || angle >= 270)
 				{
 					//std::cout << "CASE 1" << std::endl;
-					parentTransform->Rotate(-(mousePosPrev.y - y), 0, 0);
+					pTransform->Rotate(-(mousePosPrev.y - y), 0, 0);
 				}
 				else
 				{
 					//std::cout << "CASE 2" << std::endl;
-					parentTransform->Rotate((mousePosPrev.y - y), 0, 0);
+					pTransform->Rotate((mousePosPrev.y - y), 0, 0);
 				}
 
 
