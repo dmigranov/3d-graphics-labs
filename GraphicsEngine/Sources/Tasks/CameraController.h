@@ -59,7 +59,7 @@ public:
 
 		// Camera Rotation
 		mousePos = Input::GetMousePosition();
-		if(mousePosPrev.x != 0 || mousePosPrev.y != 0)
+		if (mousePosPrev.x != 0 || mousePosPrev.y != 0)
 		{
 			Vector3 angles = pTransform->GetEulerAngles();
 			double x = mousePos.x;
@@ -72,14 +72,23 @@ public:
 
 
 			pTransform->Rotate(0, -(mousePosPrev.x - x), 0);
-			std::cout << angles.y - (mousePosPrev.x - x) << std::endl;
+
+
+			int angle = (int)abs(angles.y) % 360;
+			std::cout << angles.x - (mousePosPrev.y - y) << std::endl;
 
 			//в зависимости от горизонтального поворота делать разный y (
-			if (abs(angles.x - (mousePosPrev.y - y)) <= 90)
-				if(angles.y - (mousePosPrev.x - x) < 180 && angles.y - (mousePosPrev.x - x) >= -180)
+			//if (abs(angles.x - (mousePosPrev.y - y)) <= 90)
+				if (angle < 90 || angle >= 270)
+				{
+					//std::cout << "CASE 1" << std::endl;
 					pTransform->Rotate(-(mousePosPrev.y - y), 0, 0);
+				}
 				else
+				{
+					//std::cout << "CASE 2" << std::endl;
 					pTransform->Rotate((mousePosPrev.y - y), 0, 0);
+				}
 
 
 			//pTransform->Rotate(-(mousePosPrev.y - y), -(mousePosPrev.x - x), 0);
