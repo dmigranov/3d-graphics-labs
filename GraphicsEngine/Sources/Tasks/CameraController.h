@@ -65,15 +65,21 @@ public:
 			double x = mousePos.x;
 			double y = mousePos.y;
 			// TODO : Task08
-			//препод говорил что-то про parent
+			//parent???
 			/*Matrix4x4 rotX = Matrix4x4::RotationX(mousePosPrev.y - y); //нормировать
 			Matrix4x4 rotY = Matrix4x4::RotationY(-(mousePosPrev.x - x));
 			Matrix4x4 rot = rotX * rotY;*/
 
 
 			pTransform->Rotate(0, -(mousePosPrev.x - x), 0);
+			std::cout << angles.y - (mousePosPrev.x - x) << std::endl;
 
-			pTransform->Rotate(-(mousePosPrev.y - y), 0, 0);
+			//в зависимости от горизонтального поворота делать разный y (
+			if (abs(angles.x - (mousePosPrev.y - y)) <= 90)
+				if(angles.y - (mousePosPrev.x - x) < 180 && angles.y - (mousePosPrev.x - x) >= -180)
+					pTransform->Rotate(-(mousePosPrev.y - y), 0, 0);
+				else
+					pTransform->Rotate((mousePosPrev.y - y), 0, 0);
 
 
 			//pTransform->Rotate(-(mousePosPrev.y - y), -(mousePosPrev.x - x), 0);
