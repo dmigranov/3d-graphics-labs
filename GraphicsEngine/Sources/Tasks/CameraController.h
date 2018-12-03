@@ -75,19 +75,19 @@ public:
 
 
 			int angle = (int)abs(angles.y) % 360;
-			std::cout << angles.x - (mousePosPrev.y - y) << std::endl;
+			//std::cout << angles.x - (mousePosPrev.y - y) << std::endl;
 
 			//в зависимости от горизонтального поворота делать разный y (
 			//if (abs(angles.x - (mousePosPrev.y - y)) <= 90)
 				if (angle < 90 || angle >= 270)
 				{
 					//std::cout << "CASE 1" << std::endl;
-					pTransform->Rotate(-(mousePosPrev.y - y), 0, 0);
+					pTransform->Rotate(-0.25 * (mousePosPrev.y - y), 0, 0);
 				}
 				else
 				{
 					//std::cout << "CASE 2" << std::endl;
-					pTransform->Rotate((mousePosPrev.y - y), 0, 0);
+					pTransform->Rotate(0.25 * (mousePosPrev.y - y), 0, 0);
 				}
 
 
