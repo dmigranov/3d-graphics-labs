@@ -46,10 +46,7 @@ public:
 		}
 		
 		Transform * parentTransform = parent->m_pTransform;
-		/*Transform * childTransform = child->m_pTransform;
-		childTransform*/
-		
-		
+
 		// Camera Translation
 		{
 			Vector3 forward	= pTransform->GetForward();
@@ -112,10 +109,6 @@ public:
 					//std::cout << "CASE 2" << std::endl;
 					pTransform->Rotate((mousePosPrev.y - y), 0, 0);
 				}
-
-
-			//pTransform->Rotate(-(mousePosPrev.y - y), -(mousePosPrev.x - x), 0);
-
 		}
 		mousePosPrev = mousePos;
 	}
