@@ -14,7 +14,7 @@ class CameraController : public Component
 	Vector3 mousePos;
 	Vector3 mousePosPrev;
 	Object * parent;
-	Object * child;
+	
 	bool isInitialized  = false;
 
 public:
@@ -22,9 +22,6 @@ public:
 	{
 		parent = new Object();
 
-		/*child = new Object();
-
-		child->m_pTransform = new Transform(); //!*/
 		mousePos		= Vector3::Zero();
 		mousePosPrev	= Vector3::Zero();
 	}
@@ -39,10 +36,10 @@ public:
 		if (!isInitialized)
 		{
 			Vector3 pos = pTransform->GetPosition();
-			std::cout << pos.x << " " << pos.y << " " << pos.z << std::endl;
+
 			parent->m_pTransform = new Transform(pos, pTransform->GetEulerAngles());
 			pos = parent->m_pTransform->GetPosition();
-			std::cout << pos.x << " " << pos.y << " " << pos.z << std::endl;
+
 			pTransform->SetLocalPosition(Vector3(0, 0, 0));
 			pTransform->SetParent(parent->m_pTransform);
 			isInitialized = true;
@@ -104,7 +101,7 @@ public:
 			//std::cout << angles.x - (mousePosPrev.y - y) << std::endl;
 
 			//в зависимости от горизонтального поворота делать разный y (
-			//if (abs(angles.x - (mousePosPrev.y - y)) <= 90)
+			if (abs(angles.x - (mousePosPrev.y - y)) <= 90)
 				if (angle < 90 || angle >= 270)
 				{
 					//std::cout << "CASE 1" << std::endl;
