@@ -14,12 +14,17 @@ class CameraController : public Component
 	Vector3 mousePos;
 	Vector3 mousePosPrev;
 	Object * parent;
+	Object * child;
+	bool isInitialized  = false;
 
 public:
 	CameraController()
 	{
 		parent = new Object();
-		parent->m_pTransform = new Transform();
+
+		/*child = new Object();
+
+		child->m_pTransform = new Transform(); //!*/
 		mousePos		= Vector3::Zero();
 		mousePosPrev	= Vector3::Zero();
 	}
@@ -30,9 +35,22 @@ public:
 	{
 		Transform * pTransform = m_pObject->m_pTransform;
 
-		//if(pTransform->P)
-		pTransform->SetParent(parent->m_pTransform);
+
+		if (!isInitialized)
+		{
+			Vector3 pos = pTransform->GetPosition();
+			std::cout << pos.x << " " << pos.y << " " << pos.z << std::endl;
+			parent->m_pTransform = new Transform(pos, pTransform->GetEulerAngles());
+			pos = parent->m_pTransform->GetPosition();
+			std::cout << pos.x << " " << pos.y << " " << pos.z << std::endl;
+			pTransform->SetLocalPosition(Vector3(0, 0, 0));
+			pTransform->SetParent(parent->m_pTransform);
+			isInitialized = true;
+		}
+		
 		Transform * parentTransform = parent->m_pTransform;
+		/*Transform * childTransform = child->m_pTransform;
+		childTransform*/
 		
 		
 		// Camera Translation
