@@ -1,29 +1,30 @@
 #include "Tasks/Labyrinth/Blocks.h"
 
+typedef unsigned short ushort;
 
 class Labyrinth
 {
 private:
-	unsigned char ** field;
-	unsigned short x, y;
+	Block ** field;
+	ushort x, y;
 
 public:
-	Labyrinth(unsigned short x, unsigned short y)
+	Labyrinth(ushort x, ushort y)
 	{
 		this->x = x;
 		this->y = y;
 
-		field = new unsigned char*[x];
-		for(unsigned short i = 0; i < x; i++)
+		field = new Block*[x];
+		for(ushort i = 0; i < x; i++)
 		{
-			field[i] = new unsigned char[y];
+			field[i] = new Block[y];
 		}
 		
-		for (unsigned short i = 0; i < x; i++)
+		for (ushort i = 0; i < x; i++)
 		{
-			for (unsigned short j = 0; j < y; j++)
+			for (ushort j = 0; j < y; j++)
 			{
-				field[i][j] = 0;
+				field[i][j] = FLOOR;
 			}
 		}
 		field[0][0];
@@ -31,6 +32,21 @@ public:
 		//первый проход: по какому-то алгоритму с хабра
 		//потом ещё добавить лаву (можно её даже анимировать) - вместо стен
 
+	}
+
+	ushort getX()
+	{
+		return x;
+	}
+
+	ushort getY()
+	{
+		return y;
+	}
+
+	Block getAt(ushort x, ushort y)
+	{
+		return field[x][y];
 	}
 
 };

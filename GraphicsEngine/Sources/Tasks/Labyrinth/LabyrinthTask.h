@@ -41,12 +41,32 @@ public:
 			scene.SetCamera(pCamera);
 		}
 
+		{
+			for (ushort x = 0; x < labyrinth.getX(); x++)
+			{
+				for (ushort y = 0; y < labyrinth.getY(); y++)
+				{
+					Object * labObject = new Object();
 
-		/*отрисовка
-		for ряды
-			for колонки
-				switch
-		*/
+					//unsigned char 
+					pObject2->m_pTransform = new Transform(0, 10, 0, 0, 0, 0, 1, 1, 1);
+					pObject2->m_pMesh = new MeshCube();
+					pObject2->m_pMaterial = new MaterialUnlit(Vector3(1, 1, 1));
+
+					scene.AddObject(labObject);
+				}
+			}
+		}
+
+		{
+			Object * pObject2 = new Object();
+
+			pObject2->m_pTransform = new Transform(0, 10, 0, 0, 0, 0, 1, 1, 1);
+			pObject2->m_pMesh = new MeshCube();
+			pObject2->m_pMaterial = new MaterialUnlit(Vector3(1, 1, 1));
+
+			scene.AddObject(pObject2);
+		}
 
 
 	}
