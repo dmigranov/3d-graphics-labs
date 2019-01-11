@@ -27,7 +27,6 @@ public:
 	{
 		Scene & scene = Application::Instance().GetScene();
 
-		//смотри другие таски
 		//генерация лабиринта
 		Labyrinth labyrinth = Labyrinth(25, 25);
 
@@ -36,27 +35,30 @@ public:
 			Object * pCameraObj = new Object();
 			Camera * pCamera = new Camera();
 			pCameraObj->m_pTransform = new Transform(Vector3(0.0f, 2.0f, 0.0f), Vector3(0.0f, 0.0f, 0.0f));
+			//TODO: исправить LabyrinthCameraController, чтобы он перемещался правильно; кстати, можно добавить мэши, чтобы потом отражалось; для головы отдельный
 			pCameraObj->AddComponent(new LabyrinthCameraController);
 			pCameraObj->AddComponent(pCamera);
-
 
 			scene.SetCamera(pCamera);
 		}
 
 		{
+			ushort lX = labyrinth.getX();
+			ushort lY = labyrinth.getY();
+
 			{
 				Object * floor = new Object();
 
-				floor->m_pTransform = new Transform(0, 0, 0, 0, 0, 0, labyrinth.getX() * blockSize, 1, labyrinth.getY() * blockSize);
+				floor->m_pTransform = new Transform(0, 0, 0, 0, 0, 0, lX * blockSize, 1, lY * blockSize);
 				floor->m_pMesh = new MeshQuad();
 				floor->m_pMaterial = new MaterialUnlit(Vector3(0, 1, 0));
 
 				scene.AddObject(floor);
 			}
 
-			for (ushort x = 0; x < labyrinth.getX(); x++)
+			for (ushort x = 0; x < lX; x++)
 			{
-				for (ushort y = 0; y < labyrinth.getY(); y++)
+				for (ushort y = 0; y < lY; y++)
 				{
 					Object * labObject = new Object();
 
