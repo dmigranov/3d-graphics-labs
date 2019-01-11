@@ -15,6 +15,8 @@
 #include "Tasks/Labyrinth/Labyrinth.h"
 #include "Tasks/Labyrinth/LabyrinthCameraController.h"
 
+#define blockSize 0.5
+
 
 class LabyrinthTask : public Task
 {
@@ -48,25 +50,23 @@ public:
 				{
 					Object * labObject = new Object();
 
-					//unsigned char 
-					pObject2->m_pTransform = new Transform(0, 10, 0, 0, 0, 0, 1, 1, 1);
-					pObject2->m_pMesh = new MeshCube();
-					pObject2->m_pMaterial = new MaterialUnlit(Vector3(1, 1, 1));
+					Block block = labyrinth.getAt(x, y);
+					switch (block)
+					{
+					case FLOOR:
+						labObject->m_pTransform = new Transform(x * blockSize, 0, y * blockSize, 0, 0, 0, blockSize, blockSize, blockSize);
+						labObject->m_pMesh = new MeshCube();
+						labObject->m_pMaterial = new MaterialUnlit(Vector3(1, 1, 0));
+						break;
+
+					}
 
 					scene.AddObject(labObject);
 				}
 			}
 		}
 
-		{
-			Object * pObject2 = new Object();
 
-			pObject2->m_pTransform = new Transform(0, 10, 0, 0, 0, 0, 1, 1, 1);
-			pObject2->m_pMesh = new MeshCube();
-			pObject2->m_pMaterial = new MaterialUnlit(Vector3(1, 1, 1));
-
-			scene.AddObject(pObject2);
-		}
 
 
 	}
