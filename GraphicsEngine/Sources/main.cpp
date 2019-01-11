@@ -10,6 +10,7 @@
 #include "Tasks/Task06.h"
 #include "Tasks/Task07.h"
 #include "Tasks/Task08.h"
+#include "Tasks/Labyrinth/LabyrinthTask.h"
 
 
 // The application's entry point
@@ -31,7 +32,8 @@ int main(int argc, char ** argv)
     //Task * pTask = new Task05_03(); //done
     //Task * pTask = new Task06(); //done
 	//Task * pTask = new Task07(); //done
-	Task * pTask = new Task08();	//done
+	//Task * pTask = new Task08();	//done
+	Task * pTask = new LabyrinthTask();
 	{
 		GraphicsEngine & engine = GraphicsEngine::Instance();
 

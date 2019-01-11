@@ -46,6 +46,9 @@
     <Filter Include="GraphicsEngine\Internal">
       <UniqueIdentifier>{10705b53-0dfa-4514-b97c-399b26dc7cc7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tasks\Labyrinth">
+      <UniqueIdentifier>{4a1055fb-d3f8-459a-9e29-b946dfb38fa3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Sources\Tasks\ObjectRotator.h">
@@ -434,6 +437,12 @@
     </ClInclude>
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialEarthNormal.h">
       <Filter>GraphicsEngine\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Tasks\Labyrinth\LabyrinthTask.h">
+      <Filter>Tasks\Labyrinth</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Tasks\Labyrinth\Labyrinth.h">
+      <Filter>Tasks\Labyrinth</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
