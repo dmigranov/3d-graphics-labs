@@ -444,6 +444,12 @@
     <ClInclude Include="..\Sources\Tasks\Labyrinth\Labyrinth.h">
       <Filter>Tasks\Labyrinth</Filter>
     </ClInclude>
+    <ClInclude Include="..\Sources\Tasks\Labyrinth\LabyrinthCameraController.h">
+      <Filter>Tasks\Labyrinth</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sources\Tasks\Labyrinth\Blocks.h">
+      <Filter>Tasks\Labyrinth</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Sources\GraphicsEngine\Application.cpp">

@@ -13,6 +13,7 @@
 #include "Tasks/ObjectRotator.h"
 
 #include "Tasks/Labyrinth/Labyrinth.h"
+#include "Tasks/Labyrinth/LabyrinthCameraController.h"
 
 
 class LabyrinthTask : public Task
@@ -26,7 +27,19 @@ public:
 
 		//смотри другие таски
 		//генерация лабиринта
-		Labyrinth labyrinth = Labyrinth(20, 20);
+		Labyrinth labyrinth = Labyrinth(25, 25);
+
+		// Camera
+		{
+			Object * pCameraObj = new Object();
+			Camera * pCamera = new Camera();
+			pCameraObj->m_pTransform = new Transform(Vector3(0.0f, 0.5f, -5.0f), Vector3(10.0f, 0.0f, 0.0f));
+			pCameraObj->AddComponent(new LabyrinthCameraController);
+			pCameraObj->AddComponent(pCamera);
+
+
+			scene.SetCamera(pCamera);
+		}
 
 
 		/*отрисовка

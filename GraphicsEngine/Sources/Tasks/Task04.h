@@ -51,9 +51,19 @@ public:
 
 			scene.AddObject( pObject1 );
 		}
+		{
+			Object * pObject2 = new Object();
+
+			pObject2->m_pTransform = new Transform(3, 0, 0, 0, 0, 0, 3, 3, 3);
+			pObject2->m_pMesh = new MeshSphere(20);
+			pObject2->m_pMaterial = new MaterialDiffuse();
+			pObject2->AddComponent(new ObjectRotator(0, 10, 0));
+
+			scene.AddObject(pObject2);
+		}
 
 		// Ligth source #1 - Directional
-		{
+		/*{
 			Light * pLight = new Light(LIGHT_DIRECTIONAL);
 			pLight->SetColor(1,1,0);
 			pLight->SetIntensity(1);
@@ -64,21 +74,21 @@ public:
 			//pLightObject->AddComponent(new ObjectRotator(20, 0, 0));
 
 			scene.AddLight(pLight); //directional works!
-		}
+		}*/
 
 		// Ligth source #2 - Point
-		/*{
+		{
 			Light * pLight = new Light(LIGHT_POINT);
 			pLight->SetColor(1,1,1);
 			pLight->SetIntensity(1);
 
 			Object * pLightObject = new Object();
-			pLightObject->m_pTransform	= new Transform(0, 0,-5.5, 0,0,0, 1,1,1);
+			pLightObject->m_pTransform	= new Transform(-5, 0, 0, 0,0,0, 1,1,1);
 			pLightObject->AddComponent(pLight);
 			//pLightObject->AddComponent(new ObjectRotator(0, 20, 0)); //вращение идёт вокруг собственной оси, поэтому в случае с пойнтом смысла не имеет, т.к он излучает во все стороны
 
 			scene.AddLight(pLight); //it works as well! (read above)
-		}*/
+		}
 
 		//Ligth source #3 - Spot
 		/*{

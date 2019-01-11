@@ -1,3 +1,4 @@
+#include "Tasks/Labyrinth/Blocks.h"
 
 
 class Labyrinth
@@ -9,17 +10,26 @@ private:
 public:
 	Labyrinth(unsigned short x, unsigned short y)
 	{
-		this.x = x;
-		this.y = y;
+		this->x = x;
+		this->y = y;
 
 		field = new unsigned char*[x];
 		for(unsigned short i = 0; i < x; i++)
 		{
 			field[i] = new unsigned char[y];
 		}
-		field[0];
+		
+		for (unsigned short i = 0; i < x; i++)
+		{
+			for (unsigned short j = 0; j < y; j++)
+			{
+				field[i][j] = 0;
+			}
+		}
+		field[0][0];
+
 		//первый проход: по какому-то алгоритму с хабра
-		//потом ещё добавить лаву (можно её даже анимировать)
+		//потом ещё добавить лаву (можно её даже анимировать) - вместо стен
 
 	}
 

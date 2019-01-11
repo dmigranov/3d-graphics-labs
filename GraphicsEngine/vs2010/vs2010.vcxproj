@@ -223,7 +223,9 @@ xcopy  /S /I /E /Y "..\Sources\GraphicsEngine\Shaders" "..\BUILD\Release\Shaders
     <ClInclude Include="..\Sources\GraphicsEngine\Vector4.h" />
     <ClInclude Include="..\Sources\Tasks\CameraController.h" />
     <ClInclude Include="..\Sources\Tasks\FpsCounter.h" />
+    <ClInclude Include="..\Sources\Tasks\Labyrinth\Blocks.h" />
     <ClInclude Include="..\Sources\Tasks\Labyrinth\Labyrinth.h" />
+    <ClInclude Include="..\Sources\Tasks\Labyrinth\LabyrinthCameraController.h" />
     <ClInclude Include="..\Sources\Tasks\Labyrinth\LabyrinthTask.h" />
     <ClInclude Include="..\Sources\Tasks\ObjectMover.h" />
     <ClInclude Include="..\Sources\Tasks\ObjectRotator.h" />
