@@ -44,6 +44,16 @@ public:
 		}
 
 		{
+			{
+				Object * floor = new Object();
+
+				floor->m_pTransform = new Transform(0, 0, 0, 0, 0, 0, labyrinth.getX() * blockSize, 1, labyrinth.getY() * blockSize);
+				floor->m_pMesh = new MeshQuad();
+				floor->m_pMaterial = new MaterialUnlit(Vector3(0, 1, 0));
+
+				scene.AddObject(floor);
+			}
+
 			for (ushort x = 0; x < labyrinth.getX(); x++)
 			{
 				for (ushort y = 0; y < labyrinth.getY(); y++)
@@ -53,11 +63,6 @@ public:
 					Block block = labyrinth.getAt(x, y);
 					switch (block)
 					{
-					case FLOOR:
-						labObject->m_pTransform = new Transform(x * blockSize, 0, y * blockSize, 0, 0, 0, blockSize, blockSize, blockSize);
-						labObject->m_pMesh = new MeshCube();
-						labObject->m_pMaterial = new MaterialUnlit(Vector3(1, 1, 0));
-						break;
 					case WALL:
 						labObject->m_pTransform = new Transform(x * blockSize, blockSize, y * blockSize, 0, 0, 0, blockSize, blockSize, blockSize);
 						labObject->m_pMesh = new MeshCube();
