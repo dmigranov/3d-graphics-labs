@@ -25,9 +25,17 @@ public:
 		Scene & scene = Application::Instance().GetScene();
 
 		//смотри другие таски
-
 		//генерация лабиринта
 		Labyrinth labyrinth = Labyrinth(20, 20);
+
+
+		/*отрисовка
+		for ряды
+			for колонки
+				switch
+		*/
+
+
 	}
 
 	virtual void Update()
