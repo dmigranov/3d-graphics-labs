@@ -19,8 +19,8 @@ VS_OUTPUT main( VS_INPUT input )
 	VS_OUTPUT output;
 
 	output.Position	= mul(input.Position, matrixWorldViewProjT);
-	//output.Color	= materialColor;
-	output.Color	= input.Color;
+	output.Color	= materialColor;
+	//output.Color	= input.Color;
 	
 	return output;
 };

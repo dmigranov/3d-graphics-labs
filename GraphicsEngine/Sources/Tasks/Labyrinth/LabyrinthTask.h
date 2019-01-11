@@ -35,7 +35,7 @@ public:
 		{
 			Object * pCameraObj = new Object();
 			Camera * pCamera = new Camera();
-			pCameraObj->m_pTransform = new Transform(Vector3(0.0f, 0.5f, -5.0f), Vector3(10.0f, 0.0f, 0.0f));
+			pCameraObj->m_pTransform = new Transform(Vector3(0.0f, 2.0f, 0.0f), Vector3(0.0f, 0.0f, 0.0f));
 			pCameraObj->AddComponent(new LabyrinthCameraController);
 			pCameraObj->AddComponent(pCamera);
 
@@ -58,7 +58,11 @@ public:
 						labObject->m_pMesh = new MeshCube();
 						labObject->m_pMaterial = new MaterialUnlit(Vector3(1, 1, 0));
 						break;
-
+					case WALL:
+						labObject->m_pTransform = new Transform(x * blockSize, blockSize, y * blockSize, 0, 0, 0, blockSize, blockSize, blockSize);
+						labObject->m_pMesh = new MeshCube();
+						labObject->m_pMaterial = new MaterialUnlit(Vector3(0, 1, 1));
+						break;
 					}
 
 					scene.AddObject(labObject);
