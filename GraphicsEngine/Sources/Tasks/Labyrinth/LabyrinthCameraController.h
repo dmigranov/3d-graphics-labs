@@ -91,10 +91,15 @@ public:
 				std::cout << pos.x << " " << pos.z << std::endl;
 				//std::cout << 
 			}
-			if((pos.x >= 1 || x > 0) && (pos.z >= 1 || z > 0))
-				parentTransform->Translate(speed * dt * direction);
+			//if((pos.x >= 1 || x > 0) && (pos.z >= 1 || z > 0)) //или нужны для того, чтобы можно было сдвинуться, если застрял
+				
+			if (pos.x <= 1 && x <= 0)
+				direction.x = 0;
+			if (pos.z <= 1 && z <= 0)
+				direction.z = 0;
 
-			
+
+			parentTransform->Translate(speed * dt * direction);
 		}
 
 		// Camera Rotation
