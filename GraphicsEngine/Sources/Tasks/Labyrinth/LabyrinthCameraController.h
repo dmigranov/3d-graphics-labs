@@ -16,12 +16,15 @@ class LabyrinthCameraController : public Component
 	Vector3 mousePos;
 	Vector3 mousePosPrev;
 	Object * parent;
-
 	bool isInitialized = false;
+	Block ** labyrinth;
+	unsigned int blockSize;
 
 public:
 	LabyrinthCameraController(Labyrinth labyrinth, unsigned int blockSize)
 	{
+		this->labyrinth = labyrinth.getField();
+		this->blockSize = blockSize;
 		parent = new Object();
 
 		mousePos = Vector3::Zero();
@@ -33,7 +36,6 @@ public:
 	virtual void Update()
 	{
 		Transform * pTransform = m_pObject->m_pTransform;
-
 
 		if (!isInitialized)
 		{
@@ -54,11 +56,9 @@ public:
 			Vector3 forward = pTransform->GetForward();
 			Vector3 right = pTransform->GetRight();
 			double dt = Time::GetDeltaTime();
-
 			const double speed = 1.0;
 			Vector3 direction;
 
-			//if (Input::GetKey(KEY_CODE_W) || Input::GetKey(KEY_CODE_UP_ARROW))
 			if (Input::GetKey(KEY_CODE_W) || Input::GetKey(KEY_CODE_UP_ARROW))
 			{
 				direction += forward;
@@ -76,13 +76,13 @@ public:
 				direction -= right;
 			}
 
+			//отображаем на плоскость, но не перпендикулярно, а с сохранением длины
 			double x = direction.x;
 			double z = direction.z;
 			double L = direction.Length();
 			double l = x*x + z*z;
 			double a = (l!=0) ? L / sqrt(l) : 0;
 			direction = Vector3(x * a, 0, z * a);
-				
 			parentTransform->Translate(speed * dt * direction);
 		}
 

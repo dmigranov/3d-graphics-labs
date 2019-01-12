@@ -60,4 +60,9 @@ public:
 		return field[x][y];
 	}
 
+	Block ** getField()
+	{
+		return field;
+	}
+
 };
