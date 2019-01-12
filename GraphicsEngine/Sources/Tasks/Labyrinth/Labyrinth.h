@@ -25,10 +25,15 @@ public:
 		{
 			for (ushort j = 0; j < y; j++)
 			{
-				if (i % 2 != 0 && j % 2 != 0)  //чётность/
+				/*if (i % 2 != 0 && j % 2 != 0)  //границы?/
 					field[i][j] = FLOOR;
 				else
-					field[i][j] = WALL;
+					field[i][j] = WALL;*/
+				if (i > 0 && i < x - 1 && j > 0 && j < y - 1)  //границы?/
+					field[i][j] = FLOOR;
+				else
+					field[i][j] = WALL; 
+
 			}
 		}
 
