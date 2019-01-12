@@ -83,7 +83,15 @@ public:
 			double l = x*x + z*z;
 			double a = (l!=0) ? L / sqrt(l) : 0;
 			direction = Vector3(x * a, 0, z * a);
+
+			//Vector3 localPos = parentTransform->GetLocalPosition();
+			Vector3 pos = parentTransform->GetPosition();
+			if(L!=0)
+				std::cout << pos.x << " " << pos.z << std::endl;
+
 			parentTransform->Translate(speed * dt * direction);
+
+			
 		}
 
 		// Camera Rotation
