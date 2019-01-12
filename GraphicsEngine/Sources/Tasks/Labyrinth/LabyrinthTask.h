@@ -15,7 +15,7 @@
 #include "Tasks/Labyrinth/Labyrinth.h"
 #include "Tasks/Labyrinth/LabyrinthCameraController.h"
 
-#define blockSize 0.5
+#define blockSize 1
 
 
 class LabyrinthTask : public Task
@@ -28,13 +28,13 @@ public:
 		Scene & scene = Application::Instance().GetScene();
 
 		//генерация лабиринта
-		Labyrinth labyrinth = Labyrinth(25, 25);
+		Labyrinth labyrinth = Labyrinth(15, 15);
 
 		// Camera
 		{
 			Object * pCameraObj = new Object();
 			Camera * pCamera = new Camera();
-			pCameraObj->m_pTransform = new Transform(Vector3(0.0f, 2.0f, 0.0f), Vector3(0.0f, 0.0f, 0.0f));
+			pCameraObj->m_pTransform = new Transform(Vector3(0.0f, 1.0f, 0.0f), Vector3(0.0f, 0.0f, 0.0f));
 			//TODO: исправить LabyrinthCameraController, чтобы он перемещался правильно; кстати, можно добавить мэши, чтобы потом отражалось; для головы отдельный
 			pCameraObj->AddComponent(new LabyrinthCameraController);
 			pCameraObj->AddComponent(pCamera);
@@ -56,7 +56,7 @@ public:
 				scene.AddObject(floor);
 			}
 
-			for (ushort x = 0; x < lX; x++)
+			/*for (ushort x = 0; x < lX; x++)
 			{
 				for (ushort y = 0; y < lY; y++)
 				{
@@ -74,7 +74,7 @@ public:
 
 					scene.AddObject(labObject);
 				}
-			}
+			}*/
 		}
 
 

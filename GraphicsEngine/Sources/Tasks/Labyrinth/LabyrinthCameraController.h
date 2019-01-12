@@ -74,6 +74,13 @@ public:
 				direction -= right;
 			}
 
+			double x = direction.x;
+			double z = direction.z;
+			double L = direction.Length();
+			double l = x*x + z*z;
+			double a = (l!=0) ? L / sqrt(l) : 0;
+			direction = Vector3(x * a, 0, z * a);
+				
 			parentTransform->Translate(speed * dt * direction);
 		}
 

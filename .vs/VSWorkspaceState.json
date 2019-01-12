@@ -1,6 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\GraphicsEngine",
+    "\\GraphicsEngine\\Sources",
+    "\\GraphicsEngine\\Sources\\Tasks",
+    "\\GraphicsEngine\\Sources\\Tasks\\Labyrinth"
   ],
+  "SelectedNode": "\\GraphicsEngine\\Sources\\Tasks\\Labyrinth\\Blocks.h",
   "PreviewInSolutionExplorer": false
 }
