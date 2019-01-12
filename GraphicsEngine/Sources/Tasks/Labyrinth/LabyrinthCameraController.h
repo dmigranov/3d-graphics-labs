@@ -84,7 +84,6 @@ public:
 			double a = (l != 0) ? L / sqrt(l) : 0;
 			direction = Vector3(x * a, 0, z * a);
 
-			//Vector3 localPos = parentTransform->GetLocalPosition();
 			Vector3 pos = parentTransform->GetPosition();
 			if (L != 0)
 			{
@@ -97,6 +96,15 @@ public:
 				direction.x = 0;
 			if (pos.z <= 1 && z <= 0)
 				direction.z = 0;
+			/*
+			в матрице field поле с координатамии 0, 0 перейдёт в итоге в квадрат
+			(0, 0)			(0, blockSize)
+			(blockSize, 0)	(blockSize, blockSize)	
+			в матрице field поле с координатамии i, j перейдёт в итоге в квадрат
+			(i, j)				(i, j + blockSize)
+			(i + blockSize, j)	(i + blockSize, j + blockSize)
+			(с точностью до поворота; а дальше всё так же как в условиях сверху - проверяем на то, что попали в стену)
+			*/
 
 
 			parentTransform->Translate(speed * dt * direction);
