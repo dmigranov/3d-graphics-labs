@@ -10,6 +10,7 @@
 
 #include <iostream>
 
+#define epsilon 0.05
 
 class LabyrinthCameraController : public Component
 {
@@ -92,9 +93,9 @@ public:
 			}
 			//if((pos.x >= 1 || x > 0) && (pos.z >= 1 || z > 0)) //или нужны для того, чтобы можно было сдвинуться, если застрял
 				
-			if (pos.x <= 1 && x <= 0)
+			if (pos.x <= 0 + epsilon && x <= 0)
 				direction.x = 0;
-			if (pos.z <= 1 && z <= 0)
+			if (pos.z <= 0 + epsilon && z <= 0)
 				direction.z = 0;
 			/*
 			в матрице field поле с координатамии 0, 0 перейдёт в итоге в квадрат

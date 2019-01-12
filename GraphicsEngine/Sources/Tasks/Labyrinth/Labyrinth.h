@@ -33,6 +33,11 @@ public:
 					field[i][j] = FLOOR;
 				else
 					field[i][j] = WALL; 
+				/*if (i == 0 && j == 0)  //границы?/
+					field[i][j] = WALL;
+				else
+					field[i][j] = FLOOR; */
+
 
 			}
 		}
