@@ -12,7 +12,6 @@
 #include "Tasks/Task.h"
 #include "Tasks/ObjectRotator.h"
 
-#include "Tasks/Labyrinth/Labyrinth.h"
 #include "Tasks/Labyrinth/LabyrinthCameraController.h"
 
 #define blockSize 1
@@ -36,7 +35,7 @@ public:
 			Camera * pCamera = new Camera();
 			pCameraObj->m_pTransform = new Transform(Vector3(0.0f, 1.0f, 0.0f), Vector3(0.0f, 0.0f, 0.0f));
 			//TODO: исправить LabyrinthCameraController, чтобы он перемещался правильно; кстати, можно добавить мэши, чтобы потом отражалось; для головы отдельный
-			pCameraObj->AddComponent(new LabyrinthCameraController);
+			pCameraObj->AddComponent(new LabyrinthCameraController(labyrinth, blockSize));
 			pCameraObj->AddComponent(pCamera);
 
 			scene.SetCamera(pCamera);

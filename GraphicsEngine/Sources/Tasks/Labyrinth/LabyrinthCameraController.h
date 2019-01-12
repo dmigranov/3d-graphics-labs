@@ -6,6 +6,8 @@
 #include "GraphicsEngine/Time.h"
 #include "GraphicsEngine/Vector3.h"
 
+#include "Tasks/Labyrinth/Labyrinth.h"
+
 #include <iostream>
 
 
@@ -18,7 +20,7 @@ class LabyrinthCameraController : public Component
 	bool isInitialized = false;
 
 public:
-	LabyrinthCameraController()
+	LabyrinthCameraController(Labyrinth labyrinth, unsigned int blockSize)
 	{
 		parent = new Object();
 

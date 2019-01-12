@@ -1,3 +1,4 @@
+#pragma once
 #include "Tasks/Labyrinth/Blocks.h"
 
 typedef unsigned short ushort;
