@@ -80,16 +80,19 @@ public:
 			double x = direction.x;
 			double z = direction.z;
 			double L = direction.Length();
-			double l = x*x + z*z;
-			double a = (l!=0) ? L / sqrt(l) : 0;
+			double l = x * x + z * z;
+			double a = (l != 0) ? L / sqrt(l) : 0;
 			direction = Vector3(x * a, 0, z * a);
 
 			//Vector3 localPos = parentTransform->GetLocalPosition();
 			Vector3 pos = parentTransform->GetPosition();
-			if(L!=0)
+			if (L != 0)
+			{
 				std::cout << pos.x << " " << pos.z << std::endl;
-
-			parentTransform->Translate(speed * dt * direction);
+				//std::cout << 
+			}
+			if((pos.x >= 1 || x > 0) && (pos.z >= 1 || z > 0))
+				parentTransform->Translate(speed * dt * direction);
 
 			
 		}
