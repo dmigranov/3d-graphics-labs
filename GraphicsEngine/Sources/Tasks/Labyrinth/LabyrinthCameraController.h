@@ -86,14 +86,8 @@ public:
 			direction = Vector3(x * a, 0, z * a);
 
 			Vector3 pos = parentTransform->GetPosition();
-			if (L != 0)
-			{
-				std::cout << pos.x << " " << pos.z << std::endl;
-				//std::cout << 
-			}
+			
 			//if((pos.x >= 1 || x > 0) && (pos.z >= 1 || z > 0)) //или нужны для того, чтобы можно было сдвинуться, если застрял
-				
-
 
 			if (pos.x <= 0 + epsilon && x <= 0)
 				direction.x = 0;
@@ -108,13 +102,28 @@ public:
 			(i, j)				(i, j + blockSize)
 			(i + blockSize, j)	(i + blockSize, j + blockSize)
 			(с точностью до поворота; а дальше всё так же как в условиях сверху - проверяем на то, что попали в стену)
-			*/
-			/*
 			Итак, алгоритм:
 			1) берём x и z
 			2) округляем в ближайшую сторону?
 			3) по таким как сверху условиям проверяем и если надо зануляем
 			*/
+
+			double dx = pos.x - floor(pos.x);
+			double dz = pos.z - floor(pos.z);
+
+			if (L != 0)
+			{
+				std::cout << pos.x << " " << pos.z << " " << dx  << " " << dz << std::endl;
+
+			}
+
+			if (dx < 0.5)
+			{
+				int i = floor(pos.x);
+				if (pos.x <= 0 + epsilon && x <= 0)
+					direction.x = 0;
+
+			}
 
 			parentTransform->Translate(speed * dt * direction);
 		}
