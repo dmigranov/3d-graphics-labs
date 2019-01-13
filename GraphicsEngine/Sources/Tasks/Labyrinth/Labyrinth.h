@@ -50,13 +50,16 @@ public:
 			}
 		}
 
+		field[5][5] = WALL;
+		field[5][7] = WALL;
+
 		Cell curCell;
 		
 		curCell = {1, 1};
 
 		srand(time(0));
 
-		do
+		/*do
 		{
 			Neighbours neighbours = getNeighbours(curCell);
 			int size;
@@ -65,7 +68,7 @@ public:
 				int random = rand() % size;
 			}
 
-		} while (unvisited > 0);
+		} while (unvisited > 0);*/
 
 		
 
