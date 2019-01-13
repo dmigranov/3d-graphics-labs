@@ -96,7 +96,6 @@ public:
 				direction.z = 0;
 			}*/
 
-
 			if (L != 0)
 			{
 				std::cout << floor(pos.x) << " " << floor(pos.z) << " " << ceil(pos.x) << " " << ceil(pos.z) << std::endl;
