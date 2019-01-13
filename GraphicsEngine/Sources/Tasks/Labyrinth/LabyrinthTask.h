@@ -61,6 +61,9 @@ public:
 			{
 				for (ushort y = 0; y < lY; y++)
 				{
+
+					std::cout << "(" << (x-1) * blockSize << " " << (y-1) * blockSize << ") ";
+
 					Object * labObject = new Object();
 
 					Block block = labyrinth.getAt(x, y);
@@ -77,6 +80,7 @@ public:
 
 					scene.AddObject(labObject);
 				}
+				std::cout << std::endl;
 			}
 		}
 

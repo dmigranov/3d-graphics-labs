@@ -89,41 +89,43 @@ public:
 			
 			//if((pos.x >= 1 || x > 0) && (pos.z >= 1 || z > 0)) //или нужны дл€ того, чтобы можно было сдвинутьс€, если застр€л
 
-			if (pos.x <= 0 + epsilon && x <= 0)
+			/*if (pos.x <= 0 + epsilon && x <= 0)
 				direction.x = 0;
 			if (pos.z <= 0 + epsilon && z <= 0)
-				direction.z = 0;
-			/*
-			ѕќ—Ћ≈ —ћ≈ў≈Ќ»я “”“ ¬—® —ћ≈—“»Ћќ—№ (впрочем, и до этого тут была ошибка в 0.5 * blockSize)!
-			в матрице field поле с координатамии 0, 0 перейдЄт в итоге в квадрат
-			(0, 0)			(0, blockSize)
-			(blockSize, 0)	(blockSize, blockSize)	
-			в матрице field поле с координатамии i, j перейдЄт в итоге в квадрат
-			(i, j)				(i, j + blockSize)
-			(i + blockSize, j)	(i + blockSize, j + blockSize)
-			(с точностью до поворота; а дальше всЄ так же как в услови€х сверху - провер€ем на то, что попали в стену)
-			»так, алгоритм:
-			1) берЄм x и z
-			2) округл€ем в ближайшую сторону?
-			3) по таким как сверху услови€м провер€ем и если надо занул€ем
-			*/
+				direction.z = 0;*/
 
 			double dx = pos.x - floor(pos.x);
 			double dz = pos.z - floor(pos.z);
 
-			if (L != 0)
+			/*if (L != 0)
 			{
-				std::cout << pos.x << " " << pos.z << " " << dx  << " " << dz << std::endl;
+				std::cout << floor(pos.x) << " " << floor(pos.z) << " " << ceil(pos.x) << " " << ceil(pos.z) << std::endl;
+			}*/
 
-			}
+			//нам ещЄ надо знать, с какой мы стороны подходим!
 
-			if (dx < 0.5)
+			/*if (dx < 0.5)
 			{
+				//короче, как-то это посчитать
 				int i = floor(pos.x);
 				if (pos.x <= 0 + epsilon && x <= 0)
 					direction.x = 0;
 
+			}*/
+
+			//ceil(pos.x), ceil(pos.z) - это в точносте тот элемент массива, в котором мы находимс€!
+			int i = ceil(pos.x);
+			int j = ceil(pos.z);
+
+			if (L != 0)
+			{
+				std::cout << i << " " << j << std::endl;
 			}
+
+			if (labyrinth[i][j] == WALL && pos.x > i - 1 && pos.x <= i + epsilon && x <= 0)
+				direction.x = 0;
+			if (labyrinth[i][j] == WALL && pos.z > j - 1 && pos.z <= j  + epsilon && z <= 0)
+				direction.z = 0;
 
 			parentTransform->Translate(speed * dt * direction);
 		}
@@ -138,10 +140,9 @@ public:
 
 			parentTransform->Rotate(0, -(mousePosPrev.x - x), 0);
 
-
 			int angle = (int)abs(angles.y) % 360;
 
-			//в зависимости от горизонтального поворота делать разный y (
+			//в зависимости от горизонтального поворота делать разный y
 			if (abs(angles.x - (mousePosPrev.y - y)) <= 90)
 				if (angle < 90 || angle >= 270)
 				{
