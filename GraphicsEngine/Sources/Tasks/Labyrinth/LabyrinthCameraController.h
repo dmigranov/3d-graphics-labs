@@ -86,16 +86,20 @@ public:
 			direction = Vector3(x * a, 0, z * a);
 
 			Vector3 pos = parentTransform->GetPosition();
-			
+
 			//if((pos.x >= 1 || x > 0) && (pos.z >= 1 || z > 0)) //или нужны для того, чтобы можно было сдвинуться, если застрял
 
-			/*if (pos.x <= 0 + epsilon && x <= 0)
+			if (pos.x <= 1 + epsilon && x <= 0)
+			{
+				if (L != 0)
+				{
+					std::cout << " " << pos.x << " " << x << std::endl;
+				}
 				direction.x = 0;
-			if (pos.z <= 0 + epsilon && z <= 0)
-				direction.z = 0;*/
+			}
+			if (pos.z <= 1 + epsilon && z <= 0)
+				direction.z = 0;
 
-			double dx = pos.x - floor(pos.x);
-			double dz = pos.z - floor(pos.z);
 
 			/*if (L != 0)
 			{
@@ -117,15 +121,23 @@ public:
 			int i = ceil(pos.x);
 			int j = ceil(pos.z);
 
-			if (L != 0)
-			{
-				std::cout << i << " " << j << std::endl;
-			}
 
-			if (labyrinth[i][j] == WALL && pos.x > i - 1 && pos.x <= i + epsilon && x <= 0)
+			/*if (labyrinth[i][j] == WALL &&
+				(pos.x <= i + epsilon && x <= 0)
+				)
+			{
+				if (L != 0)
+				{
+					std::cout << i << " " << pos.x << " " << x << std::endl;
+				}
 				direction.x = 0;
-			if (labyrinth[i][j] == WALL && pos.z > j - 1 && pos.z <= j  + epsilon && z <= 0)
+			}*/
+			/*if (labyrinth[i][j] == WALL &&
+				(pos.z <= j + epsilon && z <= 0)
+				)
+			{
 				direction.z = 0;
+			}*/
 
 			parentTransform->Translate(speed * dt * direction);
 		}
