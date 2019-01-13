@@ -84,60 +84,42 @@ public:
 			double l = x * x + z * z;
 			double a = (l != 0) ? L / sqrt(l) : 0;
 			direction = Vector3(x * a, 0, z * a);
-
 			Vector3 pos = parentTransform->GetPosition();
 
 			//if((pos.x >= 1 || x > 0) && (pos.z >= 1 || z > 0)) //или нужны для того, чтобы можно было сдвинуться, если застрял
-
-			if (pos.x <= 1 + epsilon && x <= 0)
+			/*if (pos.x <= 1 + epsilon && x <= 0)
 			{
-				if (L != 0)
-				{
-					std::cout << " " << pos.x << " " << x << std::endl;
-				}
 				direction.x = 0;
 			}
 			if (pos.z <= 1 + epsilon && z <= 0)
+			{
 				direction.z = 0;
+			}*/
 
 
-			/*if (L != 0)
+			if (L != 0)
 			{
 				std::cout << floor(pos.x) << " " << floor(pos.z) << " " << ceil(pos.x) << " " << ceil(pos.z) << std::endl;
-			}*/
+			}
 
-			//нам ещё надо знать, с какой мы стороны подходим!
+			//floor(pos.x), floor(pos.z) - это в точности (теперь, после сдвига) тот элемент массива, в котором мы находимся!
+			int i = floor(pos.x);
+			int j = floor(pos.z);
 
-			/*if (dx < 0.5)
-			{
-				//короче, как-то это посчитать
-				int i = floor(pos.x);
-				if (pos.x <= 0 + epsilon && x <= 0)
-					direction.x = 0;
+			//TODO: добавить или на все случаи
+			if (labyrinth[i][j] == FLOOR &&
+				(labyrinth[i - 1][j] == WALL && pos.x <= i + epsilon && x <= 0)
 
-			}*/
-
-			//ceil(pos.x), ceil(pos.z) - это в точносте тот элемент массива, в котором мы находимся!
-			int i = ceil(pos.x);
-			int j = ceil(pos.z);
-
-
-			/*if (labyrinth[i][j] == WALL &&
-				(pos.x <= i + epsilon && x <= 0)
 				)
 			{
-				if (L != 0)
-				{
-					std::cout << i << " " << pos.x << " " << x << std::endl;
-				}
 				direction.x = 0;
-			}*/
-			/*if (labyrinth[i][j] == WALL &&
-				(pos.z <= j + epsilon && z <= 0)
-				)
+			}
+			if (labyrinth[i][j] == FLOOR &&
+				((labyrinth[i][j - 1] == WALL && pos.z <= j + epsilon && z <= 0) || (false))
+			)
 			{
 				direction.z = 0;
-			}*/
+			}
 
 			parentTransform->Translate(speed * dt * direction);
 		}
