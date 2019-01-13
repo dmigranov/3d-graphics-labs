@@ -100,12 +100,7 @@ public:
 			int i = floor(pos.x);
 			int j = floor(pos.z);
 
-			if (L != 0)
-			{
-				std::cout << i << " " << j << " " << pos.x << std::endl;
-			}
-
-			//TODO: добавить или на все случаи
+			//коллизии
 			if (labyrinth[i][j] == FLOOR &&
 				(labyrinth[i - 1][j] == WALL && pos.x <= i + epsilon && x <= 0)
 				||
@@ -123,7 +118,6 @@ public:
 			{
 				direction.z = 0;
 			}
-
 			parentTransform->Translate(speed * dt * direction);
 		}
 

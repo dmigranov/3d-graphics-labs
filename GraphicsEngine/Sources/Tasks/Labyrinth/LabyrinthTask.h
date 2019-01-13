@@ -34,7 +34,7 @@ public:
 			Object * pCameraObj = new Object();
 			Camera * pCamera = new Camera();
 			//pCameraObj->m_pTransform = new Transform(Vector3(0.0f, 1.0f, 0.0f), Vector3(0.0f, 0.0f, 0.0f));
-			pCameraObj->m_pTransform = new Transform(Vector3(1.0f, 1.0f, 1.0f), Vector3(0.0f, 0.0f, 0.0f));
+			pCameraObj->m_pTransform = new Transform(Vector3(1.5f, 1.0f, 1.5f), Vector3(0.0f, 0.0f, 0.0f));
 
 			//TODO: исправить LabyrinthCameraController, чтобы он перемещался правильно; кстати, можно добавить мэши, чтобы потом отражалось; для головы отдельный
 			pCameraObj->AddComponent(new LabyrinthCameraController(labyrinth, blockSize));
@@ -62,8 +62,6 @@ public:
 				for (ushort y = 0; y < lY; y++)
 				{
 
-					std::cout << "(" << (x-1) * blockSize << " " << (y-1) * blockSize << ") ";
-
 					Object * labObject = new Object();
 
 					Block block = labyrinth.getAt(x, y);
@@ -80,7 +78,6 @@ public:
 
 					scene.AddObject(labObject);
 				}
-				std::cout << std::endl;
 			}
 		}
 
