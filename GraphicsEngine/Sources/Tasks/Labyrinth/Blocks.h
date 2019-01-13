@@ -1,5 +1,5 @@
 #pragma once
 enum Block
 {
-	FLOOR, WALL, LAVA, LIGHTWALL
+	FLOOR, WALL, LAVA, LIGHTWALL, VISITED
 };

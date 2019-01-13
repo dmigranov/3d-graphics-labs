@@ -96,25 +96,29 @@ public:
 				direction.z = 0;
 			}*/
 
-			if (L != 0)
-			{
-				std::cout << floor(pos.x) << " " << floor(pos.z) << " " << ceil(pos.x) << " " << ceil(pos.z) << std::endl;
-			}
-
 			//floor(pos.x), floor(pos.z) - это в точности (теперь, после сдвига) тот элемент массива, в котором мы находимся!
 			int i = floor(pos.x);
 			int j = floor(pos.z);
 
+			if (L != 0)
+			{
+				std::cout << i << " " << j << " " << pos.x << std::endl;
+			}
+
 			//TODO: добавить или на все случаи
 			if (labyrinth[i][j] == FLOOR &&
 				(labyrinth[i - 1][j] == WALL && pos.x <= i + epsilon && x <= 0)
-
-				)
+				||
+				(labyrinth[i + 1][j] == WALL && pos.x - 1 >= i - epsilon && x >= 0)
+			)
 			{
 				direction.x = 0;
 			}
 			if (labyrinth[i][j] == FLOOR &&
-				((labyrinth[i][j - 1] == WALL && pos.z <= j + epsilon && z <= 0) || (false))
+				((labyrinth[i][j - 1] == WALL && pos.z <= j + epsilon && z <= 0)
+				||
+				(labyrinth[i][j + 1] == WALL && pos.z - 1 >= j - epsilon && z >= 0)
+			)
 			)
 			{
 				direction.z = 0;

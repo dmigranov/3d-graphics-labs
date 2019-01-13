@@ -1,8 +1,14 @@
 #pragma once
+#include <ctime>
 #include <vector>
+#include <stack>
 #include "Tasks/Labyrinth/Blocks.h"
 
+
 typedef unsigned short ushort;
+typedef std::pair<ushort, ushort> Cell;
+typedef std::vector<std::pair<ushort, ushort>> Neighbours;
+typedef std::stack<Cell> CellStack;
 
 class Labyrinth
 {
@@ -28,7 +34,7 @@ public:
 		{
 			for (ushort j = 0; j < y; j++)
 			{
-				if (i > 0 && i < x - 1 && j > 0 && j < y - 1)  //только границы!
+				if (i > 0 && i < x - 1 && j > 0 && j < y - 1)  //только границы! - для тестирования
 					field[i][j] = FLOOR;
 				else
 					field[i][j] = WALL;
@@ -44,18 +50,22 @@ public:
 			}
 		}
 
-		std::pair<ushort, ushort> curCell;
+		Cell curCell;
+		
 		curCell = {1, 1};
 
-		/*do
-		{
-			std::vector<std::pair<ushort, ushort>> neighbours = getNeighbours();
-			if (neighbours.size() != 0)
-			{
+		srand(time(0));
 
+		do
+		{
+			Neighbours neighbours = getNeighbours(curCell);
+			int size;
+			if ((size = neighbours.size()) != 0)
+			{
+				int random = rand() % size;
 			}
 
-		} while (unvisited > 0);*/
+		} while (unvisited > 0);
 
 		
 
@@ -84,4 +94,33 @@ public:
 		return field;
 	}
 
+private:
+	Neighbours getNeighbours(Cell curCell)
+	{
+		ushort cx = curCell.first;
+		ushort cy = curCell.second;
+
+		Cell u = { cx, cy - 2 };
+		Cell d = { cx, cy - 2 };
+		Cell r = { cx + 2, cy };
+		Cell l = { cx - 2, cy };
+
+		Neighbours neighbours = { u, d, r, l }, retNeighbours;
+
+		for (Cell cell : neighbours)
+		{
+			if (cell.first >= 0 && cell.first < x && cell.second >= 0 && cell.second < y)
+			{
+				Block block = field[cell.first][cell.second];
+				if (block != WALL && block != VISITED)
+					retNeighbours.push_back(cell);
+			}
+		}
+		return retNeighbours;
+	}
+
+	void removeWall(Cell c1, Cell c2)
+	{
+
+	}
 };
