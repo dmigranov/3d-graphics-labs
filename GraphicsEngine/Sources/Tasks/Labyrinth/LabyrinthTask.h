@@ -79,6 +79,8 @@ public:
 					scene.AddObject(labObject);
 				}
 			}
+
+			//TODO: добавить зеркальный потолок (reflectio, environment mapping (cubic?))
 		}
 
 	}
