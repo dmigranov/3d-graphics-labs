@@ -33,26 +33,22 @@ public:
 		{
 			Object * pCameraObj = new Object();
 			Camera * pCamera = new Camera();
-			//pCameraObj->m_pTransform = new Transform(Vector3(0.0f, 1.0f, 0.0f), Vector3(0.0f, 0.0f, 0.0f));
 			pCameraObj->m_pTransform = new Transform(Vector3(1.5f, 1.0f, 1.5f), Vector3(0.0f, 0.0f, 0.0f));
-
-			//TODO: исправить LabyrinthCameraController, чтобы он перемещался правильно; кстати, можно добавить мэши, чтобы потом отражалось; для головы отдельный
+			//TODO: можно добавить мэши, чтобы потом отражалось (?); для головы отдельный?
 			pCameraObj->AddComponent(new LabyrinthCameraController(labyrinth, blockSize));
 			pCameraObj->AddComponent(pCamera);
-
 			scene.SetCamera(pCamera);
 		}
 
 		{
 			ushort lX = labyrinth.getX();
 			ushort lY = labyrinth.getY();
-
 			{
 				Object * floor = new Object();
 
 				floor->m_pTransform = new Transform(lX * blockSize / 2.0, 0, lY * blockSize / 2.0, 0, 0, 0, lX * blockSize, 1, lY * blockSize);
 				floor->m_pMesh = new MeshQuad();
-				floor->m_pMaterial = new MaterialUnlit(Vector3(0, 1, 0));
+				floor->m_pMaterial = new MaterialUnlit(Vector3(1, 1, 1));
 
 				scene.AddObject(floor);
 			}
@@ -61,7 +57,6 @@ public:
 			{
 				for (ushort y = 0; y < lY; y++)
 				{
-
 					Object * labObject = new Object();
 
 					Block block = labyrinth.getAt(x, y);
@@ -70,9 +65,13 @@ public:
 					case WALL:
 						//labObject->m_pTransform = new Transform(x * blockSize, blockSize / 2.0, y * blockSize, 0, 0, 0, blockSize, blockSize*2.0, blockSize);
 						labObject->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, blockSize / 2.0, y * blockSize + blockSize / 2.0, 0, 0, 0, blockSize, blockSize*2.0, blockSize);
-
 						labObject->m_pMesh = new MeshCube();
-						labObject->m_pMaterial = new MaterialUnlit(Vector3(1, 0, 0));
+						labObject->m_pMaterial = new MaterialUnlit(Vector3(1, 1, 1));
+						break;
+					case FINISHWALL:
+						labObject->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, blockSize / 2.0, y * blockSize + blockSize / 2.0, 0, 0, 0, blockSize, blockSize*2.0, blockSize);
+						labObject->m_pMesh = new MeshCube();
+						labObject->m_pMaterial = new MaterialRoad();
 						break;
 					}
 
@@ -80,9 +79,6 @@ public:
 				}
 			}
 		}
-
-
-
 
 	}
 

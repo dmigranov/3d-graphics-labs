@@ -57,7 +57,7 @@ public:
 			Vector3 forward = pTransform->GetForward();
 			Vector3 right = pTransform->GetRight();
 			double dt = Time::GetDeltaTime();
-			const double speed = 1.0;
+			const double speed = 1.0; //1.0!
 			Vector3 direction;
 
 			if (Input::GetKey(KEY_CODE_W) || Input::GetKey(KEY_CODE_UP_ARROW))
@@ -101,18 +101,18 @@ public:
 			int j = floor(pos.z);
 
 			//коллизии
-			if (labyrinth[i][j] == FLOOR &&
-				(labyrinth[i - 1][j] == WALL && pos.x <= i + epsilon && x <= 0)
+			if ((labyrinth[i][j] == FLOOR || labyrinth[i][j] == FINISHPOINT) &&
+				((labyrinth[i - 1][j] == WALL || labyrinth[i - 1][j] == FINISHWALL) && pos.x <= i + epsilon && x <= 0)
 				||
-				(labyrinth[i + 1][j] == WALL && pos.x - 1 >= i - epsilon && x >= 0)
+				((labyrinth[i + 1][j] == WALL || labyrinth[i + 1][j] == FINISHWALL) && pos.x - 1 >= i - epsilon && x >= 0)
 			)
 			{
 				direction.x = 0;
 			}
-			if (labyrinth[i][j] == FLOOR &&
-				((labyrinth[i][j - 1] == WALL && pos.z <= j + epsilon && z <= 0)
+			if ((labyrinth[i][j] == FLOOR || labyrinth[i][j] == FINISHPOINT) &&
+				(( ( labyrinth[i][j - 1] == WALL || labyrinth[i][j - 1] == FINISHWALL ) && pos.z <= j + epsilon && z <= 0)
 				||
-				(labyrinth[i][j + 1] == WALL && pos.z - 1 >= j - epsilon && z >= 0)
+				((labyrinth[i][j + 1] == WALL || labyrinth[i][j + 1] == FINISHWALL) && pos.z - 1 >= j - epsilon && z >= 0)
 			)
 			)
 			{

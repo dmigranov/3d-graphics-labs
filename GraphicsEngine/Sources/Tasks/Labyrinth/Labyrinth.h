@@ -22,6 +22,11 @@ private:
 public:
 	Labyrinth(ushort x, ushort y)
 	{
+		if (x % 2 == 0)
+			x++;
+		if (y % 2 == 0)
+			y++;
+
 		this->x = x;
 		this->y = y;
 
@@ -42,7 +47,7 @@ public:
 					field[i][j] = WALL;*/
 
 				
-				if (i % 2 != 0 && j % 2 != 0)  //+ границы если четные xy? - для алгоритма
+				if (i % 2 != 0 && j % 2 != 0)  //для алгоритма
 				{
 					field[i][j] = FLOOR;
 					unvisited++;
@@ -95,23 +100,23 @@ public:
 
 		} while (unvisited > 0);
 
+		initFinish();
+
+
+		//потом ещё добавить лаву (можно её даже анимировать) - вместо стен (вместо пола чревато)
+
+
 		for (ushort i = 0; i < x; i++)
 		{
 			for (ushort j = 0; j < y; j++)
 			{
-				
+
 				if (field[i][j] == VISITED)
 					field[i][j] = FLOOR;
 				std::cout << field[i][j] << " ";
 			}
 			std::cout << std::endl;
 		}
-		std::cout << unvisited << std::endl;
-
-
-		//первый проход: по какому-то алгоритму с хабра
-		//потом ещё добавить лаву (можно её даже анимировать) - вместо стен (вместо пола чревато)
-
 	}
 
 	ushort getX()
@@ -192,6 +197,23 @@ private:
 			field[cell.first][cell.second] = VISITED;
 			
 		}
+	}
+
+	void initFinish()
+	{
+		field[x - 2][y - 2] = FINISHPOINT;
+
+		if (field[x - 1][y - 2] == WALL)
+			field[x - 1][y - 2] = FINISHWALL;
+		if (field[x - 3][y - 2] == WALL)
+			field[x - 3][y - 2] = FINISHWALL;
+		if (field[x - 2][y - 1] == WALL)
+			field[x - 2][y - 1] = FINISHWALL;
+		if (field[x - 2][y - 3] == WALL)
+			field[x - 2][y - 3] = FINISHWALL;
+
+		
+		
 	}
 
 };
