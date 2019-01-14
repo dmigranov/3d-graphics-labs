@@ -6,8 +6,8 @@
 
 
 typedef unsigned short ushort;
-typedef std::pair<ushort, ushort> Cell;
-typedef std::vector<std::pair<ushort, ushort>> CellVector;
+typedef std::pair<int, int> Cell; //тут было ushort, но ради вычитания в getNeighbours...
+typedef std::vector<Cell> CellVector;
 typedef std::stack<Cell> CellStack;
 
 class Labyrinth
@@ -51,6 +51,7 @@ public:
 					field[i][j] = WALL;
 			}
 		}
+		
 
 		//field[5][5] = WALL;
 		//field[5][7] = WALL;
@@ -71,8 +72,7 @@ public:
 				Cell neighbourCell = neighbours[random];
 				stack.push(curCell);
 				removeWall(curCell, neighbourCell);
-				field[neighbourCell.first][neighbourCell.second] = VISITED;
-				unvisited--;
+				setVisited(neighbourCell);
 				curCell = neighbourCell;
 			}
 			else if (stack.size() > 0)
@@ -89,7 +89,7 @@ public:
 					int random = rand() % unvisited.size();
 					curCell = unvisited[random];
 				}
-				else break;
+				//else break;
 			}
 
 
@@ -99,7 +99,9 @@ public:
 		{
 			for (ushort j = 0; j < y; j++)
 			{
-				//TODO: заменить VISITED на FLOOR
+				
+				if (field[i][j] == VISITED)
+					field[i][j] = FLOOR;
 				std::cout << field[i][j] << " ";
 			}
 			std::cout << std::endl;
@@ -135,11 +137,11 @@ public:
 private:
 	CellVector getNeighbours(Cell curCell)
 	{
-		ushort cx = curCell.first;
-		ushort cy = curCell.second;
+		int cx = curCell.first;
+		int cy = curCell.second;
 
 		Cell u = { cx, cy - 2 };
-		Cell d = { cx, cy - 2 };
+		Cell d = { cx, cy + 2 };
 		Cell r = { cx + 2, cy };
 		Cell l = { cx - 2, cy };
 
@@ -163,8 +165,7 @@ private:
 		short dx = (c2.first - c1.first) / 2;
 		short dy = (c2.second - c1.second) / 2;
 
-		field[c1.first + dx][c1.second + dy] = VISITED;
-		unvisited--;
+		setVisited({ c1.first + dx , c1.second + dy });
 	}
 
 	CellVector getUnvisited()
@@ -179,6 +180,18 @@ private:
 			}
 		}
 		return retVector;
+	}
+
+	void setVisited(Cell cell)
+	{
+		Block block = field[cell.first][cell.second];
+		if (block != VISITED)
+		{
+			if (block == FLOOR)
+				unvisited--;
+			field[cell.first][cell.second] = VISITED;
+			
+		}
 	}
 
 };
