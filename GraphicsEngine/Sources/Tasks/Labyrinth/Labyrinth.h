@@ -7,7 +7,7 @@
 
 typedef unsigned short ushort;
 typedef std::pair<ushort, ushort> Cell;
-typedef std::vector<std::pair<ushort, ushort>> Neighbours;
+typedef std::vector<std::pair<ushort, ushort>> CellVector;
 typedef std::stack<Cell> CellStack;
 
 class Labyrinth
@@ -15,6 +15,8 @@ class Labyrinth
 private:
 	Block ** field;
 	ushort x, y;
+	CellStack stack;
+	unsigned int unvisited = 0;
 	
 
 public:
@@ -29,29 +31,29 @@ public:
 			field[i] = new Block[y];
 		}
 		
-		unsigned int unvisited = 0;
+		
 		for (ushort i = 0; i < x; i++)
 		{
 			for (ushort j = 0; j < y; j++)
 			{
-				if (i > 0 && i < x - 1 && j > 0 && j < y - 1)  //только границы! - дл€ тестировани€
+				/*if (i > 0 && i < x - 1 && j > 0 && j < y - 1)  //только границы! - дл€ тестировани€
 					field[i][j] = FLOOR;
 				else
-					field[i][j] = WALL;
+					field[i][j] = WALL;*/
 
 				
-				/*if (i % 2 != 0 && j % 2 != 0)  //+ границы если четные xy? - дл€ алгоритма
+				if (i % 2 != 0 && j % 2 != 0)  //+ границы если четные xy? - дл€ алгоритма
 				{
 					field[i][j] = FLOOR;
 					unvisited++;
 				}
 				else
-					field[i][j] = WALL;*/
+					field[i][j] = WALL;
 			}
 		}
 
-		field[5][5] = WALL;
-		field[5][7] = WALL;
+		//field[5][5] = WALL;
+		//field[5][7] = WALL;
 
 		Cell curCell;
 		
@@ -59,16 +61,50 @@ public:
 
 		srand(time(0));
 
-		/*do
+		do
 		{
-			Neighbours neighbours = getNeighbours(curCell);
+			CellVector neighbours = getNeighbours(curCell);
 			int size;
 			if ((size = neighbours.size()) != 0)
 			{
 				int random = rand() % size;
+				Cell neighbourCell = neighbours[random];
+				stack.push(curCell);
+				removeWall(curCell, neighbourCell);
+				field[neighbourCell.first][neighbourCell.second] = VISITED;
+				unvisited--;
+				curCell = neighbourCell;
+			}
+			else if (stack.size() > 0)
+			{
+				curCell = stack.top();
+				stack.pop();
+			}
+			else
+			{
+				//выбираем случайную из нпосещЄнных
+				CellVector unvisited = getUnvisited();
+				if (unvisited.size() != 0)
+				{
+					int random = rand() % unvisited.size();
+					curCell = unvisited[random];
+				}
+				else break;
 			}
 
-		} while (unvisited > 0);*/
+
+		} while (unvisited > 0);
+
+		for (ushort i = 0; i < x; i++)
+		{
+			for (ushort j = 0; j < y; j++)
+			{
+				//TODO: заменить VISITED на FLOOR
+				std::cout << field[i][j] << " ";
+			}
+			std::cout << std::endl;
+		}
+		std::cout << unvisited << std::endl;
 
 
 		//первый проход: по какому-то алгоритму с хабра
@@ -97,7 +133,7 @@ public:
 	}
 
 private:
-	Neighbours getNeighbours(Cell curCell)
+	CellVector getNeighbours(Cell curCell)
 	{
 		ushort cx = curCell.first;
 		ushort cy = curCell.second;
@@ -107,7 +143,7 @@ private:
 		Cell r = { cx + 2, cy };
 		Cell l = { cx - 2, cy };
 
-		Neighbours neighbours = { u, d, r, l }, retNeighbours;
+		CellVector neighbours = { u, d, r, l }, retNeighbours;
 
 		for (Cell cell : neighbours)
 		{
@@ -123,6 +159,26 @@ private:
 
 	void removeWall(Cell c1, Cell c2)
 	{
+		//найти координаты стенки
+		short dx = (c2.first - c1.first) / 2;
+		short dy = (c2.second - c1.second) / 2;
 
+		field[c1.first + dx][c1.second + dy] = VISITED;
+		unvisited--;
 	}
+
+	CellVector getUnvisited()
+	{
+		CellVector retVector;
+		for (ushort i = 0; i < x; i++)
+		{
+			for (ushort j = 0; j < y; j++)
+			{
+				if (field[i][j] == FLOOR)
+					retVector.push_back({i, j});
+			}
+		}
+		return retVector;
+	}
+
 };
