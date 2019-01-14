@@ -4,6 +4,7 @@
 #include "GraphicsEngine/GraphicsEngine.h"
 #include "GraphicsEngine/Light.h"
 #include "GraphicsEngine/Materials/MaterialUnlitSimple.h"
+#include "GraphicsEngine/Materials/MaterialWall.h"
 #include "GraphicsEngine/Meshes/MeshCube.h"
 #include "GraphicsEngine/Object.h"
 #include "GraphicsEngine/Scene.h"
@@ -66,7 +67,7 @@ public:
 						//labObject->m_pTransform = new Transform(x * blockSize, blockSize / 2.0, y * blockSize, 0, 0, 0, blockSize, blockSize*2.0, blockSize);
 						labObject->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, blockSize / 2.0, y * blockSize + blockSize / 2.0, 0, 0, 0, blockSize, blockSize*2.0, blockSize);
 						labObject->m_pMesh = new MeshCube();
-						labObject->m_pMaterial = new MaterialUnlit(Vector3(1, 1, 1));
+						labObject->m_pMaterial = new MaterialWall(TEXTURE_FILTER_MODE_ANISOTROPIC);
 						break;
 					case FINISHWALL:
 						labObject->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, blockSize / 2.0, y * blockSize + blockSize / 2.0, 0, 0, 0, blockSize, blockSize*2.0, blockSize);
