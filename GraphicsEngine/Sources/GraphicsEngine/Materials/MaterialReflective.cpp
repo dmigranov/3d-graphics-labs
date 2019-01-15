@@ -64,7 +64,7 @@ void MaterialReflective::SetMaterial(const Object * pObject)
 	//нам надо поместить камеру на место объекта (то есть потолка над нами - для этого и нужна высота)
 
 	LPDIRECT3DSURFACE9 pBackBuffer, pZBuffer;
-	m_pDevice->GetRenderTarget(0, &pBackBuffer); //0 - index of the render target
+	m_pDevice->GetRenderTarget(0, &pBackBuffer); //0 - index of the render target?
 	m_pDevice->GetDepthStencilSurface(&pZBuffer);
 
 	SetMaterialBegin();
