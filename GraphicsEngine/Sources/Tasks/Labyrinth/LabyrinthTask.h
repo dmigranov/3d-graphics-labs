@@ -5,6 +5,7 @@
 #include "GraphicsEngine/Light.h"
 #include "GraphicsEngine/Materials/MaterialUnlitSimple.h"
 #include "GraphicsEngine/Materials/MaterialWall.h"
+#include "GraphicsEngine/Materials/MaterialReflective.h"
 #include "GraphicsEngine/Meshes/MeshCube.h"
 #include "GraphicsEngine/Object.h"
 #include "GraphicsEngine/Scene.h"
@@ -57,10 +58,10 @@ public:
 
 			{
 				Object * ceil = new Object();
-
-				ceil->m_pTransform = new Transform(lX * blockSize / 2.0, blockSize * 3/2.0, lY * blockSize / 2.0, 0, 0, 180, lX * blockSize, 1, lY * blockSize);
+				double height = blockSize * 3 / 2.0;
+				ceil->m_pTransform = new Transform(lX * blockSize / 2.0, height, lY * blockSize / 2.0, 0, 0, 180, lX * blockSize, 1, lY * blockSize);
 				ceil->m_pMesh = new MeshQuad();
-				ceil->m_pMaterial = new MaterialUnlit(Vector3(1, 1, 1));
+				ceil->m_pMaterial = new MaterialReflective(height);
 
 				scene.AddObject(ceil);
 			}

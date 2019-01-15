@@ -7,7 +7,7 @@ class MaterialReflective : public Material
 {
 public:
 
-	MaterialReflective();
+	MaterialReflective(double height);
 
 	virtual void Init();
 
@@ -16,5 +16,6 @@ public:
 	virtual void SetMaterial(const Object * pObject);
 
 private:
-
+	Texture2D *	m_pTexture;
+	double height;
 };

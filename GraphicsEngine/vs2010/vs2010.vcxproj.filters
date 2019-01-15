@@ -836,6 +836,12 @@
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderWall.vs">
       <Filter>GraphicsEngine\Shaders\DX9</Filter>
     </None>
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderReflective.ps">
+      <Filter>GraphicsEngine\Shaders\DX9</Filter>
+    </None>
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderReflective.vs">
+      <Filter>GraphicsEngine\Shaders\DX9</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderSphereMorphing.ps">

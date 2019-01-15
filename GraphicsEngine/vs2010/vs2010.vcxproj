@@ -337,6 +337,8 @@ xcopy  /S /I /E /Y "..\Sources\GraphicsEngine\Shaders" "..\BUILD\Release\Shaders
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderEarth.vs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderEarthNormal.ps" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderEarthNormal.vs" />
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderReflective.ps" />
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderReflective.vs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderRoad.ps" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderRoad.vs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderSand.ps" />
