@@ -183,6 +183,7 @@ xcopy  /S /I /E /Y "..\Sources\GraphicsEngine\Shaders" "..\BUILD\Release\Shaders
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialCylinderMorphing.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialEarth.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialEarthNormal.h" />
+    <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialReflective.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialRoad.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialSand.h" />
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialDiffuse.h" />
@@ -294,6 +295,7 @@ xcopy  /S /I /E /Y "..\Sources\GraphicsEngine\Shaders" "..\BUILD\Release\Shaders
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialCylinderMorphing.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialEarth.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialEarthNormal.cpp" />
+    <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialReflective.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialRoad.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialSand.cpp" />
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialDiffuse.cpp" />

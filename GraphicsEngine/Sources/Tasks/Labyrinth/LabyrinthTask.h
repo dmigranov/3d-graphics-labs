@@ -37,6 +37,7 @@ public:
 			pCameraObj->m_pTransform = new Transform(Vector3(1.5f, 1.0f, 1.5f), Vector3(0.0f, 0.0f, 0.0f));
 			//TODO: можно добавить мэши, чтобы потом отражалось (?); для головы отдельный?
 			pCameraObj->AddComponent(new LabyrinthCameraController(labyrinth, blockSize));
+
 			pCameraObj->AddComponent(pCamera);
 			scene.SetCamera(pCamera);
 		}
@@ -52,6 +53,16 @@ public:
 				floor->m_pMaterial = new MaterialUnlit(Vector3(1, 1, 1));
 
 				scene.AddObject(floor);
+			}
+
+			{
+				Object * ceil = new Object();
+
+				ceil->m_pTransform = new Transform(lX * blockSize / 2.0, blockSize * 3/2.0, lY * blockSize / 2.0, 0, 0, 180, lX * blockSize, 1, lY * blockSize);
+				ceil->m_pMesh = new MeshQuad();
+				ceil->m_pMaterial = new MaterialUnlit(Vector3(1, 1, 1));
+
+				scene.AddObject(ceil);
 			}
 
 			for (ushort x = 0; x < lX; x++)
