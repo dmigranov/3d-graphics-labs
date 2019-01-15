@@ -1,7 +1,12 @@
-﻿#include "MaterialReflective.h"
+﻿#include <iostream>
+
+#include "MaterialReflective.h"
 #include "GraphicsEngine/Transform.h"
 #include "GraphicsEngine/MathUtils.h"
 #include "GraphicsEngine/SceneUtils.h"
+#include "GraphicsEngine/GraphicsApi/DirectX9/DX9GraphicsEngineContext.h"
+#include "GraphicsEngine/GraphicsApi/TextureSamplerImpl.h"
+#include "GraphicsEngine/GraphicsApi/DirectX9/DX9TextureSampler.h"
 
 
 MaterialReflective::MaterialReflective(double height)
@@ -18,8 +23,16 @@ void MaterialReflective::Init()
 {
 	Material::Init();
 
-	m_pTexture = new Texture2D("Wall.jpg");
-	m_pTexture->SetFilterMode(TEXTURE_FILTER_MODE_ANISOTROPIC);
+	//m_pTexture = new Texture2D("Wall.jpg");
+	//m_pTexture->SetFilterMode(TEXTURE_FILTER_MODE_ANISOTROPIC);
+
+	const GraphicsEngineContext * pContext = Application::Instance().GetContext();
+	const DX9GraphicsEngineContext * pDX9Context = static_cast<const DX9GraphicsEngineContext *>(pContext);
+	m_pDevice = pDX9Context->m_pDevice;
+
+	
+	std::cout << D3DXCreateTextureFromFileA(m_pDevice, "../Data/Wall.jpg", &m_pTextureD) << std::endl;
+	m_pTextureSampler = new DX9TextureSampler(TEXTURE_FILTER_MODE_POINT, TEXTURE_WRAP_MODE_REPEAT);
 
 	//ПРОИНИЦИЛИЗИРОВАТЬ ТЕКСТУРУ?
 	//m_pTexture->SetFilterMode(TEXTURE_FILTER_MODE_ANISOTROPIC);
@@ -52,7 +65,15 @@ void MaterialReflective::SetMaterial(const Object * pObject)
 		SetVertexShaderEnd();
 
 		SetPixelShaderBegin();
-		SetPixelShaderTexture2d("texture1", m_pTexture);
+
+		//SetPixelShaderTexture2d("texture1", m_pTexture);
+		DWORD sampler = 0;
+
+	
+		HRESULT hr = m_pDevice->SetTexture(sampler, m_pTextureD);
+
+		m_pTextureSampler->PassParamsToShader(0, 1);
+
 		SetPixelShaderEnd();
 	}
 	SetMaterialEnd();
