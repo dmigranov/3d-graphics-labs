@@ -21,4 +21,5 @@ private:
 	TextureSamplerImpl * m_pTextureSampler;
 	LPDIRECT3DDEVICE9 m_pDevice;
 	LPDIRECT3DTEXTURE9 m_pTextureD;
+	LPDIRECT3DCUBETEXTURE9 m_pCubeMap;
 };

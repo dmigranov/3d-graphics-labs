@@ -25,14 +25,20 @@ void MaterialReflective::Init()
 
 	//m_pTexture = new Texture2D("Wall.jpg");
 	//m_pTexture->SetFilterMode(TEXTURE_FILTER_MODE_ANISOTROPIC);
+	{
+		//yes, this is bad...
+		const GraphicsEngineContext * pContext = Application::Instance().GetContext();
+		const DX9GraphicsEngineContext * pDX9Context = static_cast<const DX9GraphicsEngineContext *>(pContext);
+		m_pDevice = pDX9Context->m_pDevice;
+		std::cout << D3DXCreateTextureFromFileA(m_pDevice, "../Data/Wall.jpg", &m_pTextureD) << std::endl;
 
-	const GraphicsEngineContext * pContext = Application::Instance().GetContext();
-	const DX9GraphicsEngineContext * pDX9Context = static_cast<const DX9GraphicsEngineContext *>(pContext);
-	m_pDevice = pDX9Context->m_pDevice;
+		m_pDevice->CreateCubeTexture(256, 1, D3DUSAGE_RENDERTARGET, D3DFMT_R8G8B8, D3DPOOL_DEFAULT, &m_pCubeMap, NULL);
+		//TODO: надо ещё проинициализировать!
+		//но наверное это надо каждый раз заново
 
-	
-	std::cout << D3DXCreateTextureFromFileA(m_pDevice, "../Data/Wall.jpg", &m_pTextureD) << std::endl;
-	m_pTextureSampler = new DX9TextureSampler(TEXTURE_FILTER_MODE_POINT, TEXTURE_WRAP_MODE_REPEAT);
+
+		m_pTextureSampler = new DX9TextureSampler(TEXTURE_FILTER_MODE_POINT, TEXTURE_WRAP_MODE_REPEAT);
+	}
 
 	//ПРОИНИЦИЛИЗИРОВАТЬ ТЕКСТУРУ?
 	//m_pTexture->SetFilterMode(TEXTURE_FILTER_MODE_ANISOTROPIC);
@@ -57,6 +63,10 @@ void MaterialReflective::SetMaterial(const Object * pObject)
 	//я так понимаю, тут надо каждый раз генерировать карту в зависимости от нашего положения
 	//нам надо поместить камеру на место объекта (то есть потолка над нами - для этого и нужна высота)
 
+	LPDIRECT3DSURFACE9 pBackBuffer, pZBuffer;
+	m_pDevice->GetRenderTarget(0, &pBackBuffer); //0 - index of the render target
+	m_pDevice->GetDepthStencilSurface(&pZBuffer);
+
 	SetMaterialBegin();
 	{
 		SetVertexShaderBegin();
@@ -67,12 +77,11 @@ void MaterialReflective::SetMaterial(const Object * pObject)
 		SetPixelShaderBegin();
 
 		//SetPixelShaderTexture2d("texture1", m_pTexture);
-		DWORD sampler = 0;
-
-	
-		HRESULT hr = m_pDevice->SetTexture(sampler, m_pTextureD);
-
-		m_pTextureSampler->PassParamsToShader(0, 1);
+		{
+			DWORD sampler = 0;
+			HRESULT hr = m_pDevice->SetTexture(sampler, m_pTextureD);
+			m_pTextureSampler->PassParamsToShader(0, 1);
+		}
 
 		SetPixelShaderEnd();
 	}
