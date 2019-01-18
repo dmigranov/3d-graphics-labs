@@ -119,7 +119,7 @@ void MaterialReflective::SetMaterial(const Object * pObject)
 		m_pDevice->SetRenderTarget(0, pFace);  //(pFace, pZBuffer)
 		SAFE_RELEASE(pFace);
 
-		//render scene!
+		//render scene! НО КАК Я ОТРЕНДЕРЮ ЭТО В МАТЕРИАЛЕ? БЕСКОНЕЧНАЯ РЕКУРСИЯ! ЭТО НАДО ДЕЛАТЬ ТАМ, ГДЕ РЕНДЕРИТСЧ ВСЁ ОСТАЛЬНОЕ
 		
 	}
 

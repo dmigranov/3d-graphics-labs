@@ -5,7 +5,7 @@
 #include "GraphicsEngine/Light.h"
 #include "GraphicsEngine/Materials/MaterialUnlitSimple.h"
 #include "GraphicsEngine/Materials/MaterialWall.h"
-#include "GraphicsEngine/Materials/MaterialReflective.h"
+#include "GraphicsEngine/Materials/MaterialDirty.h"
 #include "GraphicsEngine/Meshes/MeshCube.h"
 #include "GraphicsEngine/Object.h"
 #include "GraphicsEngine/Scene.h"
@@ -51,9 +51,9 @@ public:
 
 				floor->m_pTransform = new Transform(lX * blockSize / 2.0, 0, lY * blockSize / 2.0, 0, 0, 0, lX * blockSize, 1, lY * blockSize);
 				floor->m_pMesh = new MeshQuad();
-				floor->m_pMaterial = new MaterialUnlit(Vector3(1, 1, 1));
+				floor->m_pMaterial = new MaterialDirty(TEXTURE_FILTER_MODE_ANISOTROPIC);
 
-				scene.AddObject(floor);
+				scene.AddObject(floor);	//TODO: в итоге надо будет сделать так чтобы было замутнение, грязь!
 			}
 
 			{
@@ -61,9 +61,11 @@ public:
 				double height = blockSize * 3 / 2.0;
 				ceil->m_pTransform = new Transform(lX * blockSize / 2.0, height, lY * blockSize / 2.0, 0, 0, 180, lX * blockSize, 1, lY * blockSize);
 				ceil->m_pMesh = new MeshQuad();
-				ceil->m_pMaterial = new MaterialReflective(height);
+				ceil->m_pMaterial = new MaterialUnlit(Vector3(1, 1, 1));
 
 				scene.AddObject(ceil);
+
+				//TODO: добавить "зеркальный потолок"
 			}
 
 			for (ushort x = 0; x < lX; x++)
@@ -71,6 +73,7 @@ public:
 				for (ushort y = 0; y < lY; y++)
 				{
 					Object * labObject = new Object();
+					Object * labObject_u = new Object();
 
 					Block block = labyrinth.getAt(x, y);
 					switch (block)
@@ -80,15 +83,27 @@ public:
 						labObject->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, blockSize / 2.0, y * blockSize + blockSize / 2.0, 0, 0, 0, blockSize, blockSize*2.0, blockSize);
 						labObject->m_pMesh = new MeshCube();
 						labObject->m_pMaterial = new MaterialWall(TEXTURE_FILTER_MODE_ANISOTROPIC);
+
+						//снизу - типа обман
+						
+						labObject_u->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, -blockSize / 2.0, y * blockSize + blockSize / 2.0, 0, 0, 0, blockSize, blockSize*2.0, blockSize);
+						labObject_u->m_pMesh = new MeshCube();
+						labObject_u->m_pMaterial = new MaterialWall(TEXTURE_FILTER_MODE_ANISOTROPIC);
+
 						break;
 					case FINISHWALL:
 						labObject->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, blockSize / 2.0, y * blockSize + blockSize / 2.0, 0, 0, 0, blockSize, blockSize*2.0, blockSize);
 						labObject->m_pMesh = new MeshCube();
 						labObject->m_pMaterial = new MaterialRoad();
+
+						labObject_u->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, -blockSize / 2.0, y * blockSize + blockSize / 2.0, 0, 0, 0, blockSize, blockSize*2.0, blockSize);
+						labObject_u->m_pMesh = new MeshCube();
+						labObject_u->m_pMaterial = new MaterialRoad();
 						break;
 					}
 
 					scene.AddObject(labObject);
+					scene.AddObject(labObject_u);
 				}
 			}
 

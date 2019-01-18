@@ -456,6 +456,9 @@
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialReflective.h">
       <Filter>GraphicsEngine\Materials</Filter>
     </ClInclude>
+    <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialDirty.h">
+      <Filter>GraphicsEngine\Materials</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Sources\GraphicsEngine\Application.cpp">
@@ -690,6 +693,9 @@
     <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialReflective.cpp">
       <Filter>GraphicsEngine\Materials</Filter>
     </ClCompile>
+    <ClCompile Include="..\Sources\GraphicsEngine\Materials\MaterialDirty.cpp">
+      <Filter>GraphicsEngine\Materials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Sources\GraphicsEngine\Shaders\DX11\ShaderDiffuse.fx">
@@ -840,6 +846,12 @@
       <Filter>GraphicsEngine\Shaders\DX9</Filter>
     </None>
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderReflective.vs">
+      <Filter>GraphicsEngine\Shaders\DX9</Filter>
+    </None>
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderDirt.vs">
+      <Filter>GraphicsEngine\Shaders\DX9</Filter>
+    </None>
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderDirt.ps">
       <Filter>GraphicsEngine\Shaders\DX9</Filter>
     </None>
   </ItemGroup>
