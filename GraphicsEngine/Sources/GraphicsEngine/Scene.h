@@ -31,9 +31,11 @@ public:
 	void Update();
 	void Render();
 
+
 private:
 	std::vector<const Object *>	m_objects;
 	std::list<const Light *>	m_lights;
 	Camera *					m_pCamera;
 	Object *					m_pSelectedObject;
+
 };
