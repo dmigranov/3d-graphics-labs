@@ -36,14 +36,23 @@ void DX9Mesh::Render()
 {
 	// Render the vertex buffer contents
 	//
-	/*m_pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
-	m_pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);//D3DBLEND_SRCALPHA
-	//m_pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_DESTALPHA); //D3DBLEND_DESTALPHA*/
-	//
+	if (transparent == true) {
+		m_pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+		m_pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);//D3DBLEND_SRCALPHA
+		m_pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_DESTALPHA); //D3DBLEND_DESTALPHA
+		m_pDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
+	}
+	
+
 	m_pDevice->SetStreamSource( 0, m_pVertexBuffer, 0, m_vertexSize );
 	m_pDevice->SetFVF( m_fvf );
 	m_pDevice->SetIndices( m_pIndexBuffer );
 	m_pDevice->DrawIndexedPrimitive( m_primitiveType, 0, 0, m_verticesCount, 0, m_primitiveCount );
+
+	if (transparent == true) {
+		m_pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+		m_pDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
+	}
 }
 
 

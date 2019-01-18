@@ -30,4 +30,11 @@ public:
 	virtual void SetUV0		(const std::vector<Vector3> & uv0) = 0;
 	
 	virtual void Apply() = 0;
+
+	void SetTransparent(bool value)
+	{
+		transparent = value;
+	}
+protected:
+	bool transparent = false;
 };

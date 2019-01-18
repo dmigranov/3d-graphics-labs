@@ -22,7 +22,7 @@ PS_OUTPUT main( PS_INPUT input )
 	float3 color1 = tex2D( texture1, input.uv1.xy * uv1Scale ).rgb;
 	
 	output.Color.rgb = color1;
-	output.Color.a   = 0.5;
+	output.Color.a   = 0.3;
 
 	return output;
 };

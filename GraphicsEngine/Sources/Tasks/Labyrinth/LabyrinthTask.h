@@ -46,17 +46,7 @@ public:
 		{
 			ushort lX = labyrinth.getX();
 			ushort lY = labyrinth.getY();
-			{
-				Object * floor = new Object();
-				/*Mesh mesh;
-				mesh.Render();*/
-
-				floor->m_pTransform = new Transform(lX * blockSize / 2.0, 0, lY * blockSize / 2.0, 0, 0, 0, lX * blockSize, 1, lY * blockSize);
-				floor->m_pMesh = new MeshQuad();
-				floor->m_pMaterial = new MaterialDirty(TEXTURE_FILTER_MODE_ANISOTROPIC);
-
-				scene.AddObject(floor);	//TODO: в итоге надо будет сделать так чтобы было замутнение, грязь!
-			}
+			
 
 			{
 				Object * ceil = new Object();
@@ -68,6 +58,18 @@ public:
 				scene.AddObject(ceil);
 
 				//TODO: добавить "зеркальный потолок"
+			}
+
+			{
+				Object * floor = new Object();
+				Mesh * quad = new MeshQuad();
+
+				floor->m_pTransform = new Transform(lX * blockSize / 2.0, 0, lY * blockSize / 2.0, 0, 0, 0, lX * blockSize, 1, lY * blockSize);
+				floor->m_pMesh = quad;
+				quad->SetTransparent(true);
+				floor->m_pMaterial = new MaterialDirty(TEXTURE_FILTER_MODE_ANISOTROPIC);
+
+				scene.AddObject(floor);	//TODO: в итоге надо будет сделать так чтобы было замутнение, грязь!
 			}
 
 			for (ushort x = 0; x < lX; x++)

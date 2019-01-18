@@ -16,6 +16,10 @@ public:
 
 	void Render();
 
+	void SetTransparent(bool value);
+
 protected:
 	MeshImpl * meshImpl;
+
+	bool transparent = false;
 };

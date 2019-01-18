@@ -17,6 +17,7 @@ void Mesh::Init()
 
 	meshImpl = GraphicsEngineFabric::CreateMesh();
 	meshImpl->Init();
+	meshImpl->SetTransparent(transparent);
 }
 
 void Mesh::Deinit()
@@ -27,4 +28,9 @@ void Mesh::Deinit()
 void Mesh::Render()
 {
 	meshImpl->Render();
+}
+
+void Mesh::SetTransparent(bool value)
+{
+	transparent = value;
 }
