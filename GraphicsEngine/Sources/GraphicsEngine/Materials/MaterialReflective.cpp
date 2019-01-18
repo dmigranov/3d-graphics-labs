@@ -67,6 +67,54 @@ void MaterialReflective::SetMaterial(const Object * pObject)
 	m_pDevice->GetRenderTarget(0, &pBackBuffer); //0 - index of the render target?
 	m_pDevice->GetDepthStencilSurface(&pZBuffer);
 
+	D3DXMATRIX matProjD;
+	D3DXMatrixPerspectiveFovLH(&matProjD, D3DX_PI/2, 1.0f, 0.5f, 1000.0f);
+	m_pDevice->SetTransform(D3DTS_PROJECTION, &matProjD);
+
+	for (DWORD i = 0; i < 6; i++)
+	{
+		D3DXVECTOR3 vEnvEyePt = { 0.0f, 0.0f, 0.0f };
+		D3DXVECTOR3 vLookatPt, vUpVec;
+		switch (i)
+		{
+		case D3DCUBEMAP_FACE_POSITIVE_X:
+			vLookatPt = { 1.0f, 0.0f, 0.0f };
+			vUpVec = { 0.0f, 1.0f, 0.0f };
+			break;
+		case D3DCUBEMAP_FACE_NEGATIVE_X:
+			vLookatPt = { -1.0f, 0.0f, 0.0f };
+			vUpVec = { 0.0f, 1.0f, 0.0f };
+			break;
+		case D3DCUBEMAP_FACE_POSITIVE_Y:
+			vLookatPt = { 0.0f, 1.0f, 0.0f };
+			vUpVec = { 0.0f, 0.0f, -1.0f };
+			break;
+		case D3DCUBEMAP_FACE_NEGATIVE_Y:
+			vLookatPt = { 0.0f, -1.0f, 0.0f };
+			vUpVec = { 0.0f, 0.0f, 1.0f };
+			break;
+		case D3DCUBEMAP_FACE_POSITIVE_Z:
+			vLookatPt = { 0.0f, 0.0f, 1.0f };
+			vUpVec = { 0.0f, 1.0f, 0.0f };
+			break;
+		case D3DCUBEMAP_FACE_NEGATIVE_Z:
+			vLookatPt = { 0.0f, 0.0f, 01.0f };
+			vUpVec = { 0.0f, 1.0f, -.0f };
+			break;
+		}
+
+		D3DXMATRIX matViewD;
+		D3DXMatrixLookAtLH(&matViewD, &vEnvEyePt, &vLookatPt, &vUpVec);
+		m_pDevice->SetTransform(D3DTS_VIEW, &matViewD);
+
+		//переместились теперь делаем снимок
+		LPDIRECT3DSURFACE9 pFace;
+		m_pCubeMap->GetCubeMapSurface((D3DCUBEMAP_FACES)i, 0, &pFace);
+		
+
+
+	}
+
 	SetMaterialBegin();
 	{
 		SetVertexShaderBegin();
