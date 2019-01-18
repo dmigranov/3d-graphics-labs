@@ -8,6 +8,8 @@
 #include "GraphicsEngine/GraphicsApi/TextureSamplerImpl.h"
 #include "GraphicsEngine/GraphicsApi/DirectX9/DX9TextureSampler.h"
 
+#include "GraphicsEngine/GraphicsEngine.h"
+
 
 MaterialReflective::MaterialReflective(double height)
 {
@@ -30,9 +32,9 @@ void MaterialReflective::Init()
 		const GraphicsEngineContext * pContext = Application::Instance().GetContext();
 		const DX9GraphicsEngineContext * pDX9Context = static_cast<const DX9GraphicsEngineContext *>(pContext);
 		m_pDevice = pDX9Context->m_pDevice;
-		std::cout << D3DXCreateTextureFromFileA(m_pDevice, "../Data/Wall.jpg", &m_pTextureD) << std::endl;
+		D3DXCreateTextureFromFileA(m_pDevice, "../Data/Wall.jpg", &m_pTextureD);
 
-		m_pDevice->CreateCubeTexture(256, 1, D3DUSAGE_RENDERTARGET, D3DFMT_R8G8B8, D3DPOOL_DEFAULT, &m_pCubeMap, NULL);
+		std::cout << D3DXCreateCubeTexture(m_pDevice, 256, 1, D3DUSAGE_RENDERTARGET, D3DFMT_R8G8B8, D3DPOOL_DEFAULT, &m_pCubeMap) << std::endl;
 		//TODO: надо ещё проинициализировать!
 		//но наверное это надо каждый раз заново
 
@@ -62,6 +64,10 @@ void MaterialReflective::SetMaterial(const Object * pObject)
 
 	//я так понимаю, тут надо каждый раз генерировать карту в зависимости от нашего положения
 	//нам надо поместить камеру на место объекта (то есть потолка над нами - для этого и нужна высота)
+
+	D3DXMATRIX matProjSave, matViewSave;
+	m_pDevice->GetTransform(D3DTS_VIEW, &matViewSave);
+	m_pDevice->GetTransform(D3DTS_PROJECTION, &matProjSave);
 
 	LPDIRECT3DSURFACE9 pBackBuffer, pZBuffer;
 	m_pDevice->GetRenderTarget(0, &pBackBuffer); //0 - index of the render target?
@@ -110,10 +116,19 @@ void MaterialReflective::SetMaterial(const Object * pObject)
 		//переместились теперь делаем снимок
 		LPDIRECT3DSURFACE9 pFace;
 		m_pCubeMap->GetCubeMapSurface((D3DCUBEMAP_FACES)i, 0, &pFace);
+		m_pDevice->SetRenderTarget(0, pFace);  //(pFace, pZBuffer)
+		SAFE_RELEASE(pFace);
+
+		//render scene!
 		
-
-
 	}
+
+	m_pDevice->SetRenderTarget(0, pBackBuffer); //(pBackBuffer, pZBuffer)
+	SAFE_RELEASE(pBackBuffer);
+	SAFE_RELEASE(pZBuffer);
+
+	m_pDevice->SetTransform(D3DTS_VIEW, &matViewSave);
+	m_pDevice->SetTransform(D3DTS_PROJECTION, &matProjSave);
 
 	SetMaterialBegin();
 	{
