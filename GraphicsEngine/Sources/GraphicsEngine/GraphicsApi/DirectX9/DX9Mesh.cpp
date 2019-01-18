@@ -40,7 +40,7 @@ void DX9Mesh::Render()
 		m_pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 		m_pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);//D3DBLEND_SRCALPHA
 		m_pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_DESTALPHA); //D3DBLEND_DESTALPHA
-		m_pDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
+		//m_pDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
 	}
 	
 
@@ -51,7 +51,7 @@ void DX9Mesh::Render()
 
 	if (transparent == true) {
 		m_pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
-		m_pDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
+		//m_pDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
 	}
 }
 

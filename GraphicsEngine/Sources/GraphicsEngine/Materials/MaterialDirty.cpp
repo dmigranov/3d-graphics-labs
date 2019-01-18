@@ -20,7 +20,7 @@ void MaterialDirty::Init()
 {
 	Material::Init();
 
-	m_pTexture1 = new Texture2D("dirt.jpg");
+	m_pTexture1 = new Texture2D("dirt.png");
 	m_pTexture1->SetFilterMode(m_filterMode);
 }
 

@@ -60,17 +60,7 @@ public:
 				//TODO: добавить "зеркальный потолок"
 			}
 
-			{
-				Object * floor = new Object();
-				Mesh * quad = new MeshQuad();
-
-				floor->m_pTransform = new Transform(lX * blockSize / 2.0, 0, lY * blockSize / 2.0, 0, 0, 0, lX * blockSize, 1, lY * blockSize);
-				floor->m_pMesh = quad;
-				quad->SetTransparent(true);
-				floor->m_pMaterial = new MaterialDirty(TEXTURE_FILTER_MODE_ANISOTROPIC);
-
-				scene.AddObject(floor);	//TODO: в итоге надо будет сделать так чтобы было замутнение, грязь!
-			}
+			
 
 			for (ushort x = 0; x < lX; x++)
 			{
@@ -109,6 +99,18 @@ public:
 					scene.AddObject(labObject);
 					scene.AddObject(labObject_u);
 				}
+			}
+
+			{
+				Object * floor = new Object();
+				Mesh * quad = new MeshQuad();
+
+				floor->m_pTransform = new Transform(lX * blockSize / 2.0, 0, lY * blockSize / 2.0, 0, 0, 0, lX * blockSize, 1, lY * blockSize);
+				floor->m_pMesh = quad;
+				quad->SetTransparent(true);
+				floor->m_pMaterial = new MaterialDirty(TEXTURE_FILTER_MODE_ANISOTROPIC);
+
+				scene.AddObject(floor);	//TODO: в итоге надо будет сделать так чтобы было замутнение, грязь!
 			}
 
 			//TODO: добавить зеркальный потолок (reflectio, environment mapping (cubic?))
