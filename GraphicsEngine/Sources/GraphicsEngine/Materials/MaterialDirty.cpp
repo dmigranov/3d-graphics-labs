@@ -43,12 +43,12 @@ void MaterialDirty::SetMaterial(const Object * pObject)
 
 	
 	//yes, this is bad...
-	const GraphicsEngineContext * pContext = Application::Instance().GetContext();
+	/*const GraphicsEngineContext * pContext = Application::Instance().GetContext();
 	const DX9GraphicsEngineContext * pDX9Context = static_cast<const DX9GraphicsEngineContext *>(pContext);
 	LPDIRECT3DDEVICE9 m_pDevice = pDX9Context->m_pDevice;
 	m_pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	m_pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_ONE);
-	m_pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
+	m_pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);*/
 
 	SetMaterialBegin();
 	{

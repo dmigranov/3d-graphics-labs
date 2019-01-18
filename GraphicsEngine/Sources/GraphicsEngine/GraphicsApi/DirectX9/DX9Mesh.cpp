@@ -35,6 +35,11 @@ void DX9Mesh::Deinit()
 void DX9Mesh::Render()
 {
 	// Render the vertex buffer contents
+	//
+	/*m_pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+	m_pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);//D3DBLEND_SRCALPHA
+	//m_pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_DESTALPHA); //D3DBLEND_DESTALPHA*/
+	//
 	m_pDevice->SetStreamSource( 0, m_pVertexBuffer, 0, m_vertexSize );
 	m_pDevice->SetFVF( m_fvf );
 	m_pDevice->SetIndices( m_pIndexBuffer );

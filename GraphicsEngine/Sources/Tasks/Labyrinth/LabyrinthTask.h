@@ -48,6 +48,8 @@ public:
 			ushort lY = labyrinth.getY();
 			{
 				Object * floor = new Object();
+				/*Mesh mesh;
+				mesh.Render();*/
 
 				floor->m_pTransform = new Transform(lX * blockSize / 2.0, 0, lY * blockSize / 2.0, 0, 0, 0, lX * blockSize, 1, lY * blockSize);
 				floor->m_pMesh = new MeshQuad();
