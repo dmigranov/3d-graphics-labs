@@ -53,7 +53,7 @@ public:
 			Vector3 right	= pTransform->GetRight();
 			double dt = Time::GetDeltaTime();
 
-			const double speed = 1.0;
+			const double speed = 3.0;
 			Vector3 direction;
 
 			//if (Input::GetKey(KEY_CODE_W) || Input::GetKey(KEY_CODE_UP_ARROW))
