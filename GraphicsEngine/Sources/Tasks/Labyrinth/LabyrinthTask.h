@@ -103,7 +103,7 @@ public:
 						break;*/
 					case FINISHPOINT:
 						labObject->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, blockSize, y * blockSize + blockSize / 2.0, 0, 0, 0, 0.5, 0.5, 0.5);
-						labObject->m_pMesh = new MeshObjFile("MeshCube.obj");
+						//labObject->m_pMesh = new MeshObjFile("Trophy.obj");	//короче, кубик не отображается. видимо, у vs-ого obj файла своё представление о формате...
 						labObject->AddComponent(new ObjectRotator(0, 40, 0));
 						labObject->m_pMaterial = new MaterialUnlit(Vector3(1,0,0));
 
