@@ -203,6 +203,8 @@ private:
 	{
 		field[x - 2][y - 2] = FINISHPOINT;
 
+		/*
+
 		if (field[x - 1][y - 2] == WALL)
 			field[x - 1][y - 2] = FINISHWALL;
 		if (field[x - 3][y - 2] == WALL)
@@ -212,8 +214,8 @@ private:
 		if (field[x - 2][y - 3] == WALL)
 			field[x - 2][y - 3] = FINISHWALL;
 
-		
-		
+		*/
+
 	}
 
 };
