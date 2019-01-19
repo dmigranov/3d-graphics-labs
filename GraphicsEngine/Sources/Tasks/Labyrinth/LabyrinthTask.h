@@ -58,7 +58,8 @@ public:
 
 				scene.AddObject(ceil);
 
-				//TODO: добавить "зеркальный потолок"
+				//TODO: добавить "зеркальный" потолок!!
+
 
 				Object * ceil_r = new Object();
 				ceil_r->m_pTransform = new Transform(lX * blockSize / 2.0, -height, lY * blockSize / 2.0, 0, 0, 0, lX * blockSize, 1, lY * blockSize); //0,0,180
@@ -85,12 +86,10 @@ public:
 						labObject->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, blockSize, y * blockSize + blockSize / 2.0, 0, 0, 0, blockSize, blockSize*2.0, blockSize);
 						labObject->m_pMesh = new MeshCube();
 						labObject->m_pMaterial = new MaterialWall(TEXTURE_FILTER_MODE_ANISOTROPIC);
-						
-						
-						//TODO:перевернуть
+						//labObject_u->m_pMaterial = new MaterialTexture(TEXTURE_FILTER_MODE_ANISOTROPIC, "ShaderWallReflect", "Wall2.png");
+
 						labObject_u->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, -blockSize, y * blockSize + blockSize / 2.0, 0, 0, 0, blockSize, blockSize*2.0, blockSize);
 						labObject_u->m_pMesh = new MeshCube();
-						//labObject_u->m_pMaterial = new MaterialWall(TEXTURE_FILTER_MODE_ANISOTROPIC);
 						labObject_u->m_pMaterial = new MaterialTexture(TEXTURE_FILTER_MODE_ANISOTROPIC, "ShaderWallReflect", "Wall2.png");
 						break;
 					case FINISHWALL:
@@ -120,10 +119,7 @@ public:
 
 				scene.AddObject(floor);	//TODO: в итоге надо будет сделать так чтобы было замутнение, грязь!
 			}
-
-			//TODO: добавить зеркальный потолок (reflectio, environment mapping (cubic?))
 		}
-
 	}
 
 	virtual void Update()
