@@ -38,7 +38,9 @@ public:
 			Camera * pCamera = new Camera();
 			pCameraObj->m_pTransform = new Transform(Vector3(1.5f, 1.0f, 1.5f), Vector3(0.0f, 0.0f, 0.0f));
 			//TODO: можно добавить мэши, чтобы потом отражалось (?); для головы отдельный?
-			pCameraObj->AddComponent(new LabyrinthCameraController(labyrinth, blockSize));
+			//pCameraObj->AddComponent(new LabyrinthCameraController(labyrinth, blockSize));
+
+			pCameraObj->AddComponent(new CameraController());
 
 			pCameraObj->AddComponent(pCamera);
 			scene.SetCamera(pCamera);
@@ -57,8 +59,6 @@ public:
 				ceil->m_pMaterial = new MaterialTexture(TEXTURE_FILTER_MODE_ANISOTROPIC, "ShaderCeilReflect", "ceil2.png");
 
 				scene.AddObject(ceil);
-
-				//TODO: добавить "зеркальный" потолок!!
 
 
 				Object * ceil_r = new Object();
@@ -92,7 +92,7 @@ public:
 						labObject_u->m_pMesh = new MeshCube();
 						labObject_u->m_pMaterial = new MaterialTexture(TEXTURE_FILTER_MODE_ANISOTROPIC, "ShaderWallReflect", "Wall2.png");
 						break;
-					case FINISHWALL:
+					/*case FINISHWALL:
 						labObject->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, blockSize / 2.0, y * blockSize + blockSize / 2.0, 0, 0, 0, blockSize, blockSize*2.0, blockSize);
 						labObject->m_pMesh = new MeshCube();
 						labObject->m_pMaterial = new MaterialRoad();
@@ -100,7 +100,15 @@ public:
 						labObject_u->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, -blockSize / 2.0, y * blockSize + blockSize / 2.0, 0, 0, 0, blockSize, blockSize*2.0, blockSize);
 						labObject_u->m_pMesh = new MeshCube();
 						labObject_u->m_pMaterial = new MaterialRoad();
+						break;*/
+					case FINISHPOINT:
+						labObject->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, blockSize, y * blockSize + blockSize / 2.0, 0, 0, 0, 0.5, 0.5, 0.5);
+						labObject->m_pMesh = new MeshCube();
+						labObject->AddComponent(new ObjectRotator(0, 40, 0));
+						labObject->m_pMaterial = new MaterialUnlit(Vector3(1,0,0));
+
 						break;
+
 					}
 
 					scene.AddObject(labObject);
