@@ -52,9 +52,9 @@ public:
 			{
 				Object * ceil = new Object();
 				double height = blockSize * 3 / 2.0;
-				ceil->m_pTransform = new Transform(lX * blockSize / 2.0, height, lY * blockSize / 2.0, 0, 180, 180, lX * blockSize, 1, lY * blockSize); //0,0,180
+				ceil->m_pTransform = new Transform(lX * blockSize / 2.0, height, lY * blockSize / 2.0, 0, 0, 180, lX * blockSize, 1, lY * blockSize); //0,0,180
 				ceil->m_pMesh = new MeshQuad();
-				ceil->m_pMaterial = new MaterialTexture(TEXTURE_FILTER_MODE_ANISOTROPIC, "ShaderCeil", "ceil.png");
+				ceil->m_pMaterial = new MaterialTexture(TEXTURE_FILTER_MODE_ANISOTROPIC, "ShaderCeilReflect", "ChessBoard2.png");
 
 				scene.AddObject(ceil);
 
@@ -64,9 +64,9 @@ public:
 				Object * ceil_r = new Object();
 				ceil_r->m_pTransform = new Transform(lX * blockSize / 2.0, -height, lY * blockSize / 2.0, 0, 0, 0, lX * blockSize, 1, lY * blockSize); //0,0,180
 				ceil_r->m_pMesh = new MeshQuad();
-				ceil_r->m_pMaterial = new MaterialTexture(TEXTURE_FILTER_MODE_ANISOTROPIC, "ShaderCeil", "ceil.png");
+				ceil_r->m_pMaterial = new MaterialTexture(TEXTURE_FILTER_MODE_ANISOTROPIC, "ShaderCeil", "ChessBoard2.png");
 
-				//scene.AddObject(ceil_r);
+				scene.AddObject(ceil_r);
 			}
 
 			
