@@ -52,13 +52,20 @@ public:
 			{
 				Object * ceil = new Object();
 				double height = blockSize * 3 / 2.0;
-				ceil->m_pTransform = new Transform(lX * blockSize / 2.0, height, lY * blockSize / 2.0, 0, 0, 180, lX * blockSize, 1, lY * blockSize);
+				ceil->m_pTransform = new Transform(lX * blockSize / 2.0, height, lY * blockSize / 2.0, 0, 180, 180, lX * blockSize, 1, lY * blockSize); //0,0,180
 				ceil->m_pMesh = new MeshQuad();
 				ceil->m_pMaterial = new MaterialTexture(TEXTURE_FILTER_MODE_ANISOTROPIC, "ShaderCeil", "ceil.png");
 
 				scene.AddObject(ceil);
 
 				//TODO: добавить "зеркальный потолок"
+
+				Object * ceil_r = new Object();
+				ceil_r->m_pTransform = new Transform(lX * blockSize / 2.0, -height, lY * blockSize / 2.0, 0, 0, 0, lX * blockSize, 1, lY * blockSize); //0,0,180
+				ceil_r->m_pMesh = new MeshQuad();
+				ceil_r->m_pMaterial = new MaterialTexture(TEXTURE_FILTER_MODE_ANISOTROPIC, "ShaderCeil", "ceil.png");
+
+				//scene.AddObject(ceil_r);
 			}
 
 			
@@ -78,13 +85,13 @@ public:
 						labObject->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, blockSize / 2.0, y * blockSize + blockSize / 2.0, 0, 0, 0, blockSize, blockSize*2.0, blockSize);
 						labObject->m_pMesh = new MeshCube();
 						labObject->m_pMaterial = new MaterialWall(TEXTURE_FILTER_MODE_ANISOTROPIC);
-
-						//снизу - типа обман
 						
+						
+						//TODO:перевернуть
 						labObject_u->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, -blockSize / 2.0, y * blockSize + blockSize / 2.0, 0, 0, 0, blockSize, blockSize*2.0, blockSize);
 						labObject_u->m_pMesh = new MeshCube();
-						labObject_u->m_pMaterial = new MaterialWall(TEXTURE_FILTER_MODE_ANISOTROPIC);
-
+						//labObject_u->m_pMaterial = new MaterialWall(TEXTURE_FILTER_MODE_ANISOTROPIC);
+						labObject_u->m_pMaterial = new MaterialTexture(TEXTURE_FILTER_MODE_ANISOTROPIC, "ShaderWallReflect", "Wall2.png");
 						break;
 					case FINISHWALL:
 						labObject->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, blockSize / 2.0, y * blockSize + blockSize / 2.0, 0, 0, 0, blockSize, blockSize*2.0, blockSize);
