@@ -6,6 +6,7 @@
 #include "GraphicsEngine/Materials/MaterialUnlitSimple.h"
 #include "GraphicsEngine/Materials/MaterialWall.h"
 #include "GraphicsEngine/Materials/MaterialDirty.h"
+#include "GraphicsEngine/Materials/MaterialTexture.h"
 #include "GraphicsEngine/Meshes/MeshCube.h"
 #include "GraphicsEngine/Object.h"
 #include "GraphicsEngine/Scene.h"
@@ -53,7 +54,7 @@ public:
 				double height = blockSize * 3 / 2.0;
 				ceil->m_pTransform = new Transform(lX * blockSize / 2.0, height, lY * blockSize / 2.0, 0, 0, 180, lX * blockSize, 1, lY * blockSize);
 				ceil->m_pMesh = new MeshQuad();
-				ceil->m_pMaterial = new MaterialUnlit(Vector3(1, 1, 1));
+				ceil->m_pMaterial = new MaterialTexture(TEXTURE_FILTER_MODE_ANISOTROPIC, "ShaderCeil", "ceil.png");
 
 				scene.AddObject(ceil);
 

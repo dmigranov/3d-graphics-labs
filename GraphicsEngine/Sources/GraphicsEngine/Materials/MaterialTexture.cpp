@@ -1,28 +1,30 @@
-﻿#include "MaterialWall.h"
+﻿#include "MaterialTexture.h"
 #include "GraphicsEngine/Transform.h"
 #include "GraphicsEngine/MathUtils.h"
 #include "GraphicsEngine/SceneUtils.h"
 
 
-MaterialWall::MaterialWall(TextureFilterMode filterMode)
+MaterialTexture::MaterialTexture(TextureFilterMode filterMode, std::string shaderName, std::string fileName)
 {
-	m_vsFileName = "ShaderWall";
-	m_psFileName = "ShaderWall";
+	m_vsFileName = shaderName; //"ShaderCeil";
+	m_psFileName = shaderName;
+
+	this->fileName = fileName;
 
 	m_pTexture1 = NULL;
 	m_filterMode = filterMode;
 }
 
-void MaterialWall::Init()
+void MaterialTexture::Init()
 {
 	Material::Init();
 
 	//m_pTexture1 = new Texture2D("Wall.jpg");
-	m_pTexture1 = new Texture2D("Wall2.png");
+	m_pTexture1 = new Texture2D(fileName.c_str());
 	m_pTexture1->SetFilterMode(m_filterMode);
 }
 
-void MaterialWall::Deinit()
+void MaterialTexture::Deinit()
 {
 	delete m_pTexture1;
 	m_pTexture1 = NULL;
@@ -30,7 +32,7 @@ void MaterialWall::Deinit()
 	Material::Deinit();
 }
 
-void MaterialWall::SetMaterial(const Object * pObject)
+void MaterialTexture::SetMaterial(const Object * pObject)
 {
 	const Matrix4x4 & matWorld	= SceneUtils::GetMatrixWorld(pObject);
 	const Matrix4x4 & matView	= SceneUtils::GetMatrixView();
