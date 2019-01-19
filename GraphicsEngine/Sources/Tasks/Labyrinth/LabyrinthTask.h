@@ -82,13 +82,13 @@ public:
 					{
 					case WALL:
 						//labObject->m_pTransform = new Transform(x * blockSize, blockSize / 2.0, y * blockSize, 0, 0, 0, blockSize, blockSize*2.0, blockSize);
-						labObject->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, blockSize / 2.0, y * blockSize + blockSize / 2.0, 0, 0, 0, blockSize, blockSize*2.0, blockSize);
+						labObject->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, blockSize, y * blockSize + blockSize / 2.0, 0, 0, 0, blockSize, blockSize*2.0, blockSize);
 						labObject->m_pMesh = new MeshCube();
 						labObject->m_pMaterial = new MaterialWall(TEXTURE_FILTER_MODE_ANISOTROPIC);
 						
 						
 						//TODO:перевернуть
-						labObject_u->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, -blockSize / 2.0, y * blockSize + blockSize / 2.0, 0, 0, 0, blockSize, blockSize*2.0, blockSize);
+						labObject_u->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, -blockSize, y * blockSize + blockSize / 2.0, 0, 0, 0, blockSize, blockSize*2.0, blockSize);
 						labObject_u->m_pMesh = new MeshCube();
 						//labObject_u->m_pMaterial = new MaterialWall(TEXTURE_FILTER_MODE_ANISOTROPIC);
 						labObject_u->m_pMaterial = new MaterialTexture(TEXTURE_FILTER_MODE_ANISOTROPIC, "ShaderWallReflect", "Wall2.png");
