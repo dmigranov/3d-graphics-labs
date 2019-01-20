@@ -462,6 +462,9 @@
     <ClInclude Include="..\Sources\GraphicsEngine\Materials\MaterialTexture.h">
       <Filter>GraphicsEngine\Materials</Filter>
     </ClInclude>
+    <ClInclude Include="..\Sources\Tasks\Labyrinth\YouWonText.h">
+      <Filter>Tasks\Labyrinth</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Sources\GraphicsEngine\Application.cpp">

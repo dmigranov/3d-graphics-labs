@@ -7,6 +7,7 @@
 #include "GraphicsEngine/Vector3.h"
 
 #include "Tasks/Labyrinth/Labyrinth.h"
+#include "Tasks/Labyrinth/YouWonText.h"
 
 #include <iostream>
 
@@ -14,15 +15,18 @@
 
 class LabyrinthCameraController : public Component
 {
+
 	Vector3 mousePos;
 	Vector3 mousePosPrev;
 	Object * parent;
 	bool isInitialized = false;
 	Block ** labyrinth;
 	unsigned int blockSize;
+	YouWonText * ywt = NULL;
+
 
 public:
-	LabyrinthCameraController(Labyrinth labyrinth, unsigned int blockSize)
+	LabyrinthCameraController(Labyrinth labyrinth, unsigned int blockSize, YouWonText * ywt)
 	{
 		this->labyrinth = labyrinth.getField();
 		this->blockSize = blockSize;
@@ -30,6 +34,7 @@ public:
 
 		mousePos = Vector3::Zero();
 		mousePosPrev = Vector3::Zero();
+		this->ywt = ywt;
 	}
 
 	virtual ~LabyrinthCameraController() {}
@@ -117,6 +122,12 @@ public:
 			)
 			{
 				direction.z = 0;
+			}
+
+			if (labyrinth[i][j] == FINISHPOINT) //&& и если близко к шарику
+			{
+				//set flag variable
+				ywt->setWon(true);
 			}
 
 			//TODO: сделать проверку на точ, что дошли до финиша. если да, то устанавливаем флаговую переменную, в результате чего на экран выводится красивый текст (и всё становится чёрным, и перемещение блокируется?)

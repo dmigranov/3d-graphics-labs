@@ -16,6 +16,7 @@
 #include "Tasks/ObjectRotator.h"
 
 #include "Tasks/Labyrinth/LabyrinthCameraController.h"
+#include "Tasks/Labyrinth/YouWonText.h"
 
 #define blockSize 1
 
@@ -30,17 +31,26 @@ public:
 		Scene & scene = Application::Instance().GetScene();
 
 		//генерация лабиринта
-		Labyrinth labyrinth = Labyrinth(15, 15);
+		Labyrinth labyrinth = Labyrinth(9, 9);
 
-		// Camera
+		// Camera and gui
 		{
+		
+			Object * pObject = new Object();
+			pObject->m_pTransform = new Transform();
+			YouWonText * ywt = new YouWonText();
+			pObject->AddComponent(ywt);
+
+			scene.AddObject(pObject);
+			
+
 			Object * pCameraObj = new Object();
 			Camera * pCamera = new Camera();
 			pCameraObj->m_pTransform = new Transform(Vector3(1.5f, 1.0f, 1.5f), Vector3(0.0f, 0.0f, 0.0f));
 			//TODO: можно добавить мэши, чтобы потом отражалось (?); для головы отдельный?
-			//pCameraObj->AddComponent(new LabyrinthCameraController(labyrinth, blockSize));
+			pCameraObj->AddComponent(new LabyrinthCameraController(labyrinth, blockSize, ywt));
 
-			pCameraObj->AddComponent(new CameraController());
+			//pCameraObj->AddComponent(new CameraController());
 
 			pCameraObj->AddComponent(pCamera);
 			scene.SetCamera(pCamera);
@@ -103,9 +113,9 @@ public:
 						break;*/
 					case FINISHPOINT:
 						labObject->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, blockSize, y * blockSize + blockSize / 2.0, 0, 0, 0, 0.5, 0.5, 0.5);
-						//labObject->m_pMesh = new MeshObjFile("Trophy.obj");	//короче, кубик не отображается. видимо, у vs-ого obj файла своё представление о формате...
+						labObject->m_pMesh = new MeshSphere(20);
 						labObject->AddComponent(new ObjectRotator(0, 40, 0));
-						labObject->m_pMaterial = new MaterialUnlit(Vector3(1,0,0));
+						labObject->m_pMaterial = new MaterialTexture(TEXTURE_FILTER_MODE_ANISOTROPIC, "ShaderEarth", "Ball.jpg");
 
 						break;
 
