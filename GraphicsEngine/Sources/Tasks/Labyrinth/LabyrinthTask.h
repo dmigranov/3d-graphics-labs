@@ -46,8 +46,8 @@ public:
 
 			Object * pCameraObj = new Object();
 			Camera * pCamera = new Camera();
-			pCameraObj->m_pTransform = new Transform(Vector3(1.5f, 1.0f, 1.5f), Vector3(0.0f, 0.0f, 0.0f));
-			//TODO: можно добавить мэши, чтобы потом отражалось (?); для головы отдельный?
+			pCameraObj->m_pTransform = new Transform(Vector3(1.5f, 1.0f, 1.5f), Vector3(0.0f, 0.0f, 0.0f), Vector3(1.0f, 0.3f, 1.0f));
+			//pCameraObj->m_pMesh = new MeshSphere(20);
 			pCameraObj->AddComponent(new LabyrinthCameraController(labyrinth, blockSize, ywt));
 
 			//pCameraObj->AddComponent(new CameraController());

@@ -39,6 +39,7 @@ void WinInput::Dispatch(MSG & msg)
 				// TODO : Task08
 				// Call InternalInput
 				//комбинации?
+				InternalInput::SetKeyDown(winKey);
 			}
 			// Process other keys
 			else

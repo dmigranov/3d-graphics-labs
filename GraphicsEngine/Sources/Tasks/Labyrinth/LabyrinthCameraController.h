@@ -31,6 +31,7 @@ public:
 		this->labyrinth = labyrinth.getField();
 		this->blockSize = blockSize;
 		parent = new Object();
+		//parent->m_pMesh = new MeshSphere(20);
 
 		mousePos = Vector3::Zero();
 		mousePosPrev = Vector3::Zero();
@@ -48,6 +49,8 @@ public:
 			Vector3 pos = pTransform->GetPosition();
 
 			parent->m_pTransform = new Transform(pos, pTransform->GetEulerAngles());
+			//parent->m_pTransform = new Transform(Vector3(pos.x, pos.y - 0.5, pos.z), pTransform->GetEulerAngles(), Vector3(0.3, 0.3, 0.3));
+
 			pos = parent->m_pTransform->GetPosition();
 
 			pTransform->SetLocalPosition(Vector3(0, 0, 0));
@@ -62,7 +65,7 @@ public:
 			Vector3 forward = pTransform->GetForward();
 			Vector3 right = pTransform->GetRight();
 			double dt = Time::GetDeltaTime();
-			const double speed = 1.0; //1.0!
+			double speed = 1.0; //1.0!
 			Vector3 direction;
 
 			if (Input::GetKey(KEY_CODE_W) || Input::GetKey(KEY_CODE_UP_ARROW))
@@ -130,7 +133,15 @@ public:
 				ywt->setWon(true);
 			}
 
-			//TODO: сделать проверку на точ, что дошли до финиша. если да, то устанавливаем флаговую переменную, в результате чего на экран выводится красивый текст (и всё становится чёрным, и перемещение блокируется?)
+			if (Input::GetKey(KEY_CODE_LEFT_SHIFT))
+			{
+				speed = 2;
+			}
+			else
+			{
+				speed = 1;
+			}
+
 
 			parentTransform->Translate(speed * dt * direction);
 		}
