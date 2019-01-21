@@ -61,7 +61,23 @@ void DX9GUI::Label(int x, int y, int w, int h, const char * pText)
 
 void DX9GUI::Rectangle(int x, int y, int w, int h, int r, int g, int b)
 {
-	std::cout << "HELO" << std::endl;
+	if (!isInited)
+	{
+		Init();
+	}
+
+	RECT rect;
+	HDC hdc;=
+	{
+		ZeroMemory(&rect, sizeof(RECT));
+		rect.left = x;
+		rect.top = y;
+		rect.bottom = x + w;
+		rect.right = y + h;
+	}
+	FillRect(hdc, &rect, (HBRUSH)(RGB(r, g, b)));
+
+	
 }
 
 #endif
