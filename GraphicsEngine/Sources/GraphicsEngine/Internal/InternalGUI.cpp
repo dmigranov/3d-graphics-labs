@@ -3,6 +3,7 @@
 
 
 std::vector<GUIElement>	InternalGUI::elements;
+
 GUIImpl *				InternalGUI::pImpl = NULL;
 
 
@@ -26,6 +27,23 @@ void InternalGUI::Label(int x, int y, int w, int h, double number)
 	Label(x, y, w, h, text);
 }
 
+void InternalGUI::Rectangle(int x, int y, int w, int h, int r, int g, int b)
+{
+	GUIElement elem;
+	{
+		elem.x = x;
+		elem.y = y;
+		elem.w = w;
+		elem.h = h;
+		elem.text = "";
+		elem.r = r;
+		elem.g = g;
+		elem.b = b;
+	}
+
+	elements.push_back(elem);
+}
+
 void InternalGUI::Update()
 {
 	if (NULL == pImpl)
@@ -36,7 +54,10 @@ void InternalGUI::Update()
 	for (size_t i = 0; i < elements.size(); ++i)
 	{
 		const GUIElement & elem = elements[i];
-		pImpl->Label(elem.x, elem.y, elem.w, elem.h, elem.text.c_str());
+		if (elem.text.compare("") != 0)
+			pImpl->Label(elem.x, elem.y, elem.w, elem.h, elem.text.c_str());
+		else
+			pImpl->Rectangle(elem.x, elem.y, elem.w, elem.h, elem.r, elem.g, elem.b);
 	}
 
 	elements.clear();

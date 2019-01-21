@@ -27,7 +27,8 @@ public:
 		if (PlayerHasWon)
 		{
 			//сделать всё черным
-			GUI::Label(0, 0, 100, 100, "gf");
+
+			GUI::Rectangle(0, 0, 100, 100, 0,0,0);
 		}
 
 	}

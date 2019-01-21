@@ -24,6 +24,9 @@ public:
 	*/
 	static void Label(int x, int y, int w, int h, double number);
 
+
+	static void Rectangle(int x, int y, int w, int h, int r, int g, int b);
+
 private:
 	// Forbid construction and destruction of objects
 	GUI();

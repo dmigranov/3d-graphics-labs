@@ -28,6 +28,9 @@ public:
 	*/
 	static void Label(int x, int y, int w, int h, double number);
 
+
+	static void Rectangle(int x, int y, int w, int h, int r, int g, int b);
+
 	/**
 	* @brief Is called every frame by graphics engine.
 	*/

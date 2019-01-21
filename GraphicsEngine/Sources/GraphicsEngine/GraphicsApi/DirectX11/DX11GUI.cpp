@@ -10,5 +10,7 @@ void DX11GUI::Label(int x, int y, int w, int h, const char * pText)
 {
 
 }
+void DX11GUI::Rectangle(int x, int y, int w, int h, int r, int g, int b)
+{ }
 
 #endif

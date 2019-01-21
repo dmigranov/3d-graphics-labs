@@ -8,3 +8,8 @@ void GL20GUI::Label(int x, int y, int w, int h, const char * pText)
 
 	// TODO: Task03
 }
+
+void GL20GUI::Rectangle(int x, int y, int w, int h, int r, int g, int b)
+{
+
+}

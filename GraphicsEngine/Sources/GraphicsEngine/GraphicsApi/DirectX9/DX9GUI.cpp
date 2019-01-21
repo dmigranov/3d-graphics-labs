@@ -4,6 +4,7 @@
 
 #include "GraphicsEngine/GraphicsApi/DirectX9/DX9GraphicsEngineContext.h"
 #include "GraphicsEngine/Application.h"
+#include <iostream>
 
 bool				DX9GUI::isInited	= false;
 bool				DX9GUI::fontIsInited = false;
@@ -56,6 +57,11 @@ void DX9GUI::Label(int x, int y, int w, int h, const char * pText)
 	}
 	
 	m_pFont->DrawTextA(NULL, pText, (int)strlen(pText), &rect, DT_LEFT | DT_NOCLIP, 0xffffffff);
+}
+
+void DX9GUI::Rectangle(int x, int y, int w, int h, int r, int g, int b)
+{
+	std::cout << "HELO" << std::endl;
 }
 
 #endif
