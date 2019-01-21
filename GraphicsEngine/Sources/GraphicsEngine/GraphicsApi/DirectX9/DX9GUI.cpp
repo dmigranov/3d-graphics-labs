@@ -56,7 +56,7 @@ void DX9GUI::Label(int x, int y, int w, int h, const char * pText)
 		rect.right	= y + h;
 	}
 	
-	m_pFont->DrawTextA(NULL, pText, (int)strlen(pText), &rect, DT_LEFT | DT_NOCLIP, 0xffffffff);
+	m_pFont->DrawTextA(NULL, pText, (int)strlen(pText), &rect, DT_CENTER | DT_NOCLIP, D3DCOLOR_RGBA(0, 255, 0, 255));
 }
 
 void DX9GUI::Rectangle(int x, int y, int w, int h, int r, int g, int b)
@@ -67,7 +67,8 @@ void DX9GUI::Rectangle(int x, int y, int w, int h, int r, int g, int b)
 	}
 
 	RECT rect;
-	HDC hdc;=
+	//HDC hdc;
+	//hdc = GetDC(GetActiveWindow());
 	{
 		ZeroMemory(&rect, sizeof(RECT));
 		rect.left = x;
@@ -75,7 +76,12 @@ void DX9GUI::Rectangle(int x, int y, int w, int h, int r, int g, int b)
 		rect.bottom = x + w;
 		rect.right = y + h;
 	}
-	FillRect(hdc, &rect, (HBRUSH)(RGB(r, g, b)));
+	//FillRect(hdc, &rect, (HBRUSH)(RGB(r, g, b)));
+	LPDIRECT3DSURFACE9 pBackBuffer;
+	//std::cout << m_pDevice->GetRenderTarget(0, &pBackBuffer) << std::endl;
+	//std::cout << m_pDevice->ColorFill(pBackBuffer, &rect, D3DCOLOR_RGBA(255,255,255,255)) << std::endl;
+	SAFE_RELEASE(pBackBuffer);
+
 
 	
 }

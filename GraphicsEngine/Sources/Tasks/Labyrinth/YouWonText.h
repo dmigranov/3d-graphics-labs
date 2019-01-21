@@ -28,7 +28,7 @@ public:
 		{
 			//сделать всё черным
 
-			GUI::Rectangle(0, 0, 2000, 2000, 0,0,0);
+			GUI::Label(0, 0, 500, 500, "YOU WON THE GAME. \nRESTART IT TO PLAY AGAIN");
 		}
 
 	}

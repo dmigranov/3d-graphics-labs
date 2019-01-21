@@ -881,6 +881,12 @@
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderCeilReflect.vs">
       <Filter>GraphicsEngine\Shaders\DX9</Filter>
     </None>
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderEarthReflect.vs">
+      <Filter>GraphicsEngine\Shaders\DX9</Filter>
+    </None>
+    <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderEarthReflect.ps">
+      <Filter>GraphicsEngine\Shaders\DX9</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderSphereMorphing.ps">

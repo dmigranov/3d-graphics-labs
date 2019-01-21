@@ -63,7 +63,7 @@ public:
 
 			{
 				Object * ceil = new Object();
-				double height = blockSize * 3 / 2.0;
+				double height = blockSize * 2;
 				ceil->m_pTransform = new Transform(lX * blockSize / 2.0, height, lY * blockSize / 2.0, 0, 0, 180, lX * blockSize, 1, lY * blockSize); //0,0,180
 				ceil->m_pMesh = new MeshQuad();
 				ceil->m_pMaterial = new MaterialTexture(TEXTURE_FILTER_MODE_ANISOTROPIC, "ShaderCeilReflect", "ceil2.png");
@@ -112,10 +112,15 @@ public:
 						labObject_u->m_pMaterial = new MaterialRoad();
 						break;*/
 					case FINISHPOINT:
-						labObject->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, blockSize, y * blockSize + blockSize / 2.0, 0, 0, 0, 0.5, 0.5, 0.5);
+						labObject->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, blockSize * 3 / 2.0, y * blockSize + blockSize / 2.0, 0, 0, 0, 0.5, 0.5, 0.5);
 						labObject->m_pMesh = new MeshSphere(20);
 						labObject->AddComponent(new ObjectRotator(0, 40, 0));
 						labObject->m_pMaterial = new MaterialTexture(TEXTURE_FILTER_MODE_ANISOTROPIC, "ShaderEarth", "Ball.jpg");
+
+						labObject_u->m_pTransform = new Transform(x * blockSize + blockSize / 2.0, -blockSize * 3 / 2.0, y * blockSize + blockSize / 2.0, 0, 0, 0, 0.5, 0.5, 0.5);
+						labObject_u->m_pMesh = new MeshSphere(20);
+						labObject_u->AddComponent(new ObjectRotator(0, 40, 0));
+						labObject_u->m_pMaterial = new MaterialTexture(TEXTURE_FILTER_MODE_ANISOTROPIC, "ShaderEarthReflect", "Ball.jpg");
 
 						break;
 
