@@ -31,7 +31,7 @@ public:
 		Scene & scene = Application::Instance().GetScene();
 
 		//генерация лабиринта
-		Labyrinth labyrinth = Labyrinth(9, 9);
+		Labyrinth labyrinth = Labyrinth(11, 11);
 
 		// Camera and gui
 		{

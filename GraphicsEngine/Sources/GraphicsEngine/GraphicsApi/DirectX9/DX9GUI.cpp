@@ -66,21 +66,27 @@ void DX9GUI::Rectangle(int x, int y, int w, int h, int r, int g, int b)
 		Init();
 	}
 
-	RECT rect;
-	//HDC hdc;
-	//hdc = GetDC(GetActiveWindow());
-	{
-		ZeroMemory(&rect, sizeof(RECT));
-		rect.left = x;
-		rect.top = y;
-		rect.bottom = x + w;
-		rect.right = y + h;
-	}
+	//RECT rect;
+	
+
 	//FillRect(hdc, &rect, (HBRUSH)(RGB(r, g, b)));
-	LPDIRECT3DSURFACE9 pBackBuffer;
+	//LPDIRECT3DSURFACE9 pBackBuffer;
 	//std::cout << m_pDevice->GetRenderTarget(0, &pBackBuffer) << std::endl;
 	//std::cout << m_pDevice->ColorFill(pBackBuffer, &rect, D3DCOLOR_RGBA(255,255,255,255)) << std::endl;
-	SAFE_RELEASE(pBackBuffer);
+	//SAFE_RELEASE(pBackBuffer);
+
+	D3DDEVICE_CREATION_PARAMETERS cparams;
+	RECT rect;
+
+	m_pDevice->GetCreationParameters(&cparams);
+	GetWindowRect(cparams.hFocusWindow, &rect);
+
+	HDC hdc;
+	hdc = GetDC(cparams.hFocusWindow);
+	HBRUSH brush = CreateSolidBrush(RGB(r, g, b));
+	std::cout << FillRect(hdc, &rect, brush) << std::endl;
+
+	DeleteObject(brush);
 
 
 	

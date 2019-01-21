@@ -10,6 +10,8 @@
 void WinInput::Init()
 {
 	// TODO : Task08
+	//
+	
 
 }
 
@@ -20,6 +22,7 @@ void WinInput::Clear()
 
 void WinInput::Dispatch(MSG & msg)
 {
+
 	// If a key event
 	if (msg.message >= WM_KEYFIRST && msg.message <= WM_KEYLAST)
 	{

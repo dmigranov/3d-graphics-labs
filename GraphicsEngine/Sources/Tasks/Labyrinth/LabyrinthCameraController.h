@@ -126,6 +126,16 @@ public:
 			{
 				direction.z = 0;
 			}
+			/*if ((labyrinth[i][j] == FLOOR || labyrinth[i][j] == FINISHPOINT) &&
+				(((labyrinth[i - 1][j - 1] == WALL || labyrinth[i - 1][j - 1] == FINISHWALL) && pos.z <= j + epsilon && z <= 0 && pos.x <= i + epsilon && x <= 0)
+					||
+				((labyrinth[i - 1][j + 1] == WALL || labyrinth[i - 1][j + 1] == FINISHWALL) && pos.z - 1 >= j - epsilon && z >= 0 && pos.x <= i + epsilon && x <= 0)
+					)
+				)
+			{
+				direction.x = 0;
+				direction.z = 0;
+			}*/
 
 			if (labyrinth[i][j] == FINISHPOINT) //&& и если близко к шарику
 			{

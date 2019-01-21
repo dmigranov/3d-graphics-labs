@@ -26,8 +26,7 @@ public:
 		
 		if (PlayerHasWon)
 		{
-			//сделать всё черным
-
+			//GUI::Rectangle(0, 0, 500, 500, 0, 0, 0);
 			GUI::Label(0, 0, 500, 500, "YOU WON THE GAME. \nRESTART IT TO PLAY AGAIN");
 		}
 
