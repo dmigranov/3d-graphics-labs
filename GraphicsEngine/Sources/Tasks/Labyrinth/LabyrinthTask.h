@@ -42,7 +42,11 @@ public:
 			pObject->AddComponent(ywt);
 
 			scene.AddObject(pObject);
-			
+
+			//Object * pFpsObject = new Object();
+			//pFpsObject->m_pTransform = new Transform();
+			pObject->AddComponent(new FpsCounter());
+			scene.AddObject(pObject);
 
 			Object * pCameraObj = new Object();
 			Camera * pCamera = new Camera();
