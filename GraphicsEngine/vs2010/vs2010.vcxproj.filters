@@ -887,6 +887,7 @@
     <None Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderEarthReflect.ps">
       <Filter>GraphicsEngine\Shaders\DX9</Filter>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderSphereMorphing.ps">

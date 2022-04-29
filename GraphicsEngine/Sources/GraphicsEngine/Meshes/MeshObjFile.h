@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Mesh.h"
 #include <vector>
+#include <string>
 #include "GraphicsEngine/Vector3.h"
 
 

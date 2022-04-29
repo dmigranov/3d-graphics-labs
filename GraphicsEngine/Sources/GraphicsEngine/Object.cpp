@@ -4,7 +4,6 @@
 #include "GraphicsEngine/Meshes/Mesh.h"
 #include "GraphicsEngine/Transform.h"
 
-
 Object::Object(const char * name)
 	:	m_pTransform( NULL ),
 		m_pMesh		( NULL ),

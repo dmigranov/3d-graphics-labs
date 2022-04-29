@@ -15,21 +15,21 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>vs2010</RootNamespace>
     <ProjectName>GraphicsEngine</ProjectName>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -43,15 +43,15 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;..\SDKs\OpenGL\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;..\SDKs\OpenGL\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>.\packages\native.freeimage.3.17.0\build\native\include;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;..\SDKs\OpenGL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>.\packages\glew.redist.1.9.0.1\build\native\bin\v110\Win32\Debug\dynamic;.\packages\glew.1.9.0.1\build\native\lib\v110\Win32\Debug\dynamic;.\packages\freeglut.redist.2.8.1.15\build\native\bin\v110\Win32\Debug\dynamic;.\packages\freeglut.2.8.1.15\build\native\lib\v110\Win32\Debug\dynamic;.\packages\native.freeimage.3.17.0\build\native\lib\Win32\dynamic;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;..\SDKs\OpenGL\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)..\BUILD\Debug\$(TargetName)\</OutDir>
     <IntDir>$(ProjectDir)..\BUILD\TempD\$(TargetName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(DXSDK_DIR)\Include;..\SDKs\OpenGL\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)\Lib\x86;..\SDKs\OpenGL\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>.\packages\native.freeimage.3.17.0\build\native\include;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;..\SDKs\OpenGL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>.\packages\glew.redist.1.9.0.1\build\native\bin\v110\Win32\Release\dynamic;.\packages\glew.1.9.0.1\build\native\lib\v110\Win32\Release\dynamic;.\packages\freeglut.redist.2.8.1.15\build\native\bin\v110\Win32\Release\dynamic;.\packages\freeglut.2.8.1.15\build\native\lib\v110\Win32\Release\dynamic;.\packages\native.freeimage.3.17.0\build\native\lib\Win32\dynamic;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;..\SDKs\OpenGL\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)..\BUILD\Release\</OutDir>
     <IntDir>$(ProjectDir)..\BUILD\TempR\</IntDir>
   </PropertyGroup>
@@ -67,7 +67,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>winmm.lib;d3d9.lib;d3dx9d.lib;d3dxof.lib;d3d11.lib;d3dx11d.lib;d3dcompiler.lib;dxguid.lib;dxerr.lib;comctl32.lib;glew32.lib;freeglut.lib;FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;d3d9.lib;d3dx9d.lib;d3dxof.lib;d3d11.lib;d3dx11d.lib;d3dcompiler.lib;dxguid.lib;dxerr.lib;comctl32.lib;FreeImage.lib;freeglut.lib;glew.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
@@ -92,11 +92,11 @@ rmdir /s /q ..\BUILD\Debug\$(TargetName)\Data</Command>
       <AdditionalIncludeDirectories>..\Sources</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>winmm.lib;d3d9.lib;d3dx9.lib;d3dxof.lib;d3d11.lib;d3dx11.lib;d3dcompiler.lib;dxguid.lib;dxerr.lib;comctl32.lib;glew32.lib;freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;d3d9.lib;d3dx9.lib;d3dxof.lib;d3d11.lib;d3dx11.lib;d3dcompiler.lib;dxguid.lib;dxerr.lib;comctl32.lib;glew.lib;freeglut.lib;FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>rmdir /s /q "..\BUILD\Release\Shaders"</Command>
@@ -387,11 +387,25 @@ xcopy  /S /I /E /Y "..\Sources\GraphicsEngine\Shaders" "..\BUILD\Release\Shaders
     <None Include="..\Sources\GraphicsEngine\Shaders\GL20\ShaderTask02Cylinder.vs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\GL20\ShaderUnlit.fs" />
     <None Include="..\Sources\GraphicsEngine\Shaders\GL20\ShaderUnlit.vs" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Sources\GraphicsEngine\Shaders\DX9\ShaderSphereMorphing.ps" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\glew.redist.1.9.0.1\build\native\glew.redist.targets" Condition="Exists('packages\glew.redist.1.9.0.1\build\native\glew.redist.targets')" />
+    <Import Project="packages\glew.1.9.0.1\build\native\glew.targets" Condition="Exists('packages\glew.1.9.0.1\build\native\glew.targets')" />
+    <Import Project="packages\freeglut.redist.2.8.1.15\build\native\freeglut.redist.targets" Condition="Exists('packages\freeglut.redist.2.8.1.15\build\native\freeglut.redist.targets')" />
+    <Import Project="packages\freeglut.2.8.1.15\build\native\freeglut.targets" Condition="Exists('packages\freeglut.2.8.1.15\build\native\freeglut.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\glew.redist.1.9.0.1\build\native\glew.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\glew.redist.1.9.0.1\build\native\glew.redist.targets'))" />
+    <Error Condition="!Exists('packages\glew.1.9.0.1\build\native\glew.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\glew.1.9.0.1\build\native\glew.targets'))" />
+    <Error Condition="!Exists('packages\freeglut.redist.2.8.1.15\build\native\freeglut.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\freeglut.redist.2.8.1.15\build\native\freeglut.redist.targets'))" />
+    <Error Condition="!Exists('packages\freeglut.2.8.1.15\build\native\freeglut.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\freeglut.2.8.1.15\build\native\freeglut.targets'))" />
+  </Target>
 </Project>

@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <list>
-
+#include <string>
 
 class Material;
 class Mesh;
